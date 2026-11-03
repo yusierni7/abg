@@ -1,0 +1,2334 @@
+---
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+
+    <script>
+    (function() {
+        var hostname = location.hostname;
+        var parts = hostname.split(".");
+        var fullName = parts[0];
+        if (fullName.toLowerCase() === "www") fullName = parts[1] || fullName;
+        var formatText = function(str) {
+            return str.replace(/[-_]/g, " ").replace(/\+/g, " ").replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        };
+        var displayDomain = formatText(fullName);
+        window.__SITE_NAME__ = displayDomain;
+        document.title = {{ page.title | jsonify }} + " · " + displayDomain;
+        var metaDesc = document.querySelector("meta[name=\"description\"]") || document.createElement("meta");
+        metaDesc.name = "description";
+        metaDesc.content = {{ page.title | jsonify }} + " — Watch free on " + displayDomain + ". Curated amateur videos from Nusantara and Asia. Adults only 18+.";
+        if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
+        var canonical = document.querySelector("link[rel=\"canonical\"]") || document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        canonical.setAttribute("href", location.href);
+        if (!canonical.parentNode) document.head.appendChild(canonical);
+    })();
+    </script>
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <meta name="rating" content="adult">
+    <meta name="rating" content="mature">
+    <meta name="rating" content="RTA-5042-1996-1400-1577-RTA">
+    <meta name="content-rating" content="adult">
+    <meta name="audience" content="adult">
+
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="{{ page.title | escape }}">
+    <meta property="og:description" content="Watch {{ page.title | escape }} — curated amateur videos from Nusantara and Asia. Adults only 18+.">
+    {% if page.image %}<meta property="og:image" content="{{ page.image | relative_url | absolute_url }}">{% endif %}
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title | escape }}">
+    {% if page.image %}<meta name="twitter:image" content="{{ page.image | relative_url | absolute_url }}">{% endif %}
+
+    <style>
+        *,*::before,*::after{box-sizing:border-box}
+
+        :root {
+            --bg: #0f0a0c;
+            --bg-2: #1a1114;
+            --surface: #1f1518;
+            --surface-2: #2a1d21;
+            --text: #fdf5f2;
+            --text-dim: #a89088;
+            --text-muted: #786860;
+            --border: rgba(255,200,180,.08);
+            --border-strong: rgba(255,200,180,.18);
+            --accent: #f43f5e;
+            --accent-2: #f59e0b;
+            --accent-soft: rgba(244,63,94,.15);
+            --shadow: 0 8px 32px rgba(0,0,0,.6);
+            --ad-bg: #140c10;
+            --play-bg: rgba(15,10,12,.6);
+            --play-fg: #fdf5f2;
+            --dur-bg: rgba(15,10,12,.9);
+            --dur-fg: #fbbf24;
+            --header-bg: rgba(15,10,12,.85);
+            --menu-bg: #140c10;
+            --menu-hover: #2a1d21;
+            --menu-text: #c8b8b0;
+            --card-info-bg: rgba(31,21,24,.95);
+        }
+
+        body.light-mode {
+            --bg: #fffaf6;
+            --bg-2: #fff0e8;
+            --surface: #ffffff;
+            --surface-2: #fff5ef;
+            --text: #2a1418;
+            --text-dim: #8a6b6b;
+            --text-muted: #b09a96;
+            --border: rgba(120,40,20,.08);
+            --border-strong: rgba(120,40,20,.16);
+            --accent: #e11d48;
+            --accent-2: #d97706;
+            --accent-soft: rgba(225,29,72,.1);
+            --shadow: 0 8px 32px rgba(120,40,20,.08);
+            --ad-bg: #fff0e8;
+            --play-bg: rgba(255,255,255,.85);
+            --play-fg: #e11d48;
+            --dur-bg: rgba(42,20,24,.95);
+            --dur-fg: #fbbf24;
+            --header-bg: rgba(255,250,246,.9);
+            --menu-bg: #fffaf6;
+            --menu-hover: #fff5ef;
+            --menu-text: #6b4a4a;
+            --card-info-bg: rgba(255,255,255,.98);
+        }
+
+        html{overflow-x:hidden;background:var(--bg);scroll-behavior:smooth}
+        body{
+            width:100%;min-width:320px;max-width:100%;margin:0;padding:0;
+            background:var(--bg);color:var(--text);
+            font-family:'Inter',system-ui,-apple-system,sans-serif;
+            line-height:1.5;-webkit-font-smoothing:antialiased;
+            transition:background .3s ease,color .3s ease;
+        }
+
+        svg{display:block}
+        .ico{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+        /* ============ HEADER ============ */
+        .site-header{
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+            background:var(--header-bg);
+            backdrop-filter:blur(24px) saturate(1.8);
+            -webkit-backdrop-filter:blur(24px) saturate(1.8);
+            border-bottom:1px solid var(--border);
+            padding:10px 14px;
+        }
+        .header-inner{
+            display:flex;align-items:center;gap:8px;
+            max-width:1400px;margin:0 auto;
+        }
+        .icon-btn{
+            width:38px;height:38px;flex-shrink:0;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:11px;cursor:pointer;padding:0;
+            display:flex;align-items:center;justify-content:center;
+            color:var(--text);transition:all .2s ease;
+        }
+        .icon-btn:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .icon-btn:active{transform:scale(.94)}
+        .icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+        .lang-btn{
+            min-width:44px;height:38px;flex-shrink:0;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:11px;cursor:pointer;padding:0 9px;
+            display:flex;align-items:center;justify-content:center;gap:5px;
+            color:var(--text);transition:all .2s ease;
+            font-family:'Inter',sans-serif;
+            font-size:11px;font-weight:800;letter-spacing:.05em;
+        }
+        .lang-btn:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .lang-btn:active{transform:scale(.94)}
+        .lang-btn svg{
+            width:14px;height:14px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            color:var(--accent);
+        }
+
+        .brand{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0}
+        .brand-mark{
+            width:36px;height:36px;flex-shrink:0;
+            border-radius:50%;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:15px;
+            font-family:'Fraunces',serif;
+            box-shadow:0 4px 16px var(--accent-soft);
+            position:relative;
+        }
+        .brand-mark::after{
+            content:'';position:absolute;bottom:-2px;right:-2px;
+            width:10px;height:10px;border-radius:50%;
+            background:#22c55e;border:2px solid var(--header-bg);
+        }
+        .brand-text{display:flex;flex-direction:column;min-width:0;text-align:left}
+        .brand-name{
+            font-family:'Fraunces',serif;
+            font-size:14px;font-weight:900;letter-spacing:-.01em;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            color:var(--text);
+            line-height:1.2;
+        }
+        .brand-sub{
+            font-size:9px;font-weight:600;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--accent);
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            line-height:1.2;margin-top:2px;
+        }
+
+        /* ============ MENU PANEL ============ */
+        .menu-panel{
+            position:fixed;top:0;right:0;bottom:0;z-index:1100;
+            width:100%;max-width:420px;
+            background:var(--menu-bg);
+            transform:translateX(100%);
+            transition:transform .38s cubic-bezier(.4,0,.2,1);
+            display:flex;flex-direction:column;overflow:hidden;
+            border-left:1px solid var(--border-strong);
+            box-shadow:-20px 0 60px rgba(0,0,0,.5);
+        }
+        .menu-panel.open{transform:translateX(0)}
+        .menu-head{
+            flex-shrink:0;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:16px 18px;border-bottom:1px solid var(--border);
+            background:var(--menu-bg);
+        }
+        .menu-head-title{display:flex;align-items:center;gap:12px;min-width:0}
+        .menu-head-mark{
+            width:36px;height:36px;flex-shrink:0;border-radius:50%;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:15px;
+            font-family:'Fraunces',serif;
+        }
+        .menu-head-text{display:flex;flex-direction:column;min-width:0}
+        .menu-head-name{
+            font-family:'Fraunces',serif;
+            font-size:16px;font-weight:900;color:var(--text);
+            letter-spacing:-.02em;line-height:1.2;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .menu-head-sub{
+            font-size:9px;font-weight:700;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--accent);
+            line-height:1.2;margin-top:3px;
+        }
+        .menu-close{
+            width:38px;height:38px;border-radius:50%;
+            background:var(--surface);border:1px solid var(--border);
+            cursor:pointer;display:flex;align-items:center;justify-content:center;
+            color:var(--text);padding:0;transition:all .2s ease;
+        }
+        .menu-close:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .menu-close:active{transform:scale(.94)}
+        .menu-close svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .menu-body{flex:1;overflow-y:auto;padding:20px 18px 40px;-webkit-overflow-scrolling:touch}
+        .menu-content{max-width:100%}
+        .menu-divider{height:1px;background:var(--border);margin:18px 4px 14px;pointer-events:none}
+        .menu-section-label{
+            font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+            color:var(--accent);padding:0 4px 10px;
+            display:flex;align-items:center;gap:8px;
+        }
+        .menu-section-label svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+        .menu-legal{display:flex;flex-direction:column;gap:8px}
+        .menu-legal details{border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+        .menu-legal summary{
+            padding:14px 16px;cursor:pointer;
+            font-size:12px;font-weight:700;letter-spacing:.06em;
+            color:var(--text);list-style:none;
+            display:flex;align-items:center;gap:12px;
+            user-select:none;text-transform:uppercase;transition:color .2s ease;
+        }
+        .menu-legal summary::-webkit-details-marker{display:none}
+        .menu-legal summary .summary-ico{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
+        .menu-legal summary .summary-text{flex:1}
+        .menu-legal summary .chev{width:8px;height:8px;border-right:2px solid var(--text-dim);border-bottom:2px solid var(--text-dim);transform:rotate(45deg);transition:transform .25s ease;flex-shrink:0;margin-top:-3px}
+        .menu-legal details[open] summary .chev{transform:rotate(-135deg);margin-top:3px}
+        .menu-legal details[open] summary{color:var(--accent)}
+        .menu-legal-body{padding:4px 16px 16px;border-top:1px solid var(--border);font-size:12.5px;line-height:1.65;color:var(--text-dim)}
+        .menu-legal-body p{margin:10px 0}
+        .menu-legal-body p strong{color:var(--text)}
+        .menu-legal-body ul{margin:10px 0;padding-left:20px}
+        .menu-legal-body li{margin-bottom:6px}
+        .menu-legal-body a{color:var(--accent);text-decoration:none;font-weight:500}
+        .menu-legal-body a:hover{text-decoration:underline}
+
+        .menu-home{
+            display:flex;align-items:center;gap:12px;
+            padding:14px 16px;border-radius:12px;
+            color:var(--menu-text);text-decoration:none;
+            font-size:14px;font-weight:600;transition:all .15s ease;
+            background:var(--surface);border:1px solid var(--border);margin-bottom:14px;
+        }
+        .menu-home:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-strong)}
+        .menu-home svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent);flex-shrink:0}
+        .menu-home .arrow{margin-left:auto;width:14px;height:14px;opacity:.5}
+
+        .menu-contact-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+        .menu-contact-list li{
+            display:flex;align-items:center;gap:12px;
+            font-size:13px;line-height:1.5;padding:12px 14px;
+            border-radius:12px;background:var(--surface);border:1px solid var(--border);
+            transition:all .15s ease;
+        }
+        .menu-contact-list li:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .menu-contact-list .contact-ico{
+            flex-shrink:0;width:34px;height:34px;border-radius:10px;
+            display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,var(--accent-soft),transparent);
+            border:1px solid var(--accent-soft);color:var(--accent);
+        }
+        .menu-contact-list .contact-ico svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .menu-contact-list .contact-meta{display:flex;flex-direction:column;min-width:0;flex:1}
+        .menu-contact-list .contact-label{color:var(--text-dim);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.12em;line-height:1.2}
+        .menu-contact-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:13px;line-height:1.3;word-break:break-all;margin-top:3px}
+        .menu-contact-list a:hover{color:var(--accent)}
+
+        /* ============ ADS ============ */
+        .ad-box{
+            display:flex;justify-content:center;align-items:center;
+            margin:0 auto;max-width:100%;overflow:hidden;
+            background:var(--ad-bg);min-height:50px;
+        }
+        .ad-break{padding:8px 0;background:var(--ad-bg);border-bottom:1px solid var(--border)}
+        .ad-break:first-child{margin-top:58px}
+        .ad-break.bottom{border-top:1px solid var(--border);border-bottom:none;margin-top:20px}
+        .ad-inline{
+            margin:24px 0;padding:8px 0;
+            background:var(--ad-bg);
+            border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+        }
+
+        /* ============ POST LAYOUT ============ */
+        .post-wrap{
+            max-width:900px;
+            margin:0 auto;
+            padding:0 12px;
+            padding-top:16px;
+        }
+
+        /* ============ VIDEO PLAYER ============ */
+        .player-wrap{
+            position:relative;
+            width:100%;
+            background:#000;
+            border-radius:14px;
+            overflow:hidden;
+            border:1px solid var(--border);
+            box-shadow:0 12px 40px rgba(0,0,0,.4);
+        }
+        body.light-mode .player-wrap{box-shadow:0 12px 40px rgba(0,0,0,.12)}
+
+        .player-content{
+            position:relative;
+            width:100%;
+            aspect-ratio:16/9;
+            background:#000;
+        }
+        .player-content iframe,
+        .player-content video,
+        .player-content embed,
+        .player-content object{
+            position:absolute;inset:0;
+            width:100% !important;height:100% !important;
+            border:0;display:block;
+        }
+        .player-content.vertical{
+            aspect-ratio:9/16;
+            max-width:520px;
+            margin:0 auto;
+        }
+
+        /* ============ INFO CARD ============ */
+        .info-card{
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:14px;
+            padding:18px;
+            margin-top:16px;
+        }
+        .info-eyebrow{
+            display:inline-flex;align-items:center;gap:6px;
+            font-size:10px;font-weight:800;letter-spacing:.18em;
+            text-transform:uppercase;
+            color:var(--accent);
+            background:var(--accent-soft);
+            padding:5px 10px;
+            border-radius:999px;
+            border:1px solid var(--accent-soft);
+            margin-bottom:12px;
+        }
+        .info-eyebrow svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.4;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+        .info-title{
+            font-family:'Fraunces',Georgia,serif;
+            font-size:22px;font-weight:900;
+            letter-spacing:-.02em;
+            color:var(--text);
+            margin:0;
+            line-height:1.25;
+        }
+
+        /* ============ SHARE ROW ============ */
+        .share-label-title{
+            font-size:10px;font-weight:800;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--text-muted);
+            margin:18px 0 8px;
+            display:flex;align-items:center;gap:8px;
+        }
+        .share-label-title::after{
+            content:'';flex:1;height:1px;background:var(--border);
+        }
+        .share-row{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:8px;
+        }
+        @media(min-width:640px){
+            .share-row{grid-template-columns:repeat(6,1fr)}
+        }
+        .share-btn{
+            display:flex;align-items:center;justify-content:center;gap:7px;
+            padding:10px 12px;
+            background:var(--surface-2);
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--text);
+            font-size:12px;font-weight:600;
+            text-decoration:none;
+            cursor:pointer;
+            font-family:inherit;
+            transition:all .2s ease;
+            white-space:nowrap;
+            overflow:hidden;
+        }
+        .share-btn:hover{
+            background:var(--surface);
+            border-color:var(--accent);
+            color:var(--accent);
+            transform:translateY(-1px);
+        }
+        .share-btn:active{transform:translateY(0)}
+        .share-btn svg{
+            width:15px;height:15px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            flex-shrink:0;
+        }
+        .share-btn .share-label{overflow:hidden;text-overflow:ellipsis}
+
+        .share-btn.wa:hover{border-color:#25d366;color:#25d366}
+        .share-btn.tg:hover{border-color:#229ed9;color:#229ed9}
+        .share-btn.fb:hover{border-color:#1877f2;color:#1877f2}
+        .share-btn.tw:hover{border-color:#e7e9ea;color:#e7e9ea}
+        .share-btn.rd:hover{border-color:#ff4500;color:#ff4500}
+        .share-btn.li:hover{border-color:#06c755;color:#06c755}
+        .share-btn.pi:hover{border-color:#e60023;color:#e60023}
+        .share-btn.th:hover{border-color:#e7e9ea;color:#e7e9ea}
+        .share-btn.bs:hover{border-color:#0085ff;color:#0085ff}
+        .share-btn.em:hover{border-color:var(--accent-2);color:var(--accent-2)}
+
+        /* ============ PREV/NEXT NAV ============ */
+        .prevnext{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-top:20px;
+        }
+        .prevnext a{
+            display:flex;align-items:center;gap:10px;
+            padding:14px 16px;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:12px;
+            text-decoration:none;
+            color:var(--text);
+            transition:all .15s ease;
+            min-width:0;
+        }
+        .prevnext a:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .prevnext a:hover .pn-label{color:var(--accent)}
+        .prevnext svg{
+            width:16px;height:16px;flex-shrink:0;
+            stroke:currentColor;fill:none;stroke-width:2.2;
+            stroke-linecap:round;stroke-linejoin:round;
+            opacity:.7;
+        }
+        .prevnext .pn-text{display:flex;flex-direction:column;min-width:0;flex:1}
+        .prevnext .pn-label{
+            font-size:10px;font-weight:800;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--text-dim);
+            transition:color .15s ease;line-height:1.2;
+        }
+        .prevnext .pn-title{
+            font-size:12.5px;font-weight:500;color:var(--text);
+            overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+            margin-top:3px;
+        }
+        .prevnext .next{text-align:right;flex-direction:row-reverse}
+        .prevnext .next .pn-text{align-items:flex-end}
+        .prevnext .disabled{opacity:.35;pointer-events:none}
+
+        /* ============ RELATED SECTION ============ */
+        .related-section{margin-top:32px}
+        .related-head{
+            margin-bottom:16px;
+            display:flex;flex-direction:column;gap:8px;
+        }
+        .section-eyebrow{
+            display:inline-flex;align-items:center;gap:6px;
+            align-self:flex-start;
+            font-size:10px;font-weight:800;letter-spacing:.18em;
+            text-transform:uppercase;
+            color:var(--accent);
+            background:var(--accent-soft);
+            padding:5px 10px;
+            border-radius:999px;
+            border:1px solid var(--accent-soft);
+        }
+        .section-eyebrow svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.4;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+        .section-title-row{
+            display:flex;align-items:baseline;justify-content:space-between;
+            gap:12px;
+        }
+        .sidebar-title{
+            font-family:'Fraunces',Georgia,serif;
+            font-size:24px;font-weight:900;
+            color:var(--text);
+            margin:0;
+            letter-spacing:-.03em;
+            line-height:1.15;
+        }
+        .section-count{
+            font-size:11px;font-weight:600;color:var(--text-muted);
+            letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;
+        }
+
+        /* ============ GRID (4:3 new style) ============ */
+        .grid{
+            display:grid;gap:10px;
+            grid-template-columns:repeat(2,1fr);
+        }
+        @media(min-width:600px){
+            .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+        }
+        @media(min-width:900px){
+            .grid{grid-template-columns:repeat(3,1fr);gap:14px}
+        }
+        @media(min-width:1100px){
+            .grid{grid-template-columns:repeat(4,1fr);gap:14px}
+        }
+
+        .card{
+            position:relative;display:block;
+            border-radius:14px;overflow:hidden;
+            background:var(--surface);
+            text-decoration:none;
+            border:1px solid var(--border);
+            transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .3s ease,box-shadow .3s ease;
+        }
+        .card:hover{
+            transform:translateY(-4px);
+            border-color:var(--border-strong);
+            box-shadow:0 12px 32px rgba(0,0,0,.3);
+        }
+        .card-media{
+            position:relative;
+            width:100%;aspect-ratio:4/3;
+            overflow:hidden;background:var(--surface-2);
+        }
+        .card-media img{
+            width:100%;height:100%;object-fit:cover;display:block;
+            transition:transform .5s cubic-bezier(.4,0,.2,1);
+        }
+        .card:hover .card-media img{transform:scale(1.06)}
+
+        .card-num{
+            position:absolute;top:10px;right:10px;
+            z-index:3;pointer-events:none;
+            font-family:'Fraunces',serif;
+            font-size:11px;font-weight:900;
+            color:var(--dur-fg);
+            background:var(--dur-bg);
+            padding:3px 8px;
+            border-radius:8px;
+            letter-spacing:.05em;
+            border:1px solid rgba(251,191,36,.25);
+            font-variant-numeric:tabular-nums;
+        }
+
+        .card-play{
+            position:absolute;
+            top:50%;left:50%;
+            transform:translate(-50%,-50%);
+            width:48px;height:48px;
+            background:var(--play-bg);
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+            border-radius:12px;
+            display:flex;align-items:center;justify-content:center;
+            color:var(--play-fg);
+            z-index:2;pointer-events:none;
+            transition:all .25s ease;
+            border:1.5px solid rgba(255,255,255,.25);
+            box-shadow:0 6px 20px rgba(0,0,0,.35);
+        }
+        .card-play svg{width:20px;height:20px;fill:currentColor;margin-left:3px}
+        .card:hover .card-play{
+            background:var(--accent);
+            color:#fff;
+            border-color:var(--accent);
+            transform:translate(-50%,-50%) scale(1.08);
+        }
+        .card-dur{
+            position:absolute;bottom:10px;left:10px;
+            background:var(--dur-bg);
+            color:var(--dur-fg);
+            font-size:10.5px;font-weight:800;
+            letter-spacing:.05em;
+            padding:4px 9px 4px 7px;
+            border-radius:8px;
+            z-index:3;pointer-events:none;
+            font-variant-numeric:tabular-nums;
+            display:flex;align-items:center;gap:4px;
+            border:1px solid rgba(251,191,36,.25);
+        }
+        .card-dur svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.2;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+
+        .card-info{
+            padding:10px 12px;
+            background:var(--card-info-bg);
+            border-top:1px solid var(--border);
+        }
+        .card-title{
+            font-family:'Inter',system-ui,sans-serif;
+            font-size:12px;
+            font-weight:600;
+            line-height:1.4;
+            color:var(--text);
+            margin:0;
+            overflow:hidden;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            -webkit-box-orient:vertical;
+            text-overflow:ellipsis;
+            transition:color .2s ease;
+        }
+        .card:hover .card-title{color:var(--accent)}
+
+        #relatedGrid .card.hidden{display:none}
+
+        .load-more-wrap{
+            display:flex;justify-content:center;margin-top:20px;
+        }
+        .load-more-btn{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:12px 24px;
+            background:var(--surface);
+            border:1px solid var(--border-strong);
+            border-radius:999px;
+            color:var(--text);
+            font-size:13px;font-weight:700;
+            font-family:inherit;cursor:pointer;
+            transition:all .2s ease;
+        }
+        .load-more-btn:hover{
+            background:var(--surface-2);
+            border-color:var(--accent);
+            color:var(--accent);
+            transform:translateY(-1px);
+        }
+        .load-more-btn:active{transform:translateY(0)}
+        .load-more-btn svg{
+            width:14px;height:14px;
+            stroke:currentColor;fill:none;stroke-width:2.5;
+            stroke-linecap:round;stroke-linejoin:round;
+            transition:transform .3s ease;
+        }
+        .load-more-btn.expanded svg{transform:rotate(180deg)}
+        .load-more-btn .lm-count{
+            color:var(--text-dim);font-weight:500;font-size:12px;
+        }
+
+        /* ============ TOAST ============ */
+        .toast{
+            position:fixed;
+            bottom:24px;left:50%;
+            transform:translateX(-50%) translateY(20px);
+            background:var(--text);color:var(--bg);
+            padding:10px 18px;
+            border-radius:999px;
+            font-size:13px;font-weight:600;
+            box-shadow:0 8px 24px rgba(0,0,0,.4);
+            z-index:1500;
+            opacity:0;pointer-events:none;
+            transition:opacity .25s ease,transform .25s ease;
+            display:flex;align-items:center;gap:8px;
+            max-width:calc(100vw - 32px);
+        }
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        .toast svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+        /* ============ COOKIE BANNER ============ */
+        .cookie-banner{
+            position:fixed;
+            bottom:16px;left:50%;
+            transform:translateX(-50%) translateY(20px);
+            max-width:380px;width:calc(100% - 32px);
+            background:var(--surface);color:var(--text);
+            border:1px solid var(--border-strong);
+            border-radius:16px;
+            padding:20px 18px 16px;
+            box-shadow:0 20px 50px rgba(0,0,0,.55);
+            font-size:13px;line-height:1.5;
+            z-index:1200;
+            display:flex;flex-direction:column;align-items:center;text-align:center;
+            gap:12px;
+            opacity:0;
+            transition:opacity .3s ease,transform .3s ease;
+        }
+        .cookie-banner.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        .cookie-banner .cookie-ico{
+            flex-shrink:0;width:44px;height:44px;border-radius:12px;
+            display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,var(--accent-soft),transparent);
+            border:1px solid var(--accent-soft);color:var(--accent);
+        }
+        .cookie-banner .cookie-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .cookie-banner p{margin:0;color:var(--text)}
+        .cookie-ok{
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            color:#fff;
+            border:none;border-radius:999px;
+            padding:9px 24px;cursor:pointer;
+            font-size:13px;font-weight:700;
+            font-family:'Inter',sans-serif;
+            transition:all .15s ease;
+            display:inline-flex;align-items:center;gap:6px;
+            width:100%;justify-content:center;
+        }
+        .cookie-ok svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+        .cookie-ok:hover{filter:brightness(1.1);transform:translateY(-1px)}
+        .cookie-ok:active{transform:translateY(0)}
+
+        /* ============ FOOTER ============ */
+        footer.site-footer{
+            max-width:900px;margin:48px auto 0;
+            padding:28px 16px 32px;
+            text-align:center;
+            position:relative;
+        }
+        footer.site-footer::before{
+            content:'';position:absolute;top:0;left:50%;
+            transform:translateX(-50%);
+            width:80px;height:2px;
+            background:linear-gradient(90deg,transparent,var(--accent),var(--accent-2),transparent);
+            border-radius:2px;
+        }
+        .foot-copy{
+            font-size:12px;color:var(--text-dim);
+            margin:0;line-height:1.6;
+            display:flex;align-items:center;justify-content:center;
+            gap:8px;flex-wrap:wrap;
+        }
+        .foot-copy .copy-ico{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+        .foot-copy strong{color:var(--text);font-weight:700}
+        .foot-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            margin-top:14px;font-size:10px;font-weight:700;
+            letter-spacing:.18em;text-transform:uppercase;
+            color:var(--text-dim);
+            padding:6px 14px;
+            border:1px solid var(--border-strong);
+            border-radius:999px;
+        }
+        .foot-badge svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
+        .foot-tagline{
+            margin-top:12px;font-size:10.5px;
+            color:var(--text-muted);
+            letter-spacing:.08em;text-transform:uppercase;
+        }
+
+        /* ============ VIDEO PLAYER: RANDOM SERVER INFO BAR ============ */
+        .player-info{
+            margin-top:12px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+            padding:10px 14px;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:10px;
+            font-size:12px;
+            font-family:'Inter',sans-serif;
+            color:var(--text-dim);
+        }
+        .player-info-left{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            min-width:0;
+            overflow:hidden;
+        }
+        .player-info-dot{
+            flex-shrink:0;
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:#22c55e;
+            box-shadow:0 0 0 3px rgba(34,197,94,.15);
+            animation:pulseDot 2s ease-in-out infinite;
+        }
+        .player-info-dot.loading{
+            background:var(--accent);
+            box-shadow:0 0 0 3px var(--accent-soft);
+        }
+        .player-info-dot.error{
+            background:#ef4444;
+            box-shadow:0 0 0 3px rgba(239,68,68,.15);
+            animation:none;
+        }
+        @keyframes pulseDot{
+            0%,100%{opacity:1;transform:scale(1);}
+            50%{opacity:.6;transform:scale(.85);}
+        }
+        .player-retry{
+            flex-shrink:0;
+            display:inline-flex;
+            align-items:center;
+            gap:5px;
+            padding:6px 12px;
+            background:var(--surface-2);
+            border:1px solid var(--border-strong);
+            border-radius:8px;
+            color:var(--text);
+            font-size:11.5px;
+            font-weight:700;
+            font-family:inherit;
+            cursor:pointer;
+            transition:all .2s ease;
+            letter-spacing:.02em;
+        }
+        .player-retry:hover{
+            background:var(--surface);
+            border-color:var(--accent);
+            color:var(--accent);
+            transform:translateY(-1px);
+        }
+        .player-retry:active{transform:translateY(0)}
+        .player-retry:disabled{
+            opacity:.5;
+            cursor:not-allowed;
+            pointer-events:none;
+        }
+
+        /* SVG Loading */
+        .svg-loading{
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:12px;
+            color:var(--text-dim);
+            font-size:13px;
+            font-family:'Inter',sans-serif;
+            background:#000;
+        }
+        .spinner{
+            width:32px;
+            height:32px;
+            border:3px solid rgba(255,255,255,.15);
+            border-top-color:var(--accent);
+            border-radius:50%;
+            animation:spin 0.8s linear infinite;
+        }
+        @keyframes spin{ to{transform:rotate(360deg);} }
+
+        /* Ad divider */
+        .ad-divider{width:100%;padding:6px 0;margin:2px 0}
+        .ad-divider-head{display:flex;align-items:center;gap:12px}
+        .ad-divider-badge{
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:.16em;
+            text-transform:uppercase;
+            color:var(--text-dim);
+            padding:4px 10px;
+            border:1px solid var(--border-strong);
+            border-radius:999px;
+            background:var(--surface-2);
+            flex-shrink:0;
+            line-height:1;
+        }
+        .ad-divider-badge svg{width:11px;height:11px;opacity:.75}
+        .ad-divider-line{flex:1;height:1px;background:linear-gradient(to right, var(--border-strong), transparent)}
+
+        /* VAST box */
+        #vastBox01{
+            position:relative;
+            width:100%;
+            aspect-ratio:16/9;
+            background:#000;
+            border-radius:10px;
+            overflow:hidden;
+            border:1px solid var(--border-strong);
+        }
+        #vastVideo01{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+        #vastAdLabel01{
+            position:absolute;
+            left:10px;
+            bottom:10px;
+            padding:5px 10px;
+            background:rgba(0,0,0,.75);
+            color:#fff;
+            font-size:11px;
+            font-weight:600;
+            letter-spacing:.04em;
+            text-transform:uppercase;
+            border-radius:4px;
+            z-index:10;
+            pointer-events:none;
+            backdrop-filter:blur(4px);
+            -webkit-backdrop-filter:blur(4px);
+            border:1px solid rgba(255,255,255,.1);
+        }
+        #vastClick01{position:absolute;inset:0;z-index:8;display:none;cursor:pointer}
+
+        /* ============ RESPONSIVE ============ */
+        @media(min-width:600px){
+            .site-header{padding:10px 20px}
+            .post-wrap{padding:0 16px;padding-top:16px}
+            .brand-name{font-size:15px}
+            .info-title{font-size:24px}
+            .sidebar-title{font-size:26px}
+        }
+        @media(min-width:900px){
+            .site-header{padding:10px 28px}
+            .post-wrap{padding:0 20px;padding-top:20px;max-width:1000px}
+            .brand-name{font-size:16px}
+            .menu-head{padding:20px 28px}
+            .menu-body{padding:28px 28px 56px}
+            .info-title{font-size:26px}
+            .sidebar-title{font-size:28px}
+        }
+        @media(max-width:600px){
+            .cookie-banner{bottom:12px;width:calc(100% - 24px);padding:16px 14px 14px;font-size:12.5px}
+            .cookie-ok{padding:8px 18px;font-size:12.5px}
+            .foot-copy{font-size:11.5px}
+            .info-card{padding:14px}
+            .share-row{grid-template-columns:repeat(4,1fr);gap:6px}
+            .share-btn{padding:9px 6px;font-size:11px;gap:5px}
+            .share-btn svg{width:14px;height:14px}
+            .prevnext{grid-template-columns:1fr;gap:8px}
+            .brand-text{display:none}
+            .brand{justify-content:flex-start}
+            .info-title{font-size:20px}
+            .sidebar-title{font-size:22px}
+            .player-info{padding:9px 12px;font-size:11.5px}
+            .player-retry{padding:5px 10px;font-size:11px}
+            .ad-divider-badge{font-size:9px;padding:3px 8px;letter-spacing:.14em}
+            .ad-divider-badge svg{width:10px;height:10px}
+            .ad-divider-head{gap:8px}
+            #vastAdLabel01{font-size:10px;padding:4px 8px}
+        }
+    </style>
+
+{% include head.html %}
+
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <button class="icon-btn" id="menuOpen" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/>
+                </svg>
+            </button>
+            <div class="brand">
+                <div class="brand-mark" id="brandMark">A</div>
+                <div class="brand-text">
+                    <span class="brand-name" id="brandName">{{ page.title | escape }}</span>
+                    <span class="brand-sub" data-i18n="brandSub">Nusantara Amateur Vault</span>
+                </div>
+            </div>
+            <button class="lang-btn" id="langToggle" aria-label="Switch language" title="Switch language">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <span id="langCode">EN</span>
+            </button>
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+                <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2"/><path d="M12 20v2"/>
+                    <path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/>
+                    <path d="M2 12h2"/><path d="M20 12h2"/>
+                    <path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/>
+                </svg>
+                <svg id="moonIcon" viewBox="0 0 24 24" style="display:none" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============ MENU ============ -->
+    <aside class="menu-panel" id="menuPanel" role="dialog" aria-label="Navigation and information" aria-modal="true">
+        <div class="menu-head">
+            <div class="menu-head-title">
+                <div class="menu-head-mark" id="menuHeadMark">A</div>
+                <div class="menu-head-text">
+                    <span class="menu-head-name" id="menuHeadName">Atikah</span>
+                    <span class="menu-head-sub" data-i18n="menuSub">Explore the Vault</span>
+                </div>
+            </div>
+            <button class="menu-close" id="menuClose" aria-label="Close menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M18 6 6 18"/><path d="M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="menu-body">
+            <div class="menu-content">
+                <a href="https://atikah.xyz" class="menu-home">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                    <span data-i18n="backHome">Back to Home</span>
+                    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    <span data-i18n="aboutLabel">About</span>
+                </div>
+                <div class="menu-legal" style="margin-bottom:18px">
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                            <span class="summary-text" data-i18n="aboutTitle">What This Site Is</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="aboutBody"></div>
+                    </details>
+                </div>
+
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/></svg>
+                    <span data-i18n="policiesLabel">Policies</span>
+                </div>
+                <div class="menu-legal" style="margin-bottom:18px">
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                            <span class="summary-text" data-i18n="privacyTitle">Privacy Policy</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="privacyBody"></div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+                            <span class="summary-text" data-i18n="termsTitle">Terms of Use</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="termsBody"></div>
+                    </details>
+                </div>
+
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span data-i18n="legalLabel">Legal</span>
+                </div>
+                <div class="menu-legal" style="margin-bottom:18px">
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                            <span class="summary-text" data-i18n="disclaimerTitle">18+ Disclaimer</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="disclaimerBody"></div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="10.5" r="1"/><circle cx="15.5" cy="10.5" r="1"/><circle cx="12" cy="16" r="1"/><path d="M12 2a10 10 0 0 0 0 20"/></svg>
+                            <span class="summary-text" data-i18n="cookieTitle">Cookie Policy</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="cookieBody"></div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9h.01"/><path d="M15 15h.01"/><path d="M9.5 14.5a4 4 0 0 0 5 0"/><path d="M12 3v3"/></svg>
+                            <span class="summary-text" data-i18n="dmcaTitle">DMCA / Copyright</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="dmcaBody"></div>
+                    </details>
+
+                    <details>
+                        <summary>
+                            <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                            <span class="summary-text" data-i18n="section2257Title">18 U.S.C. § 2257 Statement</span>
+                            <span class="chev"></span>
+                        </summary>
+                        <div class="menu-legal-body" id="section2257Body"></div>
+                    </details>
+                </div>
+
+                <div class="menu-divider"></div>
+                <div class="menu-section-label" id="menu-contact">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    <span data-i18n="contactLabel">Get in Touch</span>
+                </div>
+                <ul class="menu-contact-list">
+                    <li>
+                        <span class="contact-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </span>
+                        <span class="contact-meta">
+                            <span class="contact-label">WhatsApp</span>
+                            <a href="https://wa.me/6285770366055" target="_blank" rel="noopener noreferrer">+62 857-7036-6055</a>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="contact-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+                        </span>
+                        <span class="contact-meta">
+                            <span class="contact-label">Telegram</span>
+                            <a href="https://t.me/yl4t1" target="_blank" rel="noopener noreferrer">@yl4t1</a>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="contact-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                        </span>
+                        <span class="contact-meta">
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:admin@atikah.xyz">admin@atikah.xyz</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============ i18n DICTIONARY ============ -->
+    <script id="i18n-data" type="application/json">
+    {
+      "en": {
+        "brandSub": "Nusantara Amateur Vault",
+        "menuSub": "Explore the Vault",
+        "backHome": "Back to Home",
+        "aboutLabel": "About",
+        "aboutTitle": "What This Site Is",
+        "policiesLabel": "Policies",
+        "privacyTitle": "Privacy Policy",
+        "termsTitle": "Terms of Use",
+        "legalLabel": "Legal",
+        "disclaimerTitle": "18+ Disclaimer",
+        "cookieTitle": "Cookie Policy",
+        "dmcaTitle": "DMCA / Copyright",
+        "section2257Title": "18 U.S.C. § 2257 Statement",
+        "contactLabel": "Get in Touch",
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> is a hand-curated vault of authentic amateur clips, sourced from Indonesia and neighboring Asian regions. We celebrate unscripted, unfiltered moments shared by local creators — no studios, no staged sets, no overproduction.</p><p>Every clip is reviewed for quality and authenticity before it enters the vault. The collection refreshes daily so there is always something new to explore.</p><p>This site is strictly for adult visitors (18 years and older).</p>",
+        "privacyBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>Your privacy matters to us. This policy explains what happens to information when you browse the vault.</p><p><strong>What We Collect</strong></p><p>We do <strong>not</strong> collect personal details such as names, email addresses, or payment data. No sign-up is required to explore the vault.</p><ul><li><strong>Local storage</strong> — theme preference, cookie consent, and age verification live in your browser only. They never travel to our servers.</li><li><strong>Server logs</strong> — our hosting provider may record standard access logs (IP, browser, timestamp) for security and abuse prevention, retained up to 30 days.</li></ul><p><strong>Third-Party Embeds</strong></p><p>Every video shown here is embedded from a third-party platform. Those platforms may set their own cookies and gather data under their own privacy rules. We have no say in their practices and recommend reviewing their policies.</p><p><strong>Cookies</strong></p><p>We rely on essential and functional cookies stored locally in your browser. No analytics or advertising cookies are set directly by us. See the Cookie Policy section for the full list.</p><p><strong>Children's Privacy</strong></p><p>This vault is strictly for adults (18+). We do not knowingly collect data from minors. If you are under 18, please leave the site right away.</p><p><strong>Your Rights</strong></p><p>Because we collect no personal data, there is nothing to access, correct, or delete. You can wipe all local storage anytime through your browser settings.</p><p><strong>Policy Updates</strong></p><p>We may revise this Privacy Policy occasionally. Changes take effect as soon as they are posted on this page.</p>",
+        "termsBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>By browsing or using this website, you agree to the terms below. If any part does not sit right with you, please leave the site.</p><p><strong>1. Who May Use This Site</strong></p><p>You must be at least 18 years old (or the age of majority in your jurisdiction) to access this vault. By using the site, you confirm you meet this requirement.</p><p><strong>2. The Content</strong></p><p>Everything here is provided for information and entertainment only. Clips are embedded from third-party platforms — we do not host, upload, or own the videos shown. We make no promises about the accuracy, legality, or completeness of third-party content.</p><p><strong>3. Acceptable Use</strong></p><p>You agree not to:</p><ul><li>Use the site for any unlawful purpose</li><li>Attempt unauthorized access to any part of the site</li><li>Interfere with the proper functioning of the site</li><li>Scrape, copy, or redistribute content without permission</li><li>Access the site if you are under 18 years of age</li></ul><p><strong>4. Intellectual Property</strong></p><p>All trademarks, logos, and site design belong to their respective owners. Embedded videos remain the property of their original creators and platforms.</p><p><strong>5. Third-Party Links</strong></p><p>This site contains embedded content and links to third-party websites. We are not responsible for the content, privacy practices, or availability of those external sites.</p><p><strong>6. No Warranties</strong></p><p>The site is provided \"as is\" with no warranties, express or implied. We do not guarantee uninterrupted, error-free, or secure access.</p><p><strong>7. Limitation of Liability</strong></p><p>To the fullest extent permitted by law, we are not liable for any damages arising from your use of the site or inability to use it.</p><p><strong>8. Changes to These Terms</strong></p><p>We may update these Terms at any time. Continued use of the site after changes means you accept the new Terms.</p><p><strong>9. Governing Law</strong></p><p>These Terms are governed by and construed under applicable laws, without regard to conflict-of-law principles.</p>",
+        "disclaimerBody": "<p><strong>ADULTS ONLY.</strong> This website contains adult material meant solely for adults. By entering, you confirm that you are at least 18 years old (or the age of majority where you live), that viewing adult content is legal in your location, and that you consent to seeing such material.</p><p>All content is fictional and intended for entertainment only. Any resemblance to real persons, living or dead, is coincidental. Every character depicted is 18 years of age or older. We do not endorse any illegal activity.</p><p>This site is not aimed at users in regions where adult content is prohibited. It is your responsibility to make sure access is legal in your country, state, or territory.</p>",
+        "cookieBody": "<p>This site relies on the following cookies:</p><ul><li><strong>age-verified</strong> — remembers your age verification (essential, 30 days)</li><li><strong>cookie-consent</strong> — remembers your cookie choice (essential, 1 year)</li><li><strong>theme</strong> — remembers your dark/light preference (functional, 1 year)</li><li><strong>lang</strong> — remembers your language choice (functional, 1 year)</li></ul><p>No third-party tracking cookies are used. No analytics services are integrated.</p>",
+        "dmcaBody": "<p>We respect the intellectual property rights of others. If you believe your copyrighted work appears on this site without authorization, you may file a DMCA takedown notice.</p><p><strong>What to include:</strong></p><ul><li>Identification of the copyrighted work</li><li>URL of the allegedly infringing material</li><li>Your full name and contact details</li><li>A statement of good faith belief that the use is unauthorized</li><li>A statement under penalty of perjury that the information is accurate</li><li>Your physical or electronic signature</li></ul><p>Send your notice through any channel listed in the <a href=\"#menu-contact\">Contact</a> section. We respond to valid DMCA notices within 72 hours.</p>",
+        "section2257Body": "<p><strong>Records-Keeping Compliance Statement</strong></p><p>This website is <strong>not a primary or secondary producer</strong> of any sexually explicit content. All visual depictions of actual sexually explicit conduct that appear on this website are <strong>embedded from third-party platforms</strong> that are solely responsible for compliance with 18 U.S.C. § 2257 and 28 C.F.R. Part 75.</p><p>We do not host, upload, store, or transmit any sexually explicit media on our servers. All video content is displayed via embedded players provided by third-party platforms. The original producers and hosting platforms of this content are responsible for maintaining all required records.</p><p><strong>Performer Age Verification</strong></p><p>We require every third-party source we embed from to confirm that all performers depicted were <strong>18 years of age or older</strong> at the time of production. We do not knowingly embed, publish, or link to content involving minors or non-consensual activity. Any such content that comes to our attention will be removed immediately and reported to the appropriate authorities.</p><p><strong>Exemption Statement</strong></p><p>Because this website does not produce any sexually explicit content, we are exempt from the record-keeping requirements of 18 U.S.C. § 2257 and 28 C.F.R. Part 75. This exemption applies under 28 C.F.R. § 75.1(c) (persons who are not primary or secondary producers).</p><p>For compliance-related questions, takedown requests, or legal inquiries, see the <a href=\"#menu-contact\">Contact</a> section below.</p><p style=\"font-size:11px;opacity:.7;margin-top:10px\">If you believe any content on this website violates applicable laws or involves non-consensual or underage activity, please contact us immediately. We cooperate fully with law enforcement.</p>",
+        "shareTitle": "Share this video",
+        "copyLabel": "Copy",
+        "toastCopied": "Link copied to clipboard",
+        "prev": "Prev",
+        "next": "Next",
+        "relatedEyebrow": "Keep exploring",
+        "relatedTitle": "Related Videos",
+        "loadMore": "Load More",
+        "footerRights": "All rights reserved",
+        "footerBadge": "Adults Only · 18+",
+        "footerTagline": "Hand-picked with care · Refreshed daily",
+        "cookieText": "We use cookies to make your browsing smoother.",
+        "cookieOk": "Got it",
+        "nowWatching": "Now Watching",
+        "loadingVideo": "Loading video...",
+        "autoServer": "Auto-selected server",
+        "retry": "Retry",
+        "retrying": "Trying next server...",
+        "allFailed": "All servers unavailable",
+        "sponsored": "SPONSORED CONTENT",
+        "advertisement": "Advertisement"
+      },
+      "id": {
+        "brandSub": "Galeri Amatir Nusantara",
+        "menuSub": "Jelajahi Galeri",
+        "backHome": "Kembali ke Beranda",
+        "aboutLabel": "Tentang",
+        "aboutTitle": "Tentang Situs Ini",
+        "policiesLabel": "Kebijakan",
+        "privacyTitle": "Kebijakan Privasi",
+        "termsTitle": "Syarat Penggunaan",
+        "legalLabel": "Legal",
+        "disclaimerTitle": "Penafian 18+",
+        "cookieTitle": "Kebijakan Cookie",
+        "dmcaTitle": "DMCA / Hak Cipta",
+        "section2257Title": "Pernyataan 18 U.S.C. § 2257",
+        "contactLabel": "Hubungi Kami",
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> adalah galeri klip amatir pilihan dari Nusantara dan sekitarnya. Kami menampilkan momen apa adanya dari kreator lokal — tanpa studio, tanpa set panggung, tanpa produksi berlebihan.</p><p>Setiap klip ditinjau dari sisi kualitas dan keaslian sebelum masuk galeri. Koleksi diperbarui tiap hari, selalu ada yang baru untuk dijelajahi.</p><p>Situs ini khusus untuk pengunjung dewasa (18 tahun ke atas).</p>",
+        "privacyBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Privasi Anda penting bagi kami. Kebijakan ini menjelaskan apa yang terjadi pada informasi saat Anda menjelajahi galeri.</p><p><strong>Yang Kami Kumpulkan</strong></p><p>Kami <strong>tidak</strong> mengumpulkan data pribadi seperti nama, alamat email, atau data pembayaran. Tidak perlu daftar untuk menjelajahi galeri.</p><ul><li><strong>Penyimpanan lokal</strong> — preferensi tema, persetujuan cookie, dan verifikasi usia hanya ada di browser Anda. Tidak pernah dikirim ke server kami.</li><li><strong>Log server</strong> — penyedia hosting kami dapat mencatat log akses standar (IP, browser, waktu) untuk keamanan dan pencegahan penyalahgunaan, disimpan maksimal 30 hari.</li></ul><p><strong>Konten Pihak Ketiga</strong></p><p>Setiap video di sini disematkan dari platform pihak ketiga. Platform tersebut dapat menetapkan cookie dan mengumpulkan data sesuai aturan privasi mereka sendiri. Kami tidak punya kendali atas praktik mereka dan menyarankan Anda meninjau kebijakan mereka.</p><p><strong>Cookie</strong></p><p>Kami hanya memakai cookie penting dan fungsional yang tersimpan lokal di browser Anda. Tidak ada cookie analitik atau iklan yang dipasang langsung oleh kami. Lihat bagian Kebijakan Cookie untuk daftar lengkap.</p><p><strong>Privasi Anak</strong></p><p>Galeri ini khusus dewasa (18+). Kami tidak dengan sengaja mengumpulkan data dari anak di bawah umur. Jika Anda di bawah 18 tahun, segera tinggalkan situs ini.</p><p><strong>Hak Anda</strong></p><p>Karena kami tidak mengumpulkan data pribadi, tidak ada yang perlu diakses, dikoreksi, atau dihapus. Anda dapat menghapus semua penyimpanan lokal kapan saja melalui pengaturan browser.</p><p><strong>Pembaruan Kebijakan</strong></p><p>Kami dapat merevisi Kebijakan Privasi ini dari waktu ke waktu. Perubahan berlaku begitu diposting di halaman ini.</p>",
+        "termsBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Dengan menjelajahi atau menggunakan situs web ini, Anda setuju dengan syarat di bawah. Jika ada bagian yang tidak sesuai untuk Anda, mohon tinggalkan situs ini.</p><p><strong>1. Siapa yang Boleh Menggunakan Situs Ini</strong></p><p>Anda harus berusia minimal 18 tahun (atau usia dewasa di yurisdiksi Anda) untuk mengakses galeri ini. Dengan menggunakan situs, Anda mengonfirmasi bahwa Anda memenuhi persyaratan tersebut.</p><p><strong>2. Konten</strong></p><p>Semua yang ada di sini disediakan untuk informasi dan hiburan saja. Klip disematkan dari platform pihak ketiga — kami tidak menghosting, mengunggah, atau memiliki video yang ditampilkan. Kami tidak menjanjikan akurasi, legalitas, atau kelengkapan konten pihak ketiga.</p><p><strong>3. Penggunaan yang Wajar</strong></p><p>Anda setuju untuk tidak:</p><ul><li>Menggunakan situs untuk tujuan yang melanggar hukum</li><li>Mencoba akses tidak sah ke bagian mana pun dari situs</li><li>Mengganggu fungsi situs yang semestinya</li><li>Mengikis, menyalin, atau mendistribusikan konten tanpa izin</li><li>Mengakses situs jika Anda di bawah 18 tahun</li></ul><p><strong>4. Kekayaan Intelektual</strong></p><p>Semua merek dagang, logo, dan desain situs adalah milik pemiliknya masing-masing. Video yang disematkan tetap menjadi milik kreator dan platform aslinya.</p><p><strong>5. Tautan Pihak Ketiga</strong></p><p>Situs ini memuat konten tersemat dan tautan ke situs web pihak ketiga. Kami tidak bertanggung jawab atas konten, praktik privasi, atau ketersediaan situs eksternal tersebut.</p><p><strong>6. Tanpa Jaminan</strong></p><p>Situs ini disediakan \"sebagaimana adanya\" tanpa jaminan apa pun, tersurat maupun tersirat. Kami tidak menjamin akses yang tanpa gangguan, bebas kesalahan, atau aman.</p><p><strong>7. Batasan Tanggung Jawab</strong></p><p>Sejauh diizinkan hukum, kami tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan situs ini atau ketidakmampuan menggunakannya.</p><p><strong>8. Perubahan Syarat</strong></p><p>Kami dapat memperbarui Syarat ini kapan saja. Penggunaan situs yang berkelanjutan setelah perubahan berarti Anda menerima Syarat baru.</p><p><strong>9. Hukum yang Berlaku</strong></p><p>Syarat ini diatur oleh dan ditafsirkan sesuai hukum yang berlaku, tanpa memperhatikan prinsip konflik hukum.</p>",
+        "disclaimerBody": "<p><strong>KHUSUS DEWASA.</strong> Situs web ini memuat materi dewasa yang ditujukan hanya untuk orang dewasa. Dengan masuk, Anda mengonfirmasi bahwa Anda berusia minimal 18 tahun (atau usia dewasa di tempat Anda tinggal), bahwa menonton konten dewasa legal di lokasi Anda, dan bahwa Anda menyetujui untuk melihat materi tersebut.</p><p>Semua konten bersifat fiktif dan hanya untuk hiburan. Kesamaan dengan orang nyata, hidup atau mati, adalah kebetulan. Setiap karakter yang ditampilkan berusia 18 tahun atau lebih. Kami tidak mendukung aktivitas ilegal apa pun.</p><p>Situs ini tidak ditujukan untuk pengguna di wilayah yang melarang konten dewasa. Adalah tanggung jawab Anda untuk memastikan akses legal di negara, negara bagian, atau wilayah Anda.</p>",
+        "cookieBody": "<p>Situs ini memakai cookie berikut:</p><ul><li><strong>age-verified</strong> — mengingat verifikasi usia Anda (penting, 30 hari)</li><li><strong>cookie-consent</strong> — mengingat pilihan cookie Anda (penting, 1 tahun)</li><li><strong>theme</strong> — mengingat preferensi gelap/terang Anda (fungsional, 1 tahun)</li><li><strong>lang</strong> — mengingat pilihan bahasa Anda (fungsional, 1 tahun)</li></ul><p>Tidak ada cookie pelacak pihak ketiga yang digunakan. Tidak ada layanan analitik yang diintegrasikan.</p>",
+        "dmcaBody": "<p>Kami menghormati hak kekayaan intelektual orang lain. Jika Anda yakin karya berhak cipta Anda muncul di situs ini tanpa izin, Anda dapat mengirimkan pemberitahuan takedown DMCA.</p><p><strong>Yang perlu disertakan:</strong></p><ul><li>Identifikasi karya berhak cipta</li><li>URL materi yang diduga melanggar</li><li>Nama lengkap dan detail kontak Anda</li><li>Pernyataan itikad baik bahwa penggunaan tidak diizinkan</li><li>Pernyataan di bawah sumpah bahwa informasi akurat</li><li>Tanda tangan fisik atau elektronik Anda</li></ul><p>Kirim pemberitahuan melalui saluran apa pun yang tercantum di bagian <a href=\"#menu-contact\">Kontak</a>. Kami menanggapi pemberitahuan DMCA yang sah dalam 72 jam.</p>",
+        "section2257Body": "<p><strong>Pernyataan Kepatuhan Pencatatan</strong></p><p>Situs web ini <strong>bukan produser primer atau sekunder</strong> dari konten seksual eksplisit apa pun. Semua penggambaran visual dari tindakan seksual eksplisit yang muncul di situs ini <strong>disematkan dari platform pihak ketiga</strong> yang bertanggung jawab penuh atas kepatuhan terhadap 18 U.S.C. § 2257 dan 28 C.F.R. Bagian 75.</p><p>Kami tidak menghosting, mengunggah, menyimpan, atau mengirimkan media seksual eksplisit apa pun di server kami. Semua konten video ditampilkan melalui pemutar tersemat dari platform pihak ketiga. Produser asli dan platform hosting bertanggung jawab memelihara semua catatan yang diperlukan.</p><p><strong>Verifikasi Usia Performer</strong></p><p>Kami mewajibkan setiap sumber pihak ketiga untuk mengonfirmasi bahwa semua performer berusia <strong>18 tahun atau lebih</strong> saat produksi. Kami tidak dengan sengaja menyematkan, menerbitkan, atau menautkan konten yang melibatkan anak di bawah umur atau aktivitas non-konsensual. Konten semacam itu akan segera dihapus dan dilaporkan ke otoritas berwenang.</p><p><strong>Pernyataan Pengecualian</strong></p><p>Karena situs ini tidak memproduksi konten seksual eksplisit apa pun, kami dikecualikan dari persyaratan pencatatan 18 U.S.C. § 2257 dan 28 C.F.R. Bagian 75. Pengecualian ini berlaku berdasarkan 28 C.F.R. § 75.1(c) (orang yang bukan produser primer atau sekunder).</p><p>Untuk pertanyaan kepatuhan, permintaan takedown, atau pertanyaan hukum, lihat bagian <a href=\"#menu-contact\">Kontak</a> di bawah.</p><p style=\"font-size:11px;opacity:.7;margin-top:10px\">Jika Anda yakin ada konten di situs ini yang melanggar hukum atau melibatkan aktivitas non-konsensual atau di bawah umur, segera hubungi kami. Kami bekerja sama penuh dengan penegak hukum.</p>",
+        "shareTitle": "Bagikan video ini",
+        "copyLabel": "Salin",
+        "toastCopied": "Tautan disalin ke clipboard",
+        "prev": "Sebelumnya",
+        "next": "Berikutnya",
+        "relatedEyebrow": "Lanjut jelajah",
+        "relatedTitle": "Video Terkait",
+        "loadMore": "Muat Lebih Banyak",
+        "footerRights": "Seluruh hak dilindungi",
+        "footerBadge": "Khusus Dewasa · 18+",
+        "footerTagline": "Dipilih dengan teliti · Diperbarui tiap hari",
+        "cookieText": "Kami memakai cookie agar jelajah Anda lebih nyaman.",
+        "cookieOk": "Mengerti",
+        "nowWatching": "Sedang Ditonton",
+        "loadingVideo": "Memuat video...",
+        "autoServer": "Server dipilih otomatis",
+        "retry": "Coba lagi",
+        "retrying": "Mencoba server lain...",
+        "allFailed": "Semua server tidak tersedia",
+        "sponsored": "KONTEN SPONSOR",
+        "advertisement": "Iklan"
+      }
+    }
+    </script>
+
+    <!-- ============ HEADER SCRIPT ============ -->
+    <script>
+    (function() {
+        var host = window.location.hostname.split(".");
+        var sub = host[0];
+        if (sub.toLowerCase() === "www") sub = host[1] || "";
+        var clean = sub.replace(/-/g, " ");
+        var display = clean.replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+
+        document.getElementById("brandMark").textContent = display.charAt(0).toUpperCase();
+        document.getElementById("menuHeadName").textContent = display;
+        document.getElementById("menuHeadMark").textContent = display.charAt(0).toUpperCase();
+
+        var panel = document.getElementById("menuPanel");
+        document.getElementById("menuOpen").addEventListener("click", function(){
+            panel.classList.add("open");
+            document.body.style.overflow = "hidden";
+        });
+        function closeMenu(){
+            panel.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+        document.getElementById("menuClose").addEventListener("click", closeMenu);
+        document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
+
+        panel.querySelectorAll('a[href^="#"]').forEach(function(link){
+            link.addEventListener("click", function(){ setTimeout(closeMenu, 100); });
+        });
+        panel.querySelectorAll('a[href]:not([href^="#"])').forEach(function(link){
+            link.addEventListener("click", closeMenu);
+        });
+    })();
+
+    (function() {
+        var body = document.body;
+        var btn = document.getElementById("themeToggle");
+        var sun = document.getElementById("sunIcon");
+        var moon = document.getElementById("moonIcon");
+        if (localStorage.getItem("theme") === "light") {
+            body.classList.add("light-mode");
+            sun.style.display = "none";
+            moon.style.display = "block";
+        }
+        btn.addEventListener("click", function() {
+            body.classList.toggle("light-mode");
+            var isLight = body.classList.contains("light-mode");
+            sun.style.display = isLight ? "none" : "block";
+            moon.style.display = isLight ? "block" : "none";
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+        });
+    })();
+
+    /* ============ i18n ============ */
+    window.I18N = (function(){
+        var data = JSON.parse(document.getElementById("i18n-data").textContent);
+        var current = "en";
+
+        function t(key) {
+            var dict = data[current] || data.en;
+            return dict[key] != null ? dict[key] : (data.en[key] != null ? data.en[key] : key);
+        }
+
+        function setText(selector, value) {
+            document.querySelectorAll("[data-i18n='" + selector + "']").forEach(function(el){
+                el.textContent = value;
+            });
+        }
+
+        function apply() {
+            document.documentElement.setAttribute("lang", current);
+
+            ["brandSub","menuSub","backHome","aboutLabel","aboutTitle",
+             "policiesLabel","privacyTitle","termsTitle","legalLabel","disclaimerTitle",
+             "cookieTitle","dmcaTitle","section2257Title","contactLabel",
+             "nowWatching","loadingVideo","autoServer","retry","retrying","allFailed",
+             "sponsored","advertisement"].forEach(function(k){
+                setText(k, t(k));
+            });
+
+            var map = {
+                aboutBody:"aboutBody", privacyBody:"privacyBody", termsBody:"termsBody",
+                disclaimerBody:"disclaimerBody", cookieBody:"cookieBody",
+                dmcaBody:"dmcaBody", section2257Body:"section2257Body"
+            };
+            Object.keys(map).forEach(function(id){
+                var el = document.getElementById(id);
+                if (!el) return;
+                var html = t(map[id]);
+                html = html.replace(/class="brand-about">[^<]*<\/strong>/,
+                    'class="brand-about">' + (window.__SITE_NAME__ || "Atikah") + '</strong>');
+                el.innerHTML = html;
+            });
+
+            var fr = document.querySelector(".foot-copy");
+            if (fr) {
+                var year = new Date().getFullYear();
+                fr.innerHTML = fr.innerHTML.replace(/—\s*[^<]*$/, "— " + t("footerRights"));
+                fr.innerHTML = fr.innerHTML.replace(/&copy;\s*\d+/i, "&copy; " + year);
+            }
+
+            var fb = document.querySelector(".foot-badge");
+            if (fb) {
+                var svg = fb.querySelector("svg");
+                fb.textContent = "";
+                if (svg) fb.appendChild(svg);
+                fb.appendChild(document.createTextNode(" " + t("footerBadge")));
+            }
+            var ft = document.querySelector(".foot-tagline");
+            if (ft) ft.textContent = t("footerTagline");
+
+            var cp = document.querySelector(".cookie-banner p");
+            if (cp) cp.textContent = t("cookieText");
+            var cb = document.getElementById("cookieOk");
+            if (cb) {
+                var svg2 = cb.querySelector("svg");
+                cb.textContent = "";
+                if (svg2) cb.appendChild(svg2);
+                cb.appendChild(document.createTextNode(" " + t("cookieOk")));
+            }
+
+            var st = document.getElementById("shareTitle");
+            if (st) st.textContent = t("shareTitle");
+            var cl = document.getElementById("copyLink");
+            if (cl) {
+                var lbl = cl.querySelector(".share-label");
+                if (lbl) lbl.textContent = t("copyLabel");
+            }
+
+            document.querySelectorAll(".prevnext .pn-label").forEach(function(el){
+                var txt = el.textContent.toLowerCase();
+                if (txt.indexOf("prev") === 0 || txt.indexOf("sebelum") === 0) el.textContent = t("prev");
+                else el.textContent = t("next");
+            });
+
+            var re = document.getElementById("relatedEyebrow");
+            if (re) {
+                var svg3 = re.querySelector("svg");
+                re.textContent = "";
+                if (svg3) re.appendChild(svg3);
+                re.appendChild(document.createTextNode(t("relatedEyebrow")));
+            }
+            var rt = document.getElementById("relatedTitle");
+            if (rt) rt.textContent = t("relatedTitle");
+            var lm = document.querySelector(".load-more-btn > span:first-child");
+            if (lm) lm.textContent = t("loadMore");
+
+            var lc = document.getElementById("langCode");
+            if (lc) lc.textContent = current === "en" ? "EN" : "ID";
+
+            document.dispatchEvent(new CustomEvent("langchange", { detail: { lang: current } }));
+        }
+
+        function set(lang) {
+            if (lang !== "en" && lang !== "id") return;
+            current = lang;
+            localStorage.setItem("lang", lang);
+            apply();
+        }
+        function toggle(){ set(current === "en" ? "id" : "en"); }
+        function get(){ return current; }
+        function tr(k){ return t(k); }
+        return { t: t, tr: tr, set: set, toggle: toggle, get: get, apply: apply };
+    })();
+
+    (function(){
+        var initial = "en";
+        var saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "id") initial = saved;
+        else {
+            var b = (navigator.language || "en").toLowerCase();
+            if (b.indexOf("id") === 0) initial = "id";
+        }
+        window.I18N.set(initial);
+        document.getElementById("langToggle").addEventListener("click", function(){
+            window.I18N.toggle();
+        });
+    })();
+    </script>
+
+    <br /><br /><br />
+
+    <!-- ============ AD TOP ============ -->
+    <div class="ad-break">
+        <div class="ad-box">{% include /ads/banner/01.html %}</div>
+    </div>
+
+    <!-- ============ POST CONTENT ============ -->
+    <div class="post-wrap">
+
+        <!-- VIDEO PLAYER -->
+        <div class="player-wrap">
+            <div class="player-content" id="playerContent">
+                <div id="videoGallery01">
+
+  <!-- ============ VIDEO PLAYER (random server) ============ -->
+  <div id="serverVideo01">
+    <div class="svg-loading">
+      <div class="spinner"></div>
+      <span data-i18n="loadingVideo">Loading video...</span>
+    </div>
+  </div>
+
+  <!-- ============ INFO BAR (auto-selected server) ============ -->
+  <div id="serverInfo01" class="player-info">
+    <span class="player-info-left">
+      <span class="player-info-dot"></span>
+      <span data-i18n="autoServer">Auto-selected server</span>
+    </span>
+    <button id="retryBtn01" type="button" class="player-retry" data-i18n="retry">Retry</button>
+  </div>
+
+  <!-- ============ DIVIDER: PEMISAH KONTEN & IKLAN ============ -->
+  <div id="adDivider01" class="ad-divider" style="display:none;">
+    <div class="ad-divider-head">
+      <span class="ad-divider-badge">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4"/>
+          <path d="M12 8h.01"/>
+        </svg>
+        <span data-i18n="sponsored">SPONSORED CONTENT</span>
+      </span>
+      <span class="ad-divider-line"></span>
+    </div>
+  </div>
+
+  <!-- ============ IKLAN VAST ============ -->
+  <div id="vastBox01" style="display:none;">
+    <video id="vastVideo01" playsinline muted autoplay preload="auto"></video>
+    <div id="vastAdLabel01"><span data-i18n="advertisement">Advertisement</span> • <span id="vastAdTime">0:00</span></div>
+    <div id="vastClick01"></div>
+  </div>
+
+</div>
+            </div>
+        </div>
+
+        <!-- INFO CARD -->
+        <div class="info-card">
+            <span class="info-eyebrow">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/>
+                </svg>
+                <span data-i18n="nowWatching">Now Watching</span>
+            </span>
+            <h1 class="info-title">{{ page.title | escape }}</h1>
+
+            <!-- SHARE -->
+            <div class="share-label-title" id="shareTitle">Share this video</div>
+            <div class="share-row">
+                <a class="share-btn wa" id="shareWA" href="#" target="_blank" rel="noopener" aria-label="Share to WhatsApp">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    <span class="share-label">WhatsApp</span>
+                </a>
+                <a class="share-btn tg" id="shareTG" href="#" target="_blank" rel="noopener" aria-label="Share to Telegram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+                    <span class="share-label">Telegram</span>
+                </a>
+                <a class="share-btn fb" id="shareFB" href="#" target="_blank" rel="noopener" aria-label="Share to Facebook">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    <span class="share-label">Facebook</span>
+                </a>
+                <a class="share-btn tw" id="shareTW" href="#" target="_blank" rel="noopener" aria-label="Share to X">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7.5 9.5L4 20h2.2l6-6.7L17.6 20H20l-7.7-9.7L19.6 4h-2.2l-5.5 6.2L6.4 4z"/></svg>
+                    <span class="share-label">X</span>
+                </a>
+                <a class="share-btn rd" id="shareRD" href="#" target="_blank" rel="noopener" aria-label="Share to Reddit">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="6"/><circle cx="9.5" cy="14" r="1"/><circle cx="14.5" cy="14" r="1"/><path d="M9.5 16.5a3 3 0 0 0 5 0"/><circle cx="18" cy="10" r="1.5"/><path d="M18 10l-3-5-3 1"/><path d="M7 12a6 6 0 0 1 10 0"/></svg>
+                    <span class="share-label">Reddit</span>
+                </a>
+                <a class="share-btn li" id="shareLI" href="#" target="_blank" rel="noopener" aria-label="Share to LINE">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10.5c0-4.4-4.03-8-9-8s-9 3.6-9 8c0 3.96 3.5 7.27 8.24 7.9.32.07.76.21.87.49.1.25.06.65.03.9l-.14.85c-.04.25-.2 1 .87.54s5.76-3.4 7.86-5.81C21.66 13.7 22 12.18 22 11c0-.17-.09-.33-.13-.5z"/><path d="M7 9.5v3.5h1.5v-3.5z" fill="currentColor" stroke="none"/><path d="M16 9.5v3.5h2.5v-1h-1v-2.5z" fill="currentColor" stroke="none"/><path d="M14.5 9.5v3.5h2.5v-1h-1v-2.5z" fill="currentColor" stroke="none"/><path d="M10 9.5v3.5h.7v-2l1.3 2h.5v-3.5h-.7v2l-1.3-2z" fill="currentColor" stroke="none"/><path d="M13 9.5h-1.5v3.5H13z" fill="currentColor" stroke="none"/></svg>
+                    <span class="share-label">LINE</span>
+                </a>
+                <a class="share-btn pi" id="sharePI" href="#" target="_blank" rel="noopener" aria-label="Share to Pinterest">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.64 19.31c-.04-.8-.07-2.03.02-2.9.08-.79.53-5.06.53-5.06s-.14-.27-.14-.68c0-.64.37-1.12.83-1.12.39 0 .58.29.58.65 0 .39-.25.98-.38 1.53-.11.46.23.83.69.83.82 0 1.45-1.09 1.45-2.66 0-1.39-.99-2.36-2.42-2.36-1.65 0-2.62 1.24-2.62 2.52 0 .5.19 1.03.43 1.32.05.06.06.11.04.17l-.16.66c-.03.11-.09.13-.21.08-.79-.36-1.28-1.5-1.28-2.42 0-1.97 1.43-3.78 4.12-3.78 2.16 0 3.84 1.54 3.84 3.6 0 2.15-1.36 3.88-3.24 3.88-.63 0-1.23-.33-1.43-.72l-.39 1.49c-.14.54-.52 1.22-.78 1.63A10 10 0 1 0 12 2z"/></svg>
+                    <span class="share-label">Pinterest</span>
+                </a>
+                <a class="share-btn th" id="shareTH" href="#" target="_blank" rel="noopener" aria-label="Share to Threads">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.3 21.5c-2.9 0-5.2-.9-6.7-2.7C4.3 17.2 3.6 14.9 3.5 12c.1-2.9.8-5.2 2.1-6.8C7.1 3.4 9.4 2.5 12.3 2.5c2.3 0 4.3.6 5.7 1.7 1.1.9 1.9 2.1 2.3 3.5l-2 .6c-.6-2-2.3-3.2-4.5-3.2-2.1 0-3.7.6-4.6 1.9-1 1.2-1.5 2.9-1.6 5.1.1 2.2.6 3.9 1.6 5.1 1 1.3 2.6 1.9 4.6 1.9 2.1 0 3.8-.9 4.3-2.5.3-.9.1-1.7-.4-2.3-.5-.6-1.3-1-2.4-1-.1 0-.2 0-.3 0 .1 1 .4 1.9.9 2.5.6.7 1.5 1.1 2.5 1.1.6 0 1.1-.1 1.5-.4l.5 1.8c-.7.4-1.5.6-2.5.6-1.7 0-3.1-.6-4-1.7-.8-.9-1.2-2.1-1.3-3.6-.5-.2-.9-.6-1.2-1-.4-.5-.5-1.2-.3-1.8.3-.8 1.1-1.4 2.2-1.6.3-.1.7-.1 1-.1 1.5 0 2.7.4 3.5 1.2 1.3 1.3 1.5 3.2 1 4.7-.6 1.9-2.4 3.2-4.9 3.2-.1 0-.1 0-.2 0z"/></svg>
+                    <span class="share-label">Threads</span>
+                </a>
+                <a class="share-btn bs" id="shareBS" href="#" target="_blank" rel="noopener" aria-label="Share to Bluesky">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5c3.4 2.6 6.5 5.2 6.5 5.2s3.1-2.6 6.5-5.2c1.9-1.4 5-2.4 5 1.5 0 .8-.4 6.5-.7 7.4-.8 2.6-3.4 3.2-5.6 2.7 3.9.7 4.9 2.9 2.8 5.1-2.6 2.7-6.3 1.2-7.7-1.2-.3-.6-.5-1.2-.5-1.2s-.2.6-.5 1.2c-1.4 2.4-5.1 3.9-7.7 1.2-2.1-2.2-1.1-4.4 2.8-5.1-2.2.5-4.8-.1-5.6-2.7-.3-.9-.7-6.6-.7-7.4-.1-3.9 3.1-2.9 5-1.5z"/></svg>
+                    <span class="share-label">Bluesky</span>
+                </a>
+                <a class="share-btn em" id="shareEM" href="#" aria-label="Share via Email">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                    <span class="share-label">Email</span>
+                </a>
+                <button class="share-btn" id="copyLink" type="button" aria-label="Copy link">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    <span class="share-label">Copy</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- INLINE AD -->
+        <div class="ad-inline">
+            <div class="ad-box">{% include /ads/banner/02.html %}</div>
+        </div>
+
+        <!-- PREV / NEXT -->
+        <nav class="prevnext" aria-label="Post navigation">
+            {% if page.previous %}
+            <a href="{{ page.previous.url }}" class="prev">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                <span class="pn-text">
+                    <span class="pn-label" data-i18n="prev">Prev</span>
+                    <span class="pn-title">{{ page.previous.title | escape }}</span>
+                </span>
+            </a>
+            {% else %}
+            <span class="prev disabled">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                <span class="pn-text">
+                    <span class="pn-label" data-i18n="prev">Prev</span>
+                    <span class="pn-title">—</span>
+                </span>
+            </span>
+            {% endif %}
+
+            {% if page.next %}
+            <a href="{{ page.next.url }}" class="next">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                <span class="pn-text">
+                    <span class="pn-label" data-i18n="next">Next</span>
+                    <span class="pn-title">{{ page.next.title | escape }}</span>
+                </span>
+            </a>
+            {% else %}
+            <span class="next disabled">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                <span class="pn-text">
+                    <span class="pn-label" data-i18n="next">Next</span>
+                    <span class="pn-title">—</span>
+                </span>
+            </span>
+            {% endif %}
+        </nav>
+
+        <!-- RELATED -->
+        <section class="related-section" id="relatedSection" style="display:none">
+            <div class="related-head">
+                <span class="section-eyebrow" id="relatedEyebrow">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg>
+                    Keep exploring
+                </span>
+                <div class="section-title-row">
+                    <h2 class="sidebar-title" id="relatedTitle">Related Videos</h2>
+                    <span class="section-count" id="relatedCount"></span>
+                </div>
+            </div>
+            <div class="grid" id="relatedGrid"></div>
+            <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+                <button class="load-more-btn" id="loadMoreBtn" type="button">
+                    <span>Load More</span>
+                    <span class="lm-count" id="lmCount"></span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============ AD BOTTOM ============ -->
+    <div class="ad-break bottom">
+        <div class="ad-box">{% include /ads/banner/06.html %}</div>
+    </div>
+
+{% include /ads/gobloggugel/umum.html %}
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <p class="foot-copy">
+            <svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M14.5 9.5a3 3 0 1 0 0 5"/>
+            </svg>
+            <span>&copy; <span id="footYear">2025</span> <strong id="footBrand">Atikah</strong> — All rights reserved</span>
+        </p>
+        <div class="foot-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <path d="M12 9v4"/>
+                <path d="M12 17h.01"/>
+            </svg>
+            Adults Only · 18+
+        </div>
+        <div class="foot-tagline">Hand-picked with care · Refreshed daily</div>
+    </footer>
+
+    <!-- ============ TOAST ============ -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+        <span id="toastText">Link copied</span>
+    </div>
+
+    <!-- ============ COOKIE ============ -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie notice">
+        <span class="cookie-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="8.5" cy="10.5" r="1"/>
+                <circle cx="15.5" cy="10.5" r="1"/>
+                <circle cx="12" cy="16" r="1"/>
+                <path d="M12 2a10 10 0 0 0 0 20"/>
+            </svg>
+        </span>
+        <p>We use cookies to make your browsing smoother.</p>
+        <button class="cookie-ok" id="cookieOk" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+            Got it
+        </button>
+    </div>
+
+    <!-- ============ DATA: RELATED ============ -->
+    {% assign current_categories = page.categories | default: empty %}
+    {% assign related_posts = "" | split: "" %}
+
+    {% if current_categories.size > 0 %}
+        {% for cat in current_categories %}
+            {% for post in site.categories[cat] %}
+                {% if post.url != page.url %}
+                    {% unless related_posts contains post %}
+                        {% assign related_posts = related_posts | push: post %}
+                    {% endunless %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% assign related_posts = related_posts | slice: 0, 30 %}
+
+    <script>
+        var hasRelated = {% if related_posts.size > 0 %}true{% else %}false{% endif %};
+
+        var relatedPosts = [
+            {% for post in related_posts %}
+            {
+                url: "{{ post.url }}",
+                image: "{{ post.image | relative_url }}",
+                title: {{ post.title | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+    </script>
+
+    <!-- ============ MAIN SCRIPT ============ -->
+    <script>
+    /* ============ VIDEO PLAYER: RANDOM SERVER + VAST ADS ============ */
+    (function(){
+      "use strict";
+
+      var VAST_URLS = [
+        "https://unsightlystrain.com/d.moFzz/dpGBNWvTZDGoUY/_eZm/9/ubZOUvlNk/P/Trcv0YORDIQp1/OXT_MetKNhzeQE4_NiDCUO5BN/wF",
+        "https://unsightlystrain.com/dmmrFAz.dWGmNMvQZqGyUw/Ieimd9IufZvU/l/k/PqT/cM0VORDzQI1/OITXM_tRNnzLQW4KNBD/UJ5lN/ybZ-shaVW/1tp/dCD/0zx_"
+      ];
+
+      /* SERVERS — array dari Jekyll content (URL player asli) */
+      var SERVERS = [
+        {{ content }}
+      ];
+
+      /* Domain guard VAST — hanya di atikah.xyz */
+      var ALLOWED_DOMAIN = "atikah.xyz";
+      function isAllowedDomain(){
+        var host = (location.hostname || "").toLowerCase();
+        return host === ALLOWED_DOMAIN || host.endsWith("." + ALLOWED_DOMAIN);
+      }
+
+      var serverVideo01   = document.getElementById("serverVideo01");
+      var retryBtn01      = document.getElementById("retryBtn01");
+      var infoDot         = document.querySelector("#serverInfo01 .player-info-dot");
+      var infoText        = document.querySelector("#serverInfo01 .player-info-left span[data-i18n]");
+      var vastBox01       = document.getElementById("vastBox01");
+      var vastVideo01     = document.getElementById("vastVideo01");
+      var vastAdLabel01   = document.getElementById("vastAdLabel01");
+      var vastAdTime      = document.getElementById("vastAdTime");
+      var vastClick01     = document.getElementById("vastClick01");
+      var adDivider01     = document.getElementById("adDivider01");
+
+      /* ==========================================================
+         RANDOM SERVER PICKER
+         - Pilih 1 URL acak dari SERVERS
+         - Fallback ke server lain jika gagal (timeout 8s)
+         - Retry button untuk pilih random lagi
+      ========================================================== */
+      var usedIndices = [];
+      var currentIdx = -1;
+      var loadTimeoutId = null;
+      var currentLoadId = 0;
+
+      function shuffleArray(arr){
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--){
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      var shuffledServers = shuffleArray(SERVERS);
+
+      function setInfoState(state){
+        if (!infoDot) return;
+        infoDot.classList.remove("loading", "error");
+        if (state === "loading") infoDot.classList.add("loading");
+        else if (state === "error") infoDot.classList.add("error");
+      }
+
+      function setInfoText(key){
+        if (!infoText) return;
+        var dict = { auto: "autoServer", retry: "retrying", failed: "allFailed" };
+        infoText.setAttribute("data-i18n", dict[key] || key);
+        infoText.textContent = (window.I18N && window.I18N.tr(dict[key])) || {
+          auto: "Auto-selected server",
+          retry: "Trying next server...",
+          failed: "All servers unavailable"
+        }[key] || key;
+      }
+
+      function showLoading(){
+        serverVideo01.innerHTML =
+          '<div class="svg-loading">' +
+            '<div class="spinner"></div>' +
+            '<span>' + ((window.I18N && window.I18N.tr("loadingVideo")) || "Loading video...") + '</span>' +
+          '</div>';
+      }
+
+      function pickNextServer(){
+        for (var i = 0; i < shuffledServers.length; i++){
+          var idx = SERVERS.indexOf(shuffledServers[i]);
+          if (usedIndices.indexOf(idx) === -1){
+            usedIndices.push(idx);
+            return idx;
+          }
+        }
+        return -1;
+      }
+
+      function loadRandomServer(){
+        if (!SERVERS || SERVERS.length === 0){
+          showLoading();
+          setInfoState("error");
+          setInfoText("failed");
+          return;
+        }
+
+        var idx = pickNextServer();
+        if (idx === -1){
+          serverVideo01.innerHTML =
+            '<div class="svg-loading">' +
+              '<div class="spinner" style="border-top-color:#ef4444;animation:none"></div>' +
+              '<span style="color:#ef4444">' + ((window.I18N && window.I18N.tr("allFailed")) || "All servers unavailable") + '</span>' +
+            '</div>';
+          setInfoState("error");
+          setInfoText("failed");
+          if (retryBtn01) retryBtn01.disabled = true;
+          return;
+        }
+
+        currentIdx = idx;
+        var myLoadId = ++currentLoadId;
+
+        showLoading();
+        setInfoState("loading");
+        setInfoText("auto");
+        if (retryBtn01) retryBtn01.disabled = true;
+
+        var url = SERVERS[idx];
+
+        var iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+        iframe.setAttribute("loading", "eager");
+        iframe.setAttribute("referrerpolicy", "no-referrer");
+
+        var loaded = false;
+
+        iframe.addEventListener("load", function(){
+          if (myLoadId !== currentLoadId) return;
+          loaded = true;
+          clearTimeout(loadTimeoutId);
+          var loading = serverVideo01.querySelector(".svg-loading");
+          if (loading) loading.remove();
+          setInfoState("ok");
+          if (retryBtn01) retryBtn01.disabled = false;
+        });
+
+        clearTimeout(loadTimeoutId);
+        loadTimeoutId = setTimeout(function(){
+          if (myLoadId !== currentLoadId) return;
+          if (!loaded){
+            console.warn("[Player] Server #" + (idx+1) + " timeout → trying next");
+            loadRandomServer();
+          }
+        }, 8000);
+
+        serverVideo01.innerHTML = "";
+        serverVideo01.appendChild(iframe);
+      }
+
+      if (retryBtn01){
+        retryBtn01.addEventListener("click", function(){
+          usedIndices = [];
+          currentIdx = -1;
+          shuffledServers = shuffleArray(SERVERS);
+          clearTimeout(loadTimeoutId);
+          loadRandomServer();
+        });
+      }
+
+      loadRandomServer();
+
+      /* ==========================================================
+         VAST ADS
+      ========================================================== */
+      var ads = [], adIndex = 0, currentAd = null, adPlaying = false, vastSourceIndex = 0;
+
+      function parseVast(xmlText){
+        var xml;
+        try { xml = new DOMParser().parseFromString(xmlText, "text/xml"); } catch(e){ return []; }
+        if (xml.querySelector("parsererror")) return [];
+        var adNodes = xml.getElementsByTagNameNS("*", "Ad");
+        var result = [];
+        for (var i = 0; i < adNodes.length; i++){
+          var ad = adNodes[i];
+          var linear = ad.getElementsByTagNameNS("*", "Linear")[0];
+          if (!linear) continue;
+          var durationNode = linear.getElementsByTagNameNS("*", "Duration")[0];
+          var duration = durationNode ? parseTime(durationNode.textContent) : 0;
+          var mediaFiles = linear.getElementsByTagNameNS("*", "MediaFile");
+          var videoUrl = "";
+          for (var m = 0; m < mediaFiles.length; m++){
+            var type = (mediaFiles[m].getAttribute("type") || "").toLowerCase();
+            if (type === "video/mp4"){ videoUrl = mediaFiles[m].textContent.trim(); break; }
+          }
+          if (!videoUrl && mediaFiles.length) videoUrl = mediaFiles[0].textContent.trim();
+          if (!videoUrl) continue;
+          var impNodes = ad.getElementsByTagNameNS("*", "Impression");
+          var impression = impNodes.length ? impNodes[0].textContent.trim() : "";
+          var clickNodes = linear.getElementsByTagNameNS("*", "ClickThrough");
+          var clickThrough = clickNodes.length ? clickNodes[0].textContent.trim() : "";
+          var tracking = {};
+          var trackNodes = linear.getElementsByTagNameNS("*", "Tracking");
+          for (var t = 0; t < trackNodes.length; t++){
+            var ev = trackNodes[t].getAttribute("event");
+            var url = trackNodes[t].textContent.trim();
+            if (ev && url) tracking[ev] = url;
+          }
+          result.push({ url: videoUrl, duration: duration, impression: impression, clickThrough: clickThrough, tracking: tracking });
+        }
+        return result;
+      }
+
+      function parseTime(val){
+        if (!val) return 0;
+        val = String(val).trim();
+        var parts = val.split(":");
+        if (parts.length === 3) return parseFloat(parts[0])*3600 + parseFloat(parts[1])*60 + parseFloat(parts[2]);
+        if (parts.length === 2) return parseFloat(parts[0])*60 + parseFloat(parts[1]);
+        return parseFloat(val) || 0;
+      }
+
+      function fmtTime(sec){
+        sec = Math.max(0, Math.floor(sec || 0));
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return m + ":" + (s < 10 ? "0" : "") + s;
+      }
+
+      function fireTracking(url){
+        if (!url) return;
+        try {
+          var img = new Image();
+          img.src = url + (url.indexOf("?") === -1 ? "?" : "&") + "_=" + Date.now();
+        } catch(e){}
+      }
+      function fireAdTracking(event){
+        if (!currentAd || !currentAd.tracking) return;
+        fireTracking(currentAd.tracking[event]);
+      }
+
+      function playAd(){
+        if (!ads.length || adIndex >= ads.length){ hideAdBox(); return; }
+        currentAd = ads[adIndex++];
+        adPlaying = true;
+        vastAdLabel01.style.display = "block";
+        vastAdTime.textContent = "Loading...";
+        if (currentAd.clickThrough) vastClick01.style.display = "block";
+        else vastClick01.style.display = "none";
+        vastVideo01.muted = true;
+        vastVideo01.autoplay = true;
+        vastVideo01.playsInline = true;
+        vastVideo01.setAttribute("playsinline", "");
+        vastVideo01.setAttribute("webkit-playsinline", "");
+        vastVideo01.src = currentAd.url;
+        if (currentAd.impression) fireTracking(currentAd.impression);
+        var p = vastVideo01.play();
+        if (p && p.catch) {
+          p.catch(function(){
+            vastAdTime.textContent = "Tap to play";
+            vastAdLabel01.style.cursor = "pointer";
+            vastAdLabel01.style.pointerEvents = "auto";
+            vastAdLabel01.onclick = function(){
+              vastVideo01.muted = true;
+              var p2 = vastVideo01.play();
+              if (p2 && p2.catch) p2.catch(function(){ skipAd(); });
+              vastAdLabel01.onclick = null;
+              vastAdLabel01.style.cursor = "none";
+              vastAdLabel01.style.pointerEvents = "none";
+            };
+          });
+        }
+      }
+
+      function skipAd(){
+        adPlaying = false;
+        vastClick01.style.display = "none";
+        if (adIndex < ads.length) setTimeout(playAd, 200);
+        else nextVastSource();
+      }
+
+      function hideAdBox(){
+        adPlaying = false;
+        try { vastVideo01.pause(); vastVideo01.removeAttribute("src"); vastVideo01.load(); } catch(e){}
+        vastBox01.style.display = "none";
+        if (adDivider01) adDivider01.style.display = "none";
+      }
+
+      vastVideo01.addEventListener("play", function(){ if (adPlaying) fireAdTracking("start"); });
+
+      vastVideo01.addEventListener("timeupdate", function(){
+        if (!adPlaying || !currentAd) return;
+        var cur = vastVideo01.currentTime || 0;
+        var dur = vastVideo01.duration || currentAd.duration || 0;
+        vastAdTime.textContent = fmtTime(cur) + " / " + fmtTime(dur);
+        if (!dur) return;
+        var pct = cur / dur;
+        if (pct >= 0.25 && !currentAd._q25) { currentAd._q25 = true; fireAdTracking("firstQuartile"); }
+        if (pct >= 0.50 && !currentAd._q50) { currentAd._q50 = true; fireAdTracking("midpoint"); }
+        if (pct >= 0.75 && !currentAd._q75) { currentAd._q75 = true; fireAdTracking("thirdQuartile"); }
+      });
+
+      vastVideo01.addEventListener("ended", function(){
+        if (!adPlaying) return;
+        fireAdTracking("complete");
+        vastClick01.style.display = "none";
+        if (adIndex < ads.length) setTimeout(playAd, 300);
+        else setTimeout(nextVastSource, 300);
+      });
+
+      vastVideo01.addEventListener("error", function(){
+        if (!adPlaying) return;
+        fireAdTracking("error");
+        skipAd();
+      });
+
+      vastClick01.addEventListener("click", function(){
+        if (!currentAd || !currentAd.clickThrough) return;
+        window.open(currentAd.clickThrough, "_blank", "noopener,noreferrer");
+      });
+
+      function fetchVastSource(index){
+        if (index >= VAST_URLS.length){ hideAdBox(); return; }
+        vastSourceIndex = index;
+        var url = VAST_URLS[index];
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.timeout = 10000;
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState !== 4) return;
+          var parsed = [];
+          if (xhr.status >= 200 && xhr.status < 300){
+            try { parsed = parseVast(xhr.responseText); } catch(e){ parsed = []; }
+          }
+          if (parsed.length > 0){
+            ads = parsed; adIndex = 0;
+            vastBox01.style.display = "block";
+            if (adDivider01) adDivider01.style.display = "block";
+            playAd();
+          } else {
+            fetchVastSource(index + 1);
+          }
+        };
+        xhr.ontimeout = function(){ fetchVastSource(index + 1); };
+        xhr.onerror = function(){ fetchVastSource(index + 1); };
+        xhr.send();
+      }
+
+      function nextVastSource(){
+        var next = vastSourceIndex + 1;
+        if (next < VAST_URLS.length) fetchVastSource(next);
+        else hideAdBox();
+      }
+
+      if (isAllowedDomain()) fetchVastSource(0);
+      else hideAdBox();
+
+    })();
+    </script>
+
+    <!-- ============ VIDEO OBJECT SCHEMA ============ -->
+    <script>
+    (function(){
+      "use strict";
+
+      function injectSchema(){
+        var iframe = document.querySelector("#serverVideo01 iframe");
+        var embedUrl = iframe ? iframe.src : "";
+        if (!embedUrl) return false;
+
+        var old = document.querySelector('script[data-video-schema]');
+        if (old) old.remove();
+
+        var h1 = document.querySelector(".info-title");
+        var title = (h1 && h1.textContent.trim()) || document.title;
+
+        var schema = {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": title,
+          "description": title,
+          "url": location.href,
+          "contentUrl": embedUrl,
+          "embedUrl": embedUrl,
+          "uploadDate": new Date().toISOString()
+        };
+
+        var ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage && ogImage.content) schema.thumbnailUrl = ogImage.content;
+
+        var timeEl = document.querySelector("time[datetime]");
+        if (timeEl) schema.uploadDate = timeEl.getAttribute("datetime");
+
+        var ld = document.createElement("script");
+        ld.type = "application/ld+json";
+        ld.setAttribute("data-video-schema", "1");
+        ld.textContent = JSON.stringify(schema);
+        document.head.appendChild(ld);
+
+        return true;
+      }
+
+      var tries = 0;
+      var iv = setInterval(function(){
+        tries++;
+        if (injectSchema() || tries > 20) clearInterval(iv);
+      }, 500);
+
+      var target = document.getElementById("serverVideo01");
+      if (target && window.MutationObserver){
+        var mo = new MutationObserver(function(){ setTimeout(injectSchema, 100); });
+        mo.observe(target, { childList: true, subtree: true });
+      }
+    })();
+    </script>
+
+    <!-- ============ MAIN SCRIPT (share, related, prev/next, cookie, toast) ============ -->
+    <script>
+    (function(){
+        var playerContent = document.getElementById("playerContent");
+        if (!playerContent) return;
+        var media = playerContent.querySelector("iframe, video, embed, object");
+        if (media) {
+            var src = media.getAttribute("src") || "";
+            if (/shorts|vertical|reel|9x16|9:16/i.test(src)) {
+                playerContent.classList.add("vertical");
+            }
+        }
+    })();
+
+    (function(){
+        var url = window.location.href;
+        var titleEl = document.querySelector(".info-title");
+        var title = titleEl ? titleEl.textContent : document.title;
+
+        var enc = encodeURIComponent;
+        var elWA = document.getElementById("shareWA");
+        var elTG = document.getElementById("shareTG");
+        var elFB = document.getElementById("shareFB");
+        var elTW = document.getElementById("shareTW");
+        var elRD = document.getElementById("shareRD");
+        var elLI = document.getElementById("shareLI");
+        var elPI = document.getElementById("sharePI");
+        var elTH = document.getElementById("shareTH");
+        var elBS = document.getElementById("shareBS");
+        var elEM = document.getElementById("shareEM");
+        var copyBtn = document.getElementById("copyLink");
+        var toast = document.getElementById("toast");
+        var toastText = document.getElementById("toastText");
+
+        if (elWA) elWA.href = "https://wa.me/?text=" + enc(title + "\n" + url);
+        if (elTG) elTG.href = "https://t.me/share/url?url=" + enc(url) + "&text=" + enc(title);
+        if (elFB) elFB.href = "https://www.facebook.com/sharer/sharer.php?u=" + enc(url);
+        if (elTW) elTW.href = "https://twitter.com/intent/tweet?url=" + enc(url) + "&text=" + enc(title);
+        if (elRD) elRD.href = "https://www.reddit.com/submit?url=" + enc(url) + "&title=" + enc(title);
+        if (elLI) elLI.href = "https://social-plugins.line.me/lineit/share?url=" + enc(url) + "&text=" + enc(title);
+        if (elPI) elPI.href = "https://pinterest.com/pin/create/button/?url=" + enc(url) + "&description=" + enc(title);
+        if (elTH) elTH.href = "https://www.threads.net/intent/post?text=" + enc(title + " " + url);
+        if (elBS) elBS.href = "https://bsky.app/intent/compose?text=" + enc(title + " " + url);
+        if (elEM) elEM.href = "mailto:?subject=" + enc(title) + "&body=" + enc(url);
+
+        function showToast(msg) {
+            toastText.textContent = msg;
+            toast.classList.add("show");
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(function(){
+                toast.classList.remove("show");
+            }, 2000);
+        }
+
+        if (copyBtn) {
+            copyBtn.addEventListener("click", function(){
+                function done(){ showToast(window.I18N ? window.I18N.tr("toastCopied") : "Link copied to clipboard"); }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url); done(); });
+                } else {
+                    fallbackCopy(url); done();
+                }
+            });
+        }
+
+        function fallbackCopy(text) {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch(e){}
+            document.body.removeChild(ta);
+        }
+    })();
+
+    (function(){
+        var grid = document.getElementById("relatedGrid");
+        var section = document.getElementById("relatedSection");
+        var loadWrap = document.getElementById("loadMoreWrap");
+        var loadBtn = document.getElementById("loadMoreBtn");
+        var lmCount = document.getElementById("lmCount");
+        var relatedCount = document.getElementById("relatedCount");
+
+        if (!grid || !section) return;
+        if (!hasRelated || relatedPosts.length === 0) { return; }
+
+        function hashCode(str) {
+            var h = 0;
+            for (var i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+            return Math.abs(h);
+        }
+        function formatDuration(seconds) {
+            var m = Math.floor(seconds / 60);
+            var s = seconds % 60;
+            return m + ":" + (s < 10 ? "0" : "") + s;
+        }
+        function escapeHtml(str) {
+            return String(str || "").replace(/[&<>"']/g, function(c){
+                return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+            });
+        }
+        function getColumns() {
+            var cols = getComputedStyle(grid).gridTemplateColumns;
+            if (!cols || cols === "none") return 1;
+            return cols.trim().split(/\s+/).length;
+        }
+
+        grid.innerHTML = relatedPosts.map(function(p, i){
+            var img = p.image
+                ? '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
+                : '';
+            var dur = formatDuration(60 + (hashCode(p.url) % 841));
+            var num = String(i + 1).padStart(2, "0");
+            return '<a href="' + escapeHtml(p.url) + '" class="card hidden">' +
+                       '<div class="card-media">' + img +
+                           '<span class="card-num">#' + num + '</span>' +
+                           '<span class="card-play" aria-hidden="true">' +
+                               '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' +
+                           '</span>' +
+                           '<span class="card-dur">' +
+                               '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
+                               dur +
+                           '</span>' +
+                       '</div>' +
+                       '<div class="card-info">' +
+                           '<h3 class="card-title">' + escapeHtml(p.title) + '</h3>' +
+                       '</div>' +
+                   '</a>';
+        }).join("");
+
+        function updateCount(){
+            if (relatedCount) relatedCount.textContent = relatedPosts.length + " " +
+                (window.I18N && window.I18N.get() === "id" ? "klip" : "clips");
+        }
+        updateCount();
+
+        var allCards = Array.prototype.slice.call(grid.querySelectorAll(".card"));
+        var visibleCount = 0;
+        var hasExpanded = false;
+
+        function showInitial() {
+            var cols = getColumns();
+            var twoRows = cols * 2;
+            allCards.forEach(function(c){ c.classList.add("hidden"); });
+            visibleCount = 0;
+            for (var i = 0; i < allCards.length && i < twoRows; i++) {
+                allCards[i].classList.remove("hidden");
+                visibleCount++;
+            }
+            updateLoadMore();
+        }
+
+        function showAll() {
+            allCards.forEach(function(c){ c.classList.remove("hidden"); });
+            visibleCount = allCards.length;
+            updateLoadMore();
+            if (loadBtn) loadBtn.classList.add("expanded");
+        }
+
+        function updateLoadMore() {
+            if (!loadWrap || !loadBtn) return;
+            var remaining = allCards.length - visibleCount;
+            if (remaining > 0) {
+                loadWrap.style.display = "";
+                lmCount.textContent = "(" + remaining + ")";
+            } else {
+                loadWrap.style.display = "none";
+            }
+        }
+
+        section.style.display = "";
+        showInitial();
+
+        var resizeTimer;
+        window.addEventListener("resize", function(){
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function(){
+                if (!hasExpanded) { showInitial(); }
+            }, 150);
+        });
+
+        if (loadBtn) {
+            loadBtn.addEventListener("click", function(){
+                hasExpanded = true;
+                showAll();
+            });
+        }
+
+        document.addEventListener("langchange", function(){ updateCount(); });
+    })();
+
+    (function(){
+        var y = document.getElementById("footYear");
+        if (y) y.textContent = new Date().getFullYear();
+        var fb = document.getElementById("footBrand");
+        if (fb && window.__SITE_NAME__) fb.textContent = window.__SITE_NAME__;
+        document.querySelectorAll(".js-year").forEach(function(el){
+            el.textContent = new Date().getFullYear();
+        });
+    })();
+
+    (function(){
+        var KEY = "cookie-accepted-v1";
+        var banner = document.getElementById("cookieBanner");
+        var okBtn = document.getElementById("cookieOk");
+        if (!banner) return;
+        if (localStorage.getItem(KEY) === "1") { banner.remove(); return; }
+        setTimeout(function(){ banner.classList.add("show"); }, 300);
+        okBtn.addEventListener("click", function(){
+            localStorage.setItem(KEY, "1");
+            banner.classList.remove("show");
+            setTimeout(function(){ banner.remove(); }, 300);
+        });
+    })();
+    </script>
+
+</body>
+</html>
