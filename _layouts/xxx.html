@@ -10,7 +10,7 @@ layout: null
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
 
     <script>
     (function() {
@@ -26,7 +26,7 @@ layout: null
         document.title = {{ page.title | jsonify }} + " · " + displayDomain;
         var metaDesc = document.querySelector("meta[name=\"description\"]") || document.createElement("meta");
         metaDesc.name = "description";
-        metaDesc.content = {{ page.title | jsonify }} + " — Watch free on " + displayDomain + ". Curated amateur videos from Indonesia and Asia. 18+ only.";
+        metaDesc.content = {{ page.title | jsonify }} + " — Watch free on " + displayDomain + ". Curated amateur videos from Nusantara and Asia. Adults only 18+.";
         if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
         var canonical = document.querySelector("link[rel=\"canonical\"]") || document.createElement("link");
         canonical.setAttribute("rel", "canonical");
@@ -45,7 +45,7 @@ layout: null
 
     <meta property="og:type" content="video.other">
     <meta property="og:title" content="{{ page.title | escape }}">
-    <meta property="og:description" content="Watch {{ page.title | escape }} — curated amateur videos from Indonesia and Asia. 18+ only.">
+    <meta property="og:description" content="Watch {{ page.title | escape }} — curated amateur videos from Nusantara and Asia. Adults only 18+.">
     {% if page.image %}<meta property="og:image" content="{{ page.image | relative_url | absolute_url }}">{% endif %}
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta name="twitter:card" content="summary_large_image">
@@ -56,53 +56,55 @@ layout: null
         *,*::before,*::after{box-sizing:border-box}
 
         :root {
-            --bg: #0a0a0f;
-            --bg-2: #12121a;
-            --surface: #16161f;
-            --surface-2: #1d1d29;
-            --text: #f0f0f5;
-            --text-dim: #8a8a9a;
-            --text-muted: #6a6a78;
-            --border: rgba(255,255,255,.06);
-            --border-strong: rgba(255,255,255,.12);
-            --accent: #a855f7;
-            --accent-2: #06b6d4;
-            --accent-soft: rgba(168,85,247,.15);
-            --shadow: 0 8px 32px rgba(0,0,0,.5);
-            --ad-bg: #0e0e15;
-            --play-bg: rgba(0,0,0,.45);
-            --play-fg: rgba(255,255,255,.85);
-            --dur-bg: rgba(10,10,15,.85);
-            --dur-fg: #a855f7;
-            --header-bg: rgba(10,10,15,.85);
-            --menu-bg: #0d0d14;
-            --menu-hover: #1d1d29;
-            --menu-text: #b0b0c0;
+            --bg: #0f0a0c;
+            --bg-2: #1a1114;
+            --surface: #1f1518;
+            --surface-2: #2a1d21;
+            --text: #fdf5f2;
+            --text-dim: #a89088;
+            --text-muted: #786860;
+            --border: rgba(255,200,180,.08);
+            --border-strong: rgba(255,200,180,.18);
+            --accent: #f43f5e;
+            --accent-2: #f59e0b;
+            --accent-soft: rgba(244,63,94,.15);
+            --shadow: 0 8px 32px rgba(0,0,0,.6);
+            --ad-bg: #140c10;
+            --play-bg: rgba(15,10,12,.6);
+            --play-fg: #fdf5f2;
+            --dur-bg: rgba(15,10,12,.9);
+            --dur-fg: #fbbf24;
+            --header-bg: rgba(15,10,12,.85);
+            --menu-bg: #140c10;
+            --menu-hover: #2a1d21;
+            --menu-text: #c8b8b0;
+            --card-info-bg: rgba(31,21,24,.95);
         }
 
         body.light-mode {
-            --bg: #fafaf9;
-            --bg-2: #f0f0ee;
+            --bg: #fffaf6;
+            --bg-2: #fff0e8;
             --surface: #ffffff;
-            --surface-2: #f5f5f3;
-            --text: #14141a;
-            --text-dim: #6b6b76;
-            --text-muted: #9a9aa3;
-            --border: rgba(0,0,0,.06);
-            --border-strong: rgba(0,0,0,.12);
-            --accent: #7c3aed;
-            --accent-2: #0891b2;
-            --accent-soft: rgba(124,58,237,.1);
-            --shadow: 0 8px 32px rgba(0,0,0,.08);
-            --ad-bg: #eeeee9;
-            --play-bg: rgba(0,0,0,.4);
-            --play-fg: rgba(255,255,255,.9);
-            --dur-bg: rgba(20,20,26,.9);
-            --dur-fg: #ffffff;
-            --header-bg: rgba(250,250,249,.9);
-            --menu-bg: #fafaf9;
-            --menu-hover: #f5f5f3;
-            --menu-text: #4a4a52;
+            --surface-2: #fff5ef;
+            --text: #2a1418;
+            --text-dim: #8a6b6b;
+            --text-muted: #b09a96;
+            --border: rgba(120,40,20,.08);
+            --border-strong: rgba(120,40,20,.16);
+            --accent: #e11d48;
+            --accent-2: #d97706;
+            --accent-soft: rgba(225,29,72,.1);
+            --shadow: 0 8px 32px rgba(120,40,20,.08);
+            --ad-bg: #fff0e8;
+            --play-bg: rgba(255,255,255,.85);
+            --play-fg: #e11d48;
+            --dur-bg: rgba(42,20,24,.95);
+            --dur-fg: #fbbf24;
+            --header-bg: rgba(255,250,246,.9);
+            --menu-bg: #fffaf6;
+            --menu-hover: #fff5ef;
+            --menu-text: #6b4a4a;
+            --card-info-bg: rgba(255,255,255,.98);
         }
 
         html{overflow-x:hidden;background:var(--bg);scroll-behavior:smooth}
@@ -116,7 +118,6 @@ layout: null
 
         svg{display:block}
         .ico{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
-        .ico-sm{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
         /* ============ HEADER ============ */
         .site-header{
@@ -128,29 +129,13 @@ layout: null
             padding:10px 14px;
         }
         .header-inner{
-            display:flex;align-items:center;gap:12px;
+            display:flex;align-items:center;gap:8px;
             max-width:1400px;margin:0 auto;
         }
-        .brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-        .brand-mark{
-            width:34px;height:34px;flex-shrink:0;
-            border-radius:9px;
-            background:linear-gradient(135deg,var(--accent),var(--accent-2));
-            display:flex;align-items:center;justify-content:center;
-            color:#fff;font-weight:900;font-size:15px;
-            font-family:'Playfair Display',serif;
-            box-shadow:0 4px 16px var(--accent-soft);
-        }
-        .brand-text{display:flex;flex-direction:column;min-width:0;flex:1}
-        .brand-name{
-            font-size:14px;font-weight:700;letter-spacing:-.01em;
-            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-            color:var(--text);
-        }
         .icon-btn{
-            width:36px;height:36px;flex-shrink:0;
+            width:38px;height:38px;flex-shrink:0;
             background:var(--surface);border:1px solid var(--border);
-            border-radius:9px;cursor:pointer;padding:0;
+            border-radius:11px;cursor:pointer;padding:0;
             display:flex;align-items:center;justify-content:center;
             color:var(--text);transition:all .2s ease;
         }
@@ -158,38 +143,95 @@ layout: null
         .icon-btn:active{transform:scale(.94)}
         .icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-        /* ============ FULLSCREEN MENU ============ */
+        .lang-btn{
+            min-width:44px;height:38px;flex-shrink:0;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:11px;cursor:pointer;padding:0 9px;
+            display:flex;align-items:center;justify-content:center;gap:5px;
+            color:var(--text);transition:all .2s ease;
+            font-family:'Inter',sans-serif;
+            font-size:11px;font-weight:800;letter-spacing:.05em;
+        }
+        .lang-btn:hover{background:var(--surface-2);border-color:var(--border-strong)}
+        .lang-btn:active{transform:scale(.94)}
+        .lang-btn svg{
+            width:14px;height:14px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            color:var(--accent);
+        }
+
+        .brand{display:flex;align-items:center;gap:10px;flex:1;justify-content:center;min-width:0}
+        .brand-mark{
+            width:36px;height:36px;flex-shrink:0;
+            border-radius:50%;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:15px;
+            font-family:'Fraunces',serif;
+            box-shadow:0 4px 16px var(--accent-soft);
+            position:relative;
+        }
+        .brand-mark::after{
+            content:'';position:absolute;bottom:-2px;right:-2px;
+            width:10px;height:10px;border-radius:50%;
+            background:#22c55e;border:2px solid var(--header-bg);
+        }
+        .brand-text{display:flex;flex-direction:column;min-width:0;text-align:left}
+        .brand-name{
+            font-family:'Fraunces',serif;
+            font-size:14px;font-weight:900;letter-spacing:-.01em;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            color:var(--text);
+            line-height:1.2;
+        }
+        .brand-sub{
+            font-size:9px;font-weight:600;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--accent);
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            line-height:1.2;margin-top:2px;
+        }
+
+        /* ============ MENU PANEL ============ */
         .menu-panel{
-            position:fixed;inset:0;z-index:1100;
+            position:fixed;top:0;right:0;bottom:0;z-index:1100;
+            width:100%;max-width:420px;
             background:var(--menu-bg);
-            transform:translateY(-100%);
+            transform:translateX(100%);
             transition:transform .38s cubic-bezier(.4,0,.2,1);
             display:flex;flex-direction:column;overflow:hidden;
+            border-left:1px solid var(--border-strong);
+            box-shadow:-20px 0 60px rgba(0,0,0,.5);
         }
-        .menu-panel.open{transform:translateY(0)}
+        .menu-panel.open{transform:translateX(0)}
         .menu-head{
             flex-shrink:0;
             display:flex;align-items:center;justify-content:space-between;
-            padding:14px 16px;border-bottom:1px solid var(--border);
+            padding:16px 18px;border-bottom:1px solid var(--border);
             background:var(--menu-bg);
         }
-        .menu-head-title{display:flex;align-items:center;gap:10px;min-width:0}
+        .menu-head-title{display:flex;align-items:center;gap:12px;min-width:0}
         .menu-head-mark{
-            width:32px;height:32px;flex-shrink:0;border-radius:8px;
+            width:36px;height:36px;flex-shrink:0;border-radius:50%;
             background:linear-gradient(135deg,var(--accent),var(--accent-2));
             display:flex;align-items:center;justify-content:center;
-            color:#fff;font-weight:900;font-size:14px;
-            font-family:'Playfair Display',serif;
+            color:#fff;font-weight:900;font-size:15px;
+            font-family:'Fraunces',serif;
         }
         .menu-head-text{display:flex;flex-direction:column;min-width:0}
         .menu-head-name{
-            font-size:14px;font-weight:800;color:var(--text);
+            font-family:'Fraunces',serif;
+            font-size:16px;font-weight:900;color:var(--text);
             letter-spacing:-.02em;line-height:1.2;
             white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
         }
-        .menu-head-sub{font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);line-height:1.2;margin-top:2px}
+        .menu-head-sub{
+            font-size:9px;font-weight:700;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--accent);
+            line-height:1.2;margin-top:3px;
+        }
         .menu-close{
-            width:36px;height:36px;border-radius:9px;
+            width:38px;height:38px;border-radius:50%;
             background:var(--surface);border:1px solid var(--border);
             cursor:pointer;display:flex;align-items:center;justify-content:center;
             color:var(--text);padding:0;transition:all .2s ease;
@@ -197,26 +239,27 @@ layout: null
         .menu-close:hover{background:var(--surface-2);border-color:var(--border-strong)}
         .menu-close:active{transform:scale(.94)}
         .menu-close svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-        .menu-body{flex:1;overflow-y:auto;padding:20px 16px 40px;-webkit-overflow-scrolling:touch}
-        .menu-content{max-width:680px;margin:0 auto}
+        .menu-body{flex:1;overflow-y:auto;padding:20px 18px 40px;-webkit-overflow-scrolling:touch}
+        .menu-content{max-width:100%}
         .menu-divider{height:1px;background:var(--border);margin:18px 4px 14px;pointer-events:none}
         .menu-section-label{
-            font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-            color:var(--text-dim);padding:0 14px 8px;
+            font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+            color:var(--accent);padding:0 4px 10px;
             display:flex;align-items:center;gap:8px;
         }
-        .menu-section-label svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
-        .menu-legal{display:flex;flex-direction:column;gap:6px}
-        .menu-legal details{border:1px solid var(--border);border-radius:9px;background:var(--surface);overflow:hidden}
+        .menu-section-label svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+        .menu-legal{display:flex;flex-direction:column;gap:8px}
+        .menu-legal details{border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
         .menu-legal summary{
             padding:14px 16px;cursor:pointer;
-            font-size:12px;font-weight:700;letter-spacing:.08em;
+            font-size:12px;font-weight:700;letter-spacing:.06em;
             color:var(--text);list-style:none;
             display:flex;align-items:center;gap:12px;
             user-select:none;text-transform:uppercase;transition:color .2s ease;
         }
         .menu-legal summary::-webkit-details-marker{display:none}
-        .menu-legal summary .summary-ico{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent);opacity:.9}
+        .menu-legal summary .summary-ico{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
         .menu-legal summary .summary-text{flex:1}
         .menu-legal summary .chev{width:8px;height:8px;border-right:2px solid var(--text-dim);border-bottom:2px solid var(--text-dim);transform:rotate(45deg);transition:transform .25s ease;flex-shrink:0;margin-top:-3px}
         .menu-legal details[open] summary .chev{transform:rotate(-135deg);margin-top:3px}
@@ -228,9 +271,10 @@ layout: null
         .menu-legal-body li{margin-bottom:6px}
         .menu-legal-body a{color:var(--accent);text-decoration:none;font-weight:500}
         .menu-legal-body a:hover{text-decoration:underline}
+
         .menu-home{
             display:flex;align-items:center;gap:12px;
-            padding:13px 14px;border-radius:9px;
+            padding:14px 16px;border-radius:12px;
             color:var(--menu-text);text-decoration:none;
             font-size:14px;font-weight:600;transition:all .15s ease;
             background:var(--surface);border:1px solid var(--border);margin-bottom:14px;
@@ -238,24 +282,25 @@ layout: null
         .menu-home:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-strong)}
         .menu-home svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent);flex-shrink:0}
         .menu-home .arrow{margin-left:auto;width:14px;height:14px;opacity:.5}
+
         .menu-contact-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
         .menu-contact-list li{
             display:flex;align-items:center;gap:12px;
-            font-size:13px;line-height:1.5;padding:11px 14px;
-            border-radius:9px;background:var(--surface);border:1px solid var(--border);
+            font-size:13px;line-height:1.5;padding:12px 14px;
+            border-radius:12px;background:var(--surface);border:1px solid var(--border);
             transition:all .15s ease;
         }
         .menu-contact-list li:hover{background:var(--surface-2);border-color:var(--border-strong)}
         .menu-contact-list .contact-ico{
-            flex-shrink:0;width:32px;height:32px;border-radius:8px;
+            flex-shrink:0;width:34px;height:34px;border-radius:10px;
             display:flex;align-items:center;justify-content:center;
             background:linear-gradient(135deg,var(--accent-soft),transparent);
             border:1px solid var(--accent-soft);color:var(--accent);
         }
         .menu-contact-list .contact-ico svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
         .menu-contact-list .contact-meta{display:flex;flex-direction:column;min-width:0;flex:1}
-        .menu-contact-list .contact-label{color:var(--text-dim);font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.1em;line-height:1.2}
-        .menu-contact-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:13px;line-height:1.3;word-break:break-all;margin-top:2px}
+        .menu-contact-list .contact-label{color:var(--text-dim);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.12em;line-height:1.2}
+        .menu-contact-list a{color:var(--text);text-decoration:none;font-weight:600;font-size:13px;line-height:1.3;word-break:break-all;margin-top:3px}
         .menu-contact-list a:hover{color:var(--accent)}
 
         /* ============ ADS ============ */
@@ -265,10 +310,10 @@ layout: null
             background:var(--ad-bg);min-height:50px;
         }
         .ad-break{padding:8px 0;background:var(--ad-bg);border-bottom:1px solid var(--border)}
-        .ad-break:first-child{margin-top:54px}
+        .ad-break:first-child{margin-top:58px}
         .ad-break.bottom{border-top:1px solid var(--border);border-bottom:none;margin-top:20px}
         .ad-inline{
-            margin:20px 0;padding:8px 0;
+            margin:24px 0;padding:8px 0;
             background:var(--ad-bg);
             border-top:1px solid var(--border);
             border-bottom:1px solid var(--border);
@@ -287,10 +332,10 @@ layout: null
             position:relative;
             width:100%;
             background:#000;
-            border-radius:10px;
+            border-radius:14px;
             overflow:hidden;
             border:1px solid var(--border);
-            box-shadow:0 12px 40px rgba(0,0,0,.35);
+            box-shadow:0 12px 40px rgba(0,0,0,.4);
         }
         body.light-mode .player-wrap{box-shadow:0 12px 40px rgba(0,0,0,.12)}
 
@@ -318,37 +363,59 @@ layout: null
         .info-card{
             background:var(--surface);
             border:1px solid var(--border);
-            border-radius:10px;
-            padding:16px;
-            margin-top:14px;
+            border-radius:14px;
+            padding:18px;
+            margin-top:16px;
+        }
+        .info-eyebrow{
+            display:inline-flex;align-items:center;gap:6px;
+            font-size:10px;font-weight:800;letter-spacing:.18em;
+            text-transform:uppercase;
+            color:var(--accent);
+            background:var(--accent-soft);
+            padding:5px 10px;
+            border-radius:999px;
+            border:1px solid var(--accent-soft);
+            margin-bottom:12px;
+        }
+        .info-eyebrow svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.4;
+            stroke-linecap:round;stroke-linejoin:round;
         }
         .info-title{
-            font-family:'Playfair Display',Georgia,serif;
-            font-size:20px;font-weight:900;
+            font-family:'Fraunces',Georgia,serif;
+            font-size:22px;font-weight:900;
             letter-spacing:-.02em;
             color:var(--text);
             margin:0;
-            line-height:1.3;
+            line-height:1.25;
         }
 
         /* ============ SHARE ROW ============ */
+        .share-label-title{
+            font-size:10px;font-weight:800;letter-spacing:.16em;
+            text-transform:uppercase;color:var(--text-muted);
+            margin:18px 0 8px;
+            display:flex;align-items:center;gap:8px;
+        }
+        .share-label-title::after{
+            content:'';flex:1;height:1px;background:var(--border);
+        }
         .share-row{
             display:grid;
-            grid-template-columns:repeat(3,1fr);
+            grid-template-columns:repeat(4,1fr);
             gap:8px;
-            margin-top:16px;
-            padding-top:16px;
-            border-top:1px solid var(--border);
         }
         @media(min-width:640px){
             .share-row{grid-template-columns:repeat(6,1fr)}
         }
         .share-btn{
-            display:flex;align-items:center;justify-content:center;gap:8px;
+            display:flex;align-items:center;justify-content:center;gap:7px;
             padding:10px 12px;
             background:var(--surface-2);
             border:1px solid var(--border);
-            border-radius:9px;
+            border-radius:10px;
             color:var(--text);
             font-size:12px;font-weight:600;
             text-decoration:none;
@@ -371,9 +438,7 @@ layout: null
             stroke-linecap:round;stroke-linejoin:round;
             flex-shrink:0;
         }
-        .share-btn .share-label{
-            overflow:hidden;text-overflow:ellipsis;
-        }
+        .share-btn .share-label{overflow:hidden;text-overflow:ellipsis}
 
         .share-btn.wa:hover{border-color:#25d366;color:#25d366}
         .share-btn.tg:hover{border-color:#229ed9;color:#229ed9}
@@ -395,10 +460,10 @@ layout: null
         }
         .prevnext a{
             display:flex;align-items:center;gap:10px;
-            padding:12px 14px;
+            padding:14px 16px;
             background:var(--surface);
             border:1px solid var(--border);
-            border-radius:9px;
+            border-radius:12px;
             text-decoration:none;
             color:var(--text);
             transition:all .15s ease;
@@ -412,185 +477,208 @@ layout: null
             stroke-linecap:round;stroke-linejoin:round;
             opacity:.7;
         }
-        .prevnext .pn-text{
-            display:flex;flex-direction:column;
-            min-width:0;flex:1;
-        }
+        .prevnext .pn-text{display:flex;flex-direction:column;min-width:0;flex:1}
         .prevnext .pn-label{
-            font-size:10px;font-weight:700;letter-spacing:.12em;
+            font-size:10px;font-weight:800;letter-spacing:.14em;
             text-transform:uppercase;color:var(--text-dim);
-            transition:color .15s ease;
-            line-height:1.2;
+            transition:color .15s ease;line-height:1.2;
         }
         .prevnext .pn-title{
-            font-size:12px;font-weight:500;color:var(--text);
+            font-size:12.5px;font-weight:500;color:var(--text);
             overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-            margin-top:2px;
+            margin-top:3px;
         }
         .prevnext .next{text-align:right;flex-direction:row-reverse}
         .prevnext .next .pn-text{align-items:flex-end}
         .prevnext .disabled{opacity:.35;pointer-events:none}
 
         /* ============ RELATED SECTION ============ */
-        .related-section{
-            margin-top:28px;
+        .related-section{margin-top:32px}
+        .related-head{
+            margin-bottom:16px;
+            display:flex;flex-direction:column;gap:8px;
+        }
+        .section-eyebrow{
+            display:inline-flex;align-items:center;gap:6px;
+            align-self:flex-start;
+            font-size:10px;font-weight:800;letter-spacing:.18em;
+            text-transform:uppercase;
+            color:var(--accent);
+            background:var(--accent-soft);
+            padding:5px 10px;
+            border-radius:999px;
+            border:1px solid var(--accent-soft);
+        }
+        .section-eyebrow svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.4;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+        .section-title-row{
+            display:flex;align-items:baseline;justify-content:space-between;
+            gap:12px;
         }
         .sidebar-title{
-            font-family:'Playfair Display',Georgia,serif;
-            font-size:17px;font-weight:900;
+            font-family:'Fraunces',Georgia,serif;
+            font-size:24px;font-weight:900;
             color:var(--text);
-            margin:0 0 14px;
-            display:flex;align-items:center;gap:8px;
+            margin:0;
+            letter-spacing:-.03em;
+            line-height:1.15;
         }
-        .sidebar-title::before{
-            content:'';width:3px;height:17px;border-radius:2px;
-            background:linear-gradient(180deg,var(--accent),var(--accent-2));
-            flex-shrink:0;
-        }
-        .sidebar-title svg{
-            width:14px;height:14px;margin-left:auto;
-            stroke:currentColor;fill:none;stroke-width:2;
-            stroke-linecap:round;stroke-linejoin:round;
-            color:var(--accent);opacity:.85;
+        .section-count{
+            font-size:11px;font-weight:600;color:var(--text-muted);
+            letter-spacing:.06em;text-transform:uppercase;flex-shrink:0;
         }
 
+        /* ============ GRID (4:3 new style) ============ */
         .grid{
-            display:grid;gap:6px;
+            display:grid;gap:10px;
             grid-template-columns:repeat(2,1fr);
         }
         @media(min-width:600px){
-            .grid{grid-template-columns:repeat(3,1fr);gap:8px}
+            .grid{grid-template-columns:repeat(2,1fr);gap:12px}
         }
         @media(min-width:900px){
-            .grid{grid-template-columns:repeat(4,1fr);gap:10px}
+            .grid{grid-template-columns:repeat(3,1fr);gap:14px}
         }
         @media(min-width:1100px){
-            .grid{grid-template-columns:repeat(5,1fr);gap:10px}
+            .grid{grid-template-columns:repeat(4,1fr);gap:14px}
         }
 
         .card{
             position:relative;display:block;
-            border-radius:6px;overflow:hidden;
+            border-radius:14px;overflow:hidden;
             background:var(--surface);
             text-decoration:none;
-            transition:transform .3s cubic-bezier(.4,0,.2,1);
+            border:1px solid var(--border);
+            transition:transform .3s cubic-bezier(.4,0,.2,1),border-color .3s ease,box-shadow .3s ease;
         }
-        .card:hover{transform:translateY(-2px)}
+        .card:hover{
+            transform:translateY(-4px);
+            border-color:var(--border-strong);
+            box-shadow:0 12px 32px rgba(0,0,0,.3);
+        }
         .card-media{
             position:relative;
-            width:100%;aspect-ratio:9/16;
+            width:100%;aspect-ratio:4/3;
             overflow:hidden;background:var(--surface-2);
         }
         .card-media img{
             width:100%;height:100%;object-fit:cover;display:block;
             transition:transform .5s cubic-bezier(.4,0,.2,1);
         }
-        .card:hover .card-media img{transform:scale(1.05)}
+        .card:hover .card-media img{transform:scale(1.06)}
+
+        .card-num{
+            position:absolute;top:10px;right:10px;
+            z-index:3;pointer-events:none;
+            font-family:'Fraunces',serif;
+            font-size:11px;font-weight:900;
+            color:var(--dur-fg);
+            background:var(--dur-bg);
+            padding:3px 8px;
+            border-radius:8px;
+            letter-spacing:.05em;
+            border:1px solid rgba(251,191,36,.25);
+            font-variant-numeric:tabular-nums;
+        }
+
         .card-play{
             position:absolute;
             top:50%;left:50%;
             transform:translate(-50%,-50%);
             width:48px;height:48px;
             background:var(--play-bg);
-            backdrop-filter:blur(4px);
-            -webkit-backdrop-filter:blur(4px);
-            border-radius:50%;
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+            border-radius:12px;
             display:flex;align-items:center;justify-content:center;
             color:var(--play-fg);
             z-index:2;pointer-events:none;
             transition:all .25s ease;
-            border:1px solid rgba(255,255,255,.15);
+            border:1.5px solid rgba(255,255,255,.25);
+            box-shadow:0 6px 20px rgba(0,0,0,.35);
         }
-        .card-play svg{width:18px;height:18px;fill:currentColor;margin-left:3px}
+        .card-play svg{width:20px;height:20px;fill:currentColor;margin-left:3px}
         .card:hover .card-play{
-            background:rgba(0,0,0,.7);
+            background:var(--accent);
             color:#fff;
-            transform:translate(-50%,-50%) scale(1.1);
+            border-color:var(--accent);
+            transform:translate(-50%,-50%) scale(1.08);
         }
         .card-dur{
-            position:absolute;top:6px;right:6px;
+            position:absolute;bottom:10px;left:10px;
             background:var(--dur-bg);
             color:var(--dur-fg);
-            font-size:10px;font-weight:700;
-            letter-spacing:.04em;
-            padding:3px 7px 3px 5px;
-            border-radius:999px;
+            font-size:10.5px;font-weight:800;
+            letter-spacing:.05em;
+            padding:4px 9px 4px 7px;
+            border-radius:8px;
             z-index:3;pointer-events:none;
             font-variant-numeric:tabular-nums;
-            border:1px solid var(--accent-soft);
-            display:flex;align-items:center;gap:3px;
+            display:flex;align-items:center;gap:4px;
+            border:1px solid rgba(251,191,36,.25);
         }
-        .card-dur svg{width:9px;height:9px;stroke:currentColor;fill:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+        .card-dur svg{
+            width:10px;height:10px;
+            stroke:currentColor;fill:none;stroke-width:2.2;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+
+        .card-info{
+            padding:10px 12px;
+            background:var(--card-info-bg);
+            border-top:1px solid var(--border);
+        }
         .card-title{
-            position:absolute;
-            bottom:0;left:0;right:0;
-            font-size:10.5px;font-weight:400;
-            line-height:1.35;
-            color:#fff;opacity:.7;
-            padding:22px 10px 8px;
+            font-family:'Inter',system-ui,sans-serif;
+            font-size:12px;
+            font-weight:600;
+            line-height:1.4;
+            color:var(--text);
             margin:0;
             overflow:hidden;
             display:-webkit-box;
             -webkit-line-clamp:2;
             -webkit-box-orient:vertical;
             text-overflow:ellipsis;
-            background:linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,0) 100%);
-            z-index:2;pointer-events:none;
-            transition:opacity .2s ease;
+            transition:color .2s ease;
         }
-        .card:hover .card-title{opacity:1}
+        .card:hover .card-title{color:var(--accent)}
 
-        #relatedGrid .card.hidden{
-            display: none;
-        }
+        #relatedGrid .card.hidden{display:none}
 
         .load-more-wrap{
-            display: flex;
-            justify-content: center;
-            margin-top: 18px;
+            display:flex;justify-content:center;margin-top:20px;
         }
-
         .load-more-btn{
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--surface);
-            border: 1px solid var(--border-strong);
-            border-radius: 999px;
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 600;
-            font-family: inherit;
-            cursor: pointer;
-            transition: all .2s ease;
+            display:inline-flex;align-items:center;gap:8px;
+            padding:12px 24px;
+            background:var(--surface);
+            border:1px solid var(--border-strong);
+            border-radius:999px;
+            color:var(--text);
+            font-size:13px;font-weight:700;
+            font-family:inherit;cursor:pointer;
+            transition:all .2s ease;
         }
         .load-more-btn:hover{
-            background: var(--surface-2);
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
+            background:var(--surface-2);
+            border-color:var(--accent);
+            color:var(--accent);
+            transform:translateY(-1px);
         }
-        .load-more-btn:active{
-            transform: translateY(0);
-        }
+        .load-more-btn:active{transform:translateY(0)}
         .load-more-btn svg{
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: transform .3s ease;
+            width:14px;height:14px;
+            stroke:currentColor;fill:none;stroke-width:2.5;
+            stroke-linecap:round;stroke-linejoin:round;
+            transition:transform .3s ease;
         }
-        .load-more-btn.expanded svg{
-            transform: rotate(180deg);
-        }
+        .load-more-btn.expanded svg{transform:rotate(180deg)}
         .load-more-btn .lm-count{
-            color: var(--text-dim);
-            font-weight: 500;
-            font-size: 12px;
+            color:var(--text-dim);font-weight:500;font-size:12px;
         }
 
         /* ============ TOAST ============ */
@@ -617,44 +705,56 @@ layout: null
             position:fixed;
             bottom:16px;left:50%;
             transform:translateX(-50%) translateY(20px);
-            max-width:520px;width:calc(100% - 32px);
+            max-width:380px;width:calc(100% - 32px);
             background:var(--surface);color:var(--text);
             border:1px solid var(--border-strong);
-            border-radius:12px;
-            padding:14px 16px;
-            box-shadow:0 12px 40px rgba(0,0,0,.5);
+            border-radius:16px;
+            padding:20px 18px 16px;
+            box-shadow:0 20px 50px rgba(0,0,0,.55);
             font-size:13px;line-height:1.5;
             z-index:1200;
-            display:flex;align-items:center;gap:12px;
+            display:flex;flex-direction:column;align-items:center;text-align:center;
+            gap:12px;
             opacity:0;
             transition:opacity .3s ease,transform .3s ease;
         }
         .cookie-banner.show{opacity:1;transform:translateX(-50%) translateY(0)}
         .cookie-banner .cookie-ico{
-            flex-shrink:0;width:32px;height:32px;border-radius:8px;
+            flex-shrink:0;width:44px;height:44px;border-radius:12px;
             display:flex;align-items:center;justify-content:center;
-            background:var(--accent-soft);color:var(--accent);
+            background:linear-gradient(135deg,var(--accent-soft),transparent);
+            border:1px solid var(--accent-soft);color:var(--accent);
         }
-        .cookie-banner .cookie-ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-        .cookie-banner p{margin:0;flex:1;color:var(--text)}
+        .cookie-banner .cookie-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .cookie-banner p{margin:0;color:var(--text)}
         .cookie-ok{
-            background:var(--accent);color:#fff;
-            border:none;border-radius:8px;
-            padding:8px 18px;cursor:pointer;
-            font-size:13px;font-weight:600;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            color:#fff;
+            border:none;border-radius:999px;
+            padding:9px 24px;cursor:pointer;
+            font-size:13px;font-weight:700;
             font-family:'Inter',sans-serif;
-            flex-shrink:0;transition:all .15s ease;
+            transition:all .15s ease;
             display:inline-flex;align-items:center;gap:6px;
+            width:100%;justify-content:center;
         }
         .cookie-ok svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
         .cookie-ok:hover{filter:brightness(1.1);transform:translateY(-1px)}
+        .cookie-ok:active{transform:translateY(0)}
 
         /* ============ FOOTER ============ */
         footer.site-footer{
-            max-width:900px;margin:40px auto 0;
-            padding:24px 16px 32px;
-            border-top:1px solid var(--border);
+            max-width:900px;margin:48px auto 0;
+            padding:28px 16px 32px;
             text-align:center;
+            position:relative;
+        }
+        footer.site-footer::before{
+            content:'';position:absolute;top:0;left:50%;
+            transform:translateX(-50%);
+            width:80px;height:2px;
+            background:linear-gradient(90deg,transparent,var(--accent),var(--accent-2),transparent);
+            border-radius:2px;
         }
         .foot-copy{
             font-size:12px;color:var(--text-dim);
@@ -663,43 +763,53 @@ layout: null
             gap:8px;flex-wrap:wrap;
         }
         .foot-copy .copy-ico{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
-        .foot-copy strong{color:var(--text);font-weight:600}
+        .foot-copy strong{color:var(--text);font-weight:700}
         .foot-badge{
             display:inline-flex;align-items:center;gap:6px;
-            margin-top:12px;font-size:10px;font-weight:700;
-            letter-spacing:.15em;text-transform:uppercase;
+            margin-top:14px;font-size:10px;font-weight:700;
+            letter-spacing:.18em;text-transform:uppercase;
             color:var(--text-dim);
-            padding:5px 12px;
+            padding:6px 14px;
             border:1px solid var(--border-strong);
             border-radius:999px;
         }
         .foot-badge svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
+        .foot-tagline{
+            margin-top:12px;font-size:10.5px;
+            color:var(--text-muted);
+            letter-spacing:.08em;text-transform:uppercase;
+        }
 
         /* ============ RESPONSIVE ============ */
         @media(min-width:600px){
             .site-header{padding:10px 20px}
             .post-wrap{padding:0 16px;padding-top:16px}
             .brand-name{font-size:15px}
-            .info-title{font-size:22px}
+            .info-title{font-size:24px}
+            .sidebar-title{font-size:26px}
         }
         @media(min-width:900px){
             .site-header{padding:10px 28px}
             .post-wrap{padding:0 20px;padding-top:20px;max-width:1000px}
             .brand-name{font-size:16px}
-            .menu-head{padding:18px 32px}
-            .menu-body{padding:28px 32px 56px}
-            .menu-content{max-width:760px}
-            .info-title{font-size:24px}
+            .menu-head{padding:20px 28px}
+            .menu-body{padding:28px 28px 56px}
+            .info-title{font-size:26px}
+            .sidebar-title{font-size:28px}
         }
         @media(max-width:600px){
-            .cookie-banner{bottom:12px;width:calc(100% - 24px);padding:12px 14px;font-size:12.5px}
-            .cookie-ok{padding:7px 14px;font-size:12.5px}
+            .cookie-banner{bottom:12px;width:calc(100% - 24px);padding:16px 14px 14px;font-size:12.5px}
+            .cookie-ok{padding:8px 18px;font-size:12.5px}
             .foot-copy{font-size:11.5px}
             .info-card{padding:14px}
-            .share-row{grid-template-columns:repeat(3,1fr);gap:6px}
+            .share-row{grid-template-columns:repeat(4,1fr);gap:6px}
             .share-btn{padding:9px 6px;font-size:11px;gap:5px}
             .share-btn svg{width:14px;height:14px}
             .prevnext{grid-template-columns:1fr;gap:8px}
+            .brand-text{display:none}
+            .brand{justify-content:flex-start}
+            .info-title{font-size:20px}
+            .sidebar-title{font-size:22px}
         }
     </style>
 
@@ -710,12 +820,26 @@ layout: null
 
     <header class="site-header">
         <div class="header-inner">
+            <button class="icon-btn" id="menuOpen" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/>
+                </svg>
+            </button>
             <div class="brand">
-                <div class="brand-mark" id="brandMark">Y</div>
+                <div class="brand-mark" id="brandMark">A</div>
                 <div class="brand-text">
                     <span class="brand-name" id="brandName">{{ page.title | escape }}</span>
+                    <span class="brand-sub" data-i18n="brandSub">Nusantara Amateur Vault</span>
                 </div>
             </div>
+            <button class="lang-btn" id="langToggle" aria-label="Switch language" title="Switch language">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <span id="langCode">EN</span>
+            </button>
             <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
                 <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="4"/>
@@ -728,11 +852,6 @@ layout: null
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
             </button>
-            <button class="icon-btn" id="menuOpen" aria-label="Open menu">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/>
-                </svg>
-            </button>
         </div>
     </header>
 
@@ -740,10 +859,10 @@ layout: null
     <aside class="menu-panel" id="menuPanel" role="dialog" aria-label="Navigation and information" aria-modal="true">
         <div class="menu-head">
             <div class="menu-head-title">
-                <div class="menu-head-mark" id="menuHeadMark">Y</div>
+                <div class="menu-head-mark" id="menuHeadMark">A</div>
                 <div class="menu-head-text">
-                    <span class="menu-head-name" id="menuHeadName">Yulianti</span>
-                    <span class="menu-head-sub">Menu &amp; Info</span>
+                    <span class="menu-head-name" id="menuHeadName">Atikah</span>
+                    <span class="menu-head-sub" data-i18n="menuSub">Explore the Vault</span>
                 </div>
             </div>
             <button class="menu-close" id="menuClose" aria-label="Close menu">
@@ -754,173 +873,100 @@ layout: null
         </div>
         <div class="menu-body">
             <div class="menu-content">
-                <a href="https://yulianti.xyz" class="menu-home">
+                <a href="https://atikah.xyz" class="menu-home">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-                    <span>Back to Home</span>
+                    <span data-i18n="backHome">Back to Home</span>
                     <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
 
                 <div class="menu-divider"></div>
                 <div class="menu-section-label">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                    About
+                    <span data-i18n="aboutLabel">About</span>
                 </div>
                 <div class="menu-legal" style="margin-bottom:18px">
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
-                            <span class="summary-text">About This Site</span>
+                            <span class="summary-text" data-i18n="aboutTitle">What This Site Is</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p><strong id="aboutBrandName">Yulianti</strong> is a curated gallery featuring authentic amateur videos from Indonesia and across Asia. We highlight real people and real moments — no studios, no scripts, just genuine content shared by creators from the region.</p>
-                            <p>Every video is hand-picked for quality and authenticity. New content is added daily.</p>
-                            <p>This site is intended for adults only (18+).</p>
-                        </div>
+                        <div class="menu-legal-body" id="aboutBody"></div>
                     </details>
                 </div>
 
                 <div class="menu-divider"></div>
                 <div class="menu-section-label">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/></svg>
-                    Policies
+                    <span data-i18n="policiesLabel">Policies</span>
                 </div>
                 <div class="menu-legal" style="margin-bottom:18px">
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-                            <span class="summary-text">Privacy Policy</span>
+                            <span class="summary-text" data-i18n="privacyTitle">Privacy Policy</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p><strong>Effective date:</strong> <span class="js-year">2025</span></p>
-                            <p>We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we handle information when you visit our site.</p>
-                            <p><strong>Information We Collect</strong></p>
-                            <p>We do <strong>not</strong> collect personal information such as names, email addresses, or payment data. We do <strong>not</strong> require registration to browse content.</p>
-                            <ul>
-                                <li><strong>Local storage</strong> — theme preference, cookie consent, and age verification are stored locally in your browser only, never transmitted to our servers.</li>
-                                <li><strong>Server logs</strong> — standard access logs (IP address, browser, timestamp) may be recorded by our hosting provider for security and abuse prevention, retained for up to 30 days.</li>
-                            </ul>
-                            <p><strong>Third-Party Content</strong></p>
-                            <p>All videos displayed on this site are embedded from third-party platforms. These platforms may set their own cookies and collect data according to their own privacy policies.</p>
-                            <p><strong>Cookies</strong></p>
-                            <p>We use only essential and functional cookies stored locally in your browser. No analytics or advertising cookies are set by us directly.</p>
-                            <p><strong>Children's Privacy</strong></p>
-                            <p>This site is strictly for adults (18+). We do not knowingly collect any information from minors.</p>
-                            <p><strong>Changes to This Policy</strong></p>
-                            <p>We may update this Privacy Policy from time to time. Changes take effect when posted on this page.</p>
-                        </div>
+                        <div class="menu-legal-body" id="privacyBody"></div>
                     </details>
 
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
-                            <span class="summary-text">Terms &amp; Conditions</span>
+                            <span class="summary-text" data-i18n="termsTitle">Terms of Use</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p><strong>Effective date:</strong> <span class="js-year">2025</span></p>
-                            <p>By accessing or using this website, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use this site.</p>
-                            <p><strong>1. Eligibility</strong></p>
-                            <p>You must be at least 18 years of age (or the age of majority in your jurisdiction) to access this site.</p>
-                            <p><strong>2. Content</strong></p>
-                            <p>All content is provided for informational and entertainment purposes only. Content is embedded from third-party platforms; we do not host, upload, or own the videos displayed.</p>
-                            <p><strong>3. Acceptable Use</strong></p>
-                            <ul>
-                                <li>Use this site for any unlawful purpose</li>
-                                <li>Attempt to gain unauthorized access to any part of the site</li>
-                                <li>Interfere with the proper functioning of the site</li>
-                                <li>Access the site if you are under 18 years of age</li>
-                            </ul>
-                            <p><strong>4. Disclaimer of Warranties</strong></p>
-                            <p>This site is provided "as is" without warranties of any kind, express or implied.</p>
-                            <p><strong>5. Limitation of Liability</strong></p>
-                            <p>To the fullest extent permitted by law, we shall not be liable for any damages arising from your use of this site.</p>
-                            <p><strong>6. Governing Law</strong></p>
-                            <p>These Terms shall be governed by and construed in accordance with applicable laws.</p>
-                        </div>
+                        <div class="menu-legal-body" id="termsBody"></div>
                     </details>
                 </div>
 
                 <div class="menu-divider"></div>
                 <div class="menu-section-label">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
-                    Legal
+                    <span data-i18n="legalLabel">Legal</span>
                 </div>
                 <div class="menu-legal" style="margin-bottom:18px">
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                            <span class="summary-text">18+ Disclaimer</span>
+                            <span class="summary-text" data-i18n="disclaimerTitle">18+ Disclaimer</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p><strong>18+ ONLY.</strong> This website contains adult material intended for adults only. By accessing this site, you confirm that you are at least 18 years old, that viewing adult content is legal where you are located, and that you consent to viewing such material.</p>
-                            <p>All content is fictional and for entertainment purposes only. All characters depicted are 18 years of age or older.</p>
-                            <p>This site is not intended for users in jurisdictions where adult content is prohibited.</p>
-                        </div>
+                        <div class="menu-legal-body" id="disclaimerBody"></div>
                     </details>
 
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="10.5" r="1"/><circle cx="15.5" cy="10.5" r="1"/><circle cx="12" cy="16" r="1"/><path d="M12 2a10 10 0 0 0 0 20"/></svg>
-                            <span class="summary-text">Cookie Policy</span>
+                            <span class="summary-text" data-i18n="cookieTitle">Cookie Policy</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p>This site uses the following cookies:</p>
-                            <ul>
-                                <li><strong>age-verified</strong> — remembers your age verification (essential, 30 days)</li>
-                                <li><strong>cookie-consent</strong> — remembers your cookie choice (essential, 1 year)</li>
-                                <li><strong>theme</strong> — remembers your dark/light mode preference (functional, 1 year)</li>
-                            </ul>
-                            <p>No third-party tracking cookies are used.</p>
-                        </div>
+                        <div class="menu-legal-body" id="cookieBody"></div>
                     </details>
 
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9h.01"/><path d="M15 15h.01"/><path d="M9.5 14.5a4 4 0 0 0 5 0"/><path d="M12 3v3"/></svg>
-                            <span class="summary-text">DMCA / Copyright</span>
+                            <span class="summary-text" data-i18n="dmcaTitle">DMCA / Copyright</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p>We respect the intellectual property rights of others. If you believe your copyrighted work has been used without authorization, you may submit a DMCA takedown notice.</p>
-                            <p><strong>How to submit:</strong></p>
-                            <ul>
-                                <li>Identification of the copyrighted work</li>
-                                <li>URL of the allegedly infringing material</li>
-                                <li>Your full name and contact information</li>
-                                <li>A statement of good faith belief that the use is not authorized</li>
-                                <li>A statement under penalty of perjury that the information is accurate</li>
-                                <li>Your physical or electronic signature</li>
-                            </ul>
-                            <p>We respond to valid DMCA notices within 72 hours.</p>
-                        </div>
+                        <div class="menu-legal-body" id="dmcaBody"></div>
                     </details>
 
                     <details>
                         <summary>
                             <svg class="summary-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-                            <span class="summary-text">18 U.S.C. § 2257 Statement</span>
+                            <span class="summary-text" data-i18n="section2257Title">18 U.S.C. § 2257 Statement</span>
                             <span class="chev"></span>
                         </summary>
-                        <div class="menu-legal-body">
-                            <p><strong>Records-Keeping Requirements Compliance Statement</strong></p>
-                            <p>This website is <strong>not a primary or secondary producer</strong> of any sexually explicit content. All visual depictions are <strong>embedded from third-party platforms</strong> that are solely responsible for compliance with 18 U.S.C. § 2257 and 28 C.F.R. Part 75.</p>
-                            <p>We do not host, upload, store, or transmit any sexually explicit media on our servers. All video content is displayed via embedded players.</p>
-                            <p><strong>Age Verification of Performers</strong></p>
-                            <p>We require all third-party sources to confirm that all performers depicted were <strong>18 years of age or older</strong> at the time of production.</p>
-                            <p><strong>Exemption Statement</strong></p>
-                            <p>Because this website does not produce any sexually explicit content, we are exempt from the record-keeping requirements of 18 U.S.C. § 2257 and 28 C.F.R. Part 75.</p>
-                        </div>
+                        <div class="menu-legal-body" id="section2257Body"></div>
                     </details>
                 </div>
 
                 <div class="menu-divider"></div>
                 <div class="menu-section-label" id="menu-contact">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                    Reach Us
+                    <span data-i18n="contactLabel">Get in Touch</span>
                 </div>
                 <ul class="menu-contact-list">
                     <li>
@@ -947,13 +993,91 @@ layout: null
                         </span>
                         <span class="contact-meta">
                             <span class="contact-label">Email</span>
-                            <a href="mailto:admin@yulianti.xyz">admin@yulianti.xyz</a>
+                            <a href="mailto:admin@atikah.xyz">admin@atikah.xyz</a>
                         </span>
                     </li>
                 </ul>
             </div>
         </div>
     </aside>
+
+    <!-- ============ i18n DICTIONARY ============ -->
+    <script id="i18n-data" type="application/json">
+    {
+      "en": {
+        "brandSub": "Nusantara Amateur Vault",
+        "menuSub": "Explore the Vault",
+        "backHome": "Back to Home",
+        "aboutLabel": "About",
+        "aboutTitle": "What This Site Is",
+        "policiesLabel": "Policies",
+        "privacyTitle": "Privacy Policy",
+        "termsTitle": "Terms of Use",
+        "legalLabel": "Legal",
+        "disclaimerTitle": "18+ Disclaimer",
+        "cookieTitle": "Cookie Policy",
+        "dmcaTitle": "DMCA / Copyright",
+        "section2257Title": "18 U.S.C. § 2257 Statement",
+        "contactLabel": "Get in Touch",
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> is a hand-curated vault of authentic amateur clips, sourced from Indonesia and neighboring Asian regions. We celebrate unscripted, unfiltered moments shared by local creators — no studios, no staged sets, no overproduction.</p><p>Every clip is reviewed for quality and authenticity before it enters the vault. The collection refreshes daily so there is always something new to explore.</p><p>This site is strictly for adult visitors (18 years and older).</p>",
+        "privacyBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>Your privacy matters to us. This policy explains what happens to information when you browse the vault.</p><p><strong>What We Collect</strong></p><p>We do <strong>not</strong> collect personal details such as names, email addresses, or payment data. No sign-up is required to explore the vault.</p><ul><li><strong>Local storage</strong> — theme preference, cookie consent, and age verification live in your browser only. They never travel to our servers.</li><li><strong>Server logs</strong> — our hosting provider may record standard access logs (IP, browser, timestamp) for security and abuse prevention, retained up to 30 days.</li></ul><p><strong>Third-Party Embeds</strong></p><p>Every video shown here is embedded from a third-party platform. Those platforms may set their own cookies and gather data under their own privacy rules. We have no say in their practices and recommend reviewing their policies.</p><p><strong>Cookies</strong></p><p>We rely on essential and functional cookies stored locally in your browser. No analytics or advertising cookies are set directly by us. See the Cookie Policy section for the full list.</p><p><strong>Children's Privacy</strong></p><p>This vault is strictly for adults (18+). We do not knowingly collect data from minors. If you are under 18, please leave the site right away.</p><p><strong>Your Rights</strong></p><p>Because we collect no personal data, there is nothing to access, correct, or delete. You can wipe all local storage anytime through your browser settings.</p><p><strong>Policy Updates</strong></p><p>We may revise this Privacy Policy occasionally. Changes take effect as soon as they are posted on this page.</p>",
+        "termsBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>By browsing or using this website, you agree to the terms below. If any part does not sit right with you, please leave the site.</p><p><strong>1. Who May Use This Site</strong></p><p>You must be at least 18 years old (or the age of majority in your jurisdiction) to access this vault. By using the site, you confirm you meet this requirement.</p><p><strong>2. The Content</strong></p><p>Everything here is provided for information and entertainment only. Clips are embedded from third-party platforms — we do not host, upload, or own the videos shown. We make no promises about the accuracy, legality, or completeness of third-party content.</p><p><strong>3. Acceptable Use</strong></p><p>You agree not to:</p><ul><li>Use the site for any unlawful purpose</li><li>Attempt unauthorized access to any part of the site</li><li>Interfere with the proper functioning of the site</li><li>Scrape, copy, or redistribute content without permission</li><li>Access the site if you are under 18 years of age</li></ul><p><strong>4. Intellectual Property</strong></p><p>All trademarks, logos, and site design belong to their respective owners. Embedded videos remain the property of their original creators and platforms.</p><p><strong>5. Third-Party Links</strong></p><p>This site contains embedded content and links to third-party websites. We are not responsible for the content, privacy practices, or availability of those external sites.</p><p><strong>6. No Warranties</strong></p><p>The site is provided \"as is\" with no warranties, express or implied. We do not guarantee uninterrupted, error-free, or secure access.</p><p><strong>7. Limitation of Liability</strong></p><p>To the fullest extent permitted by law, we are not liable for any damages arising from your use of the site or inability to use it.</p><p><strong>8. Changes to These Terms</strong></p><p>We may update these Terms at any time. Continued use of the site after changes means you accept the new Terms.</p><p><strong>9. Governing Law</strong></p><p>These Terms are governed by and construed under applicable laws, without regard to conflict-of-law principles.</p>",
+        "disclaimerBody": "<p><strong>ADULTS ONLY.</strong> This website contains adult material meant solely for adults. By entering, you confirm that you are at least 18 years old (or the age of majority where you live), that viewing adult content is legal in your location, and that you consent to seeing such material.</p><p>All content is fictional and intended for entertainment only. Any resemblance to real persons, living or dead, is coincidental. Every character depicted is 18 years of age or older. We do not endorse any illegal activity.</p><p>This site is not aimed at users in regions where adult content is prohibited. It is your responsibility to make sure access is legal in your country, state, or territory.</p>",
+        "cookieBody": "<p>This site relies on the following cookies:</p><ul><li><strong>age-verified</strong> — remembers your age verification (essential, 30 days)</li><li><strong>cookie-consent</strong> — remembers your cookie choice (essential, 1 year)</li><li><strong>theme</strong> — remembers your dark/light preference (functional, 1 year)</li><li><strong>lang</strong> — remembers your language choice (functional, 1 year)</li></ul><p>No third-party tracking cookies are used. No analytics services are integrated.</p>",
+        "dmcaBody": "<p>We respect the intellectual property rights of others. If you believe your copyrighted work appears on this site without authorization, you may file a DMCA takedown notice.</p><p><strong>What to include:</strong></p><ul><li>Identification of the copyrighted work</li><li>URL of the allegedly infringing material</li><li>Your full name and contact details</li><li>A statement of good faith belief that the use is unauthorized</li><li>A statement under penalty of perjury that the information is accurate</li><li>Your physical or electronic signature</li></ul><p>Send your notice through any channel listed in the <a href=\"#menu-contact\">Contact</a> section. We respond to valid DMCA notices within 72 hours.</p>",
+        "section2257Body": "<p><strong>Records-Keeping Compliance Statement</strong></p><p>This website is <strong>not a primary or secondary producer</strong> of any sexually explicit content. All visual depictions of actual sexually explicit conduct that appear on this website are <strong>embedded from third-party platforms</strong> that are solely responsible for compliance with 18 U.S.C. § 2257 and 28 C.F.R. Part 75.</p><p>We do not host, upload, store, or transmit any sexually explicit media on our servers. All video content is displayed via embedded players provided by third-party platforms. The original producers and hosting platforms of this content are responsible for maintaining all required records.</p><p><strong>Performer Age Verification</strong></p><p>We require every third-party source we embed from to confirm that all performers depicted were <strong>18 years of age or older</strong> at the time of production. We do not knowingly embed, publish, or link to content involving minors or non-consensual activity. Any such content that comes to our attention will be removed immediately and reported to the appropriate authorities.</p><p><strong>Exemption Statement</strong></p><p>Because this website does not produce any sexually explicit content, we are exempt from the record-keeping requirements of 18 U.S.C. § 2257 and 28 C.F.R. Part 75. This exemption applies under 28 C.F.R. § 75.1(c) (persons who are not primary or secondary producers).</p><p>For compliance-related questions, takedown requests, or legal inquiries, see the <a href=\"#menu-contact\">Contact</a> section below.</p><p style=\"font-size:11px;opacity:.7;margin-top:10px\">If you believe any content on this website violates applicable laws or involves non-consensual or underage activity, please contact us immediately. We cooperate fully with law enforcement.</p>",
+        "shareTitle": "Share this video",
+        "copyLabel": "Copy",
+        "toastCopied": "Link copied to clipboard",
+        "prev": "Prev",
+        "next": "Next",
+        "relatedEyebrow": "Keep exploring",
+        "relatedTitle": "Related Videos",
+        "loadMore": "Load More",
+        "footerRights": "All rights reserved",
+        "footerBadge": "Adults Only · 18+",
+        "footerTagline": "Hand-picked with care · Refreshed daily",
+        "cookieText": "We use cookies to make your browsing smoother.",
+        "cookieOk": "Got it"
+      },
+      "id": {
+        "brandSub": "Galeri Amatir Nusantara",
+        "menuSub": "Jelajahi Galeri",
+        "backHome": "Kembali ke Beranda",
+        "aboutLabel": "Tentang",
+        "aboutTitle": "Tentang Situs Ini",
+        "policiesLabel": "Kebijakan",
+        "privacyTitle": "Kebijakan Privasi",
+        "termsTitle": "Syarat Penggunaan",
+        "legalLabel": "Legal",
+        "disclaimerTitle": "Penafian 18+",
+        "cookieTitle": "Kebijakan Cookie",
+        "dmcaTitle": "DMCA / Hak Cipta",
+        "section2257Title": "Pernyataan 18 U.S.C. § 2257",
+        "contactLabel": "Hubungi Kami",
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> adalah galeri klip amatir pilihan dari Nusantara dan sekitarnya. Kami menampilkan momen apa adanya dari kreator lokal — tanpa studio, tanpa set panggung, tanpa produksi berlebihan.</p><p>Setiap klip ditinjau dari sisi kualitas dan keaslian sebelum masuk galeri. Koleksi diperbarui tiap hari, selalu ada yang baru untuk dijelajahi.</p><p>Situs ini khusus untuk pengunjung dewasa (18 tahun ke atas).</p>",
+        "privacyBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Privasi Anda penting bagi kami. Kebijakan ini menjelaskan apa yang terjadi pada informasi saat Anda menjelajahi galeri.</p><p><strong>Yang Kami Kumpulkan</strong></p><p>Kami <strong>tidak</strong> mengumpulkan data pribadi seperti nama, alamat email, atau data pembayaran. Tidak perlu daftar untuk menjelajahi galeri.</p><ul><li><strong>Penyimpanan lokal</strong> — preferensi tema, persetujuan cookie, dan verifikasi usia hanya ada di browser Anda. Tidak pernah dikirim ke server kami.</li><li><strong>Log server</strong> — penyedia hosting kami dapat mencatat log akses standar (IP, browser, waktu) untuk keamanan dan pencegahan penyalahgunaan, disimpan maksimal 30 hari.</li></ul><p><strong>Konten Pihak Ketiga</strong></p><p>Setiap video di sini disematkan dari platform pihak ketiga. Platform tersebut dapat menetapkan cookie dan mengumpulkan data sesuai aturan privasi mereka sendiri. Kami tidak punya kendali atas praktik mereka dan menyarankan Anda meninjau kebijakan mereka.</p><p><strong>Cookie</strong></p><p>Kami hanya memakai cookie penting dan fungsional yang tersimpan lokal di browser Anda. Tidak ada cookie analitik atau iklan yang dipasang langsung oleh kami. Lihat bagian Kebijakan Cookie untuk daftar lengkap.</p><p><strong>Privasi Anak</strong></p><p>Galeri ini khusus dewasa (18+). Kami tidak dengan sengaja mengumpulkan data dari anak di bawah umur. Jika Anda di bawah 18 tahun, segera tinggalkan situs ini.</p><p><strong>Hak Anda</strong></p><p>Karena kami tidak mengumpulkan data pribadi, tidak ada yang perlu diakses, dikoreksi, atau dihapus. Anda dapat menghapus semua penyimpanan lokal kapan saja melalui pengaturan browser.</p><p><strong>Pembaruan Kebijakan</strong></p><p>Kami dapat merevisi Kebijakan Privasi ini dari waktu ke waktu. Perubahan berlaku begitu diposting di halaman ini.</p>",
+        "termsBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Dengan menjelajahi atau menggunakan situs web ini, Anda setuju dengan syarat di bawah. Jika ada bagian yang tidak sesuai untuk Anda, mohon tinggalkan situs ini.</p><p><strong>1. Siapa yang Boleh Menggunakan Situs Ini</strong></p><p>Anda harus berusia minimal 18 tahun (atau usia dewasa di yurisdiksi Anda) untuk mengakses galeri ini. Dengan menggunakan situs, Anda mengonfirmasi bahwa Anda memenuhi persyaratan tersebut.</p><p><strong>2. Konten</strong></p><p>Semua yang ada di sini disediakan untuk informasi dan hiburan saja. Klip disematkan dari platform pihak ketiga — kami tidak menghosting, mengunggah, atau memiliki video yang ditampilkan. Kami tidak menjanjikan akurasi, legalitas, atau kelengkapan konten pihak ketiga.</p><p><strong>3. Penggunaan yang Wajar</strong></p><p>Anda setuju untuk tidak:</p><ul><li>Menggunakan situs untuk tujuan yang melanggar hukum</li><li>Mencoba akses tidak sah ke bagian mana pun dari situs</li><li>Mengganggu fungsi situs yang semestinya</li><li>Mengikis, menyalin, atau mendistribusikan konten tanpa izin</li><li>Mengakses situs jika Anda di bawah 18 tahun</li></ul><p><strong>4. Kekayaan Intelektual</strong></p><p>Semua merek dagang, logo, dan desain situs adalah milik pemiliknya masing-masing. Video yang disematkan tetap menjadi milik kreator dan platform aslinya.</p><p><strong>5. Tautan Pihak Ketiga</strong></p><p>Situs ini memuat konten tersemat dan tautan ke situs web pihak ketiga. Kami tidak bertanggung jawab atas konten, praktik privasi, atau ketersediaan situs eksternal tersebut.</p><p><strong>6. Tanpa Jaminan</strong></p><p>Situs ini disediakan \"sebagaimana adanya\" tanpa jaminan apa pun, tersurat maupun tersirat. Kami tidak menjamin akses yang tanpa gangguan, bebas kesalahan, atau aman.</p><p><strong>7. Batasan Tanggung Jawab</strong></p><p>Sejauh diizinkan hukum, kami tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan situs ini atau ketidakmampuan menggunakannya.</p><p><strong>8. Perubahan Syarat</strong></p><p>Kami dapat memperbarui Syarat ini kapan saja. Penggunaan situs yang berkelanjutan setelah perubahan berarti Anda menerima Syarat baru.</p><p><strong>9. Hukum yang Berlaku</strong></p><p>Syarat ini diatur oleh dan ditafsirkan sesuai hukum yang berlaku, tanpa memperhatikan prinsip konflik hukum.</p>",
+        "disclaimerBody": "<p><strong>KHUSUS DEWASA.</strong> Situs web ini memuat materi dewasa yang ditujukan hanya untuk orang dewasa. Dengan masuk, Anda mengonfirmasi bahwa Anda berusia minimal 18 tahun (atau usia dewasa di tempat Anda tinggal), bahwa menonton konten dewasa legal di lokasi Anda, dan bahwa Anda menyetujui untuk melihat materi tersebut.</p><p>Semua konten bersifat fiktif dan hanya untuk hiburan. Kesamaan dengan orang nyata, hidup atau mati, adalah kebetulan. Setiap karakter yang ditampilkan berusia 18 tahun atau lebih. Kami tidak mendukung aktivitas ilegal apa pun.</p><p>Situs ini tidak ditujukan untuk pengguna di wilayah yang melarang konten dewasa. Adalah tanggung jawab Anda untuk memastikan akses legal di negara, negara bagian, atau wilayah Anda.</p>",
+        "cookieBody": "<p>Situs ini memakai cookie berikut:</p><ul><li><strong>age-verified</strong> — mengingat verifikasi usia Anda (penting, 30 hari)</li><li><strong>cookie-consent</strong> — mengingat pilihan cookie Anda (penting, 1 tahun)</li><li><strong>theme</strong> — mengingat preferensi gelap/terang Anda (fungsional, 1 tahun)</li><li><strong>lang</strong> — mengingat pilihan bahasa Anda (fungsional, 1 tahun)</li></ul><p>Tidak ada cookie pelacak pihak ketiga yang digunakan. Tidak ada layanan analitik yang diintegrasikan.</p>",
+        "dmcaBody": "<p>Kami menghormati hak kekayaan intelektual orang lain. Jika Anda yakin karya berhak cipta Anda muncul di situs ini tanpa izin, Anda dapat mengirimkan pemberitahuan takedown DMCA.</p><p><strong>Yang perlu disertakan:</strong></p><ul><li>Identifikasi karya berhak cipta</li><li>URL materi yang diduga melanggar</li><li>Nama lengkap dan detail kontak Anda</li><li>Pernyataan itikad baik bahwa penggunaan tidak diizinkan</li><li>Pernyataan di bawah sumpah bahwa informasi akurat</li><li>Tanda tangan fisik atau elektronik Anda</li></ul><p>Kirim pemberitahuan melalui saluran apa pun yang tercantum di bagian <a href=\"#menu-contact\">Kontak</a>. Kami menanggapi pemberitahuan DMCA yang sah dalam 72 jam.</p>",
+        "section2257Body": "<p><strong>Pernyataan Kepatuhan Pencatatan</strong></p><p>Situs web ini <strong>bukan produser primer atau sekunder</strong> dari konten seksual eksplisit apa pun. Semua penggambaran visual dari tindakan seksual eksplisit yang muncul di situs ini <strong>disematkan dari platform pihak ketiga</strong> yang bertanggung jawab penuh atas kepatuhan terhadap 18 U.S.C. § 2257 dan 28 C.F.R. Bagian 75.</p><p>Kami tidak menghosting, mengunggah, menyimpan, atau mengirimkan media seksual eksplisit apa pun di server kami. Semua konten video ditampilkan melalui pemutar tersemat dari platform pihak ketiga. Produser asli dan platform hosting bertanggung jawab memelihara semua catatan yang diperlukan.</p><p><strong>Verifikasi Usia Performer</strong></p><p>Kami mewajibkan setiap sumber pihak ketiga untuk mengonfirmasi bahwa semua performer berusia <strong>18 tahun atau lebih</strong> saat produksi. Kami tidak dengan sengaja menyematkan, menerbitkan, atau menautkan konten yang melibatkan anak di bawah umur atau aktivitas non-konsensual. Konten semacam itu akan segera dihapus dan dilaporkan ke otoritas berwenang.</p><p><strong>Pernyataan Pengecualian</strong></p><p>Karena situs ini tidak memproduksi konten seksual eksplisit apa pun, kami dikecualikan dari persyaratan pencatatan 18 U.S.C. § 2257 dan 28 C.F.R. Bagian 75. Pengecualian ini berlaku berdasarkan 28 C.F.R. § 75.1(c) (orang yang bukan produser primer atau sekunder).</p><p>Untuk pertanyaan kepatuhan, permintaan takedown, atau pertanyaan hukum, lihat bagian <a href=\"#menu-contact\">Kontak</a> di bawah.</p><p style=\"font-size:11px;opacity:.7;margin-top:10px\">Jika Anda yakin ada konten di situs ini yang melanggar hukum atau melibatkan aktivitas non-konsensual atau di bawah umur, segera hubungi kami. Kami bekerja sama penuh dengan penegak hukum.</p>",
+        "shareTitle": "Bagikan video ini",
+        "copyLabel": "Salin",
+        "toastCopied": "Tautan disalin ke clipboard",
+        "prev": "Sebelumnya",
+        "next": "Berikutnya",
+        "relatedEyebrow": "Lanjut jelajah",
+        "relatedTitle": "Video Terkait",
+        "loadMore": "Muat Lebih Banyak",
+        "footerRights": "Seluruh hak dilindungi",
+        "footerBadge": "Khusus Dewasa · 18+",
+        "footerTagline": "Dipilih dengan teliti · Diperbarui tiap hari",
+        "cookieText": "Kami memakai cookie agar jelajah Anda lebih nyaman.",
+        "cookieOk": "Mengerti"
+      }
+    }
+    </script>
 
     <!-- ============ HEADER SCRIPT ============ -->
     <script>
@@ -967,8 +1091,6 @@ layout: null
         document.getElementById("brandMark").textContent = display.charAt(0).toUpperCase();
         document.getElementById("menuHeadName").textContent = display;
         document.getElementById("menuHeadMark").textContent = display.charAt(0).toUpperCase();
-        var about = document.getElementById("aboutBrandName");
-        if (about) about.textContent = display;
 
         var panel = document.getElementById("menuPanel");
         document.getElementById("menuOpen").addEventListener("click", function(){
@@ -1008,8 +1130,130 @@ layout: null
             localStorage.setItem("theme", isLight ? "light" : "dark");
         });
     })();
+
+    /* ============ i18n ============ */
+    window.I18N = (function(){
+        var data = JSON.parse(document.getElementById("i18n-data").textContent);
+        var current = "en";
+
+        function t(key) {
+            var dict = data[current] || data.en;
+            return dict[key] != null ? dict[key] : (data.en[key] != null ? data.en[key] : key);
+        }
+
+        function setText(selector, value) {
+            document.querySelectorAll("[data-i18n='" + selector + "']").forEach(function(el){
+                el.textContent = value;
+            });
+        }
+
+        function apply() {
+            document.documentElement.setAttribute("lang", current);
+
+            ["brandSub","menuSub","backHome","aboutLabel","aboutTitle",
+             "policiesLabel","privacyTitle","termsTitle","legalLabel","disclaimerTitle",
+             "cookieTitle","dmcaTitle","section2257Title","contactLabel"].forEach(function(k){
+                setText(k, t(k));
+            });
+
+            var map = {
+                aboutBody:"aboutBody", privacyBody:"privacyBody", termsBody:"termsBody",
+                disclaimerBody:"disclaimerBody", cookieBody:"cookieBody",
+                dmcaBody:"dmcaBody", section2257Body:"section2257Body"
+            };
+            Object.keys(map).forEach(function(id){
+                var el = document.getElementById(id);
+                if (!el) return;
+                var html = t(map[id]);
+                html = html.replace(/class="brand-about">[^<]*<\/strong>/,
+                    'class="brand-about">' + (window.__SITE_NAME__ || "Atikah") + '</strong>');
+                el.innerHTML = html;
+            });
+
+            var fr = document.querySelector(".foot-copy");
+            if (fr) {
+                var year = new Date().getFullYear();
+                var brand = window.__SITE_NAME__ || "Atikah";
+                fr.innerHTML = fr.innerHTML.replace(/—\s*[^<]*$/, "— " + t("footerRights"));
+                fr.innerHTML = fr.innerHTML.replace(/&copy;\s*\d+/i, "&copy; " + year);
+            }
+
+            var fb = document.querySelector(".foot-badge");
+            if (fb) {
+                var svg = fb.querySelector("svg");
+                fb.textContent = "";
+                if (svg) fb.appendChild(svg);
+                fb.appendChild(document.createTextNode(" " + t("footerBadge")));
+            }
+            var ft = document.querySelector(".foot-tagline");
+            if (ft) ft.textContent = t("footerTagline");
+
+            var cp = document.querySelector(".cookie-banner p");
+            if (cp) cp.textContent = t("cookieText");
+            var cb = document.getElementById("cookieOk");
+            if (cb) {
+                var svg = cb.querySelector("svg");
+                cb.textContent = "";
+                if (svg) cb.appendChild(svg);
+                cb.appendChild(document.createTextNode(" " + t("cookieOk")));
+            }
+
+            var st = document.getElementById("shareTitle");
+            if (st) st.textContent = t("shareTitle");
+            var cl = document.getElementById("copyLink");
+            if (cl) {
+                var lbl = cl.querySelector(".share-label");
+                if (lbl) lbl.textContent = t("copyLabel");
+            }
+
+            var prevLbl = document.querySelectorAll(".prevnext .pn-label");
+            prevLbl.forEach(function(el){
+                if (el.textContent.toLowerCase().indexOf("prev") === 0 || el.textContent === "Sebelumnya") el.textContent = t("prev");
+                else if (el.textContent.toLowerCase().indexOf("next") === 0 || el.textContent === "Berikutnya") el.textContent = t("next");
+            });
+
+            var re = document.getElementById("relatedEyebrow");
+            if (re) re.textContent = t("relatedEyebrow");
+            var rt = document.getElementById("relatedTitle");
+            if (rt) rt.textContent = t("relatedTitle");
+            var lm = document.querySelector(".load-more-btn > span:first-child");
+            if (lm) lm.textContent = t("loadMore");
+
+            var lc = document.getElementById("langCode");
+            if (lc) lc.textContent = current === "en" ? "EN" : "ID";
+
+            document.dispatchEvent(new CustomEvent("langchange", { detail: { lang: current } }));
+        }
+
+        function set(lang) {
+            if (lang !== "en" && lang !== "id") return;
+            current = lang;
+            localStorage.setItem("lang", lang);
+            apply();
+        }
+        function toggle(){ set(current === "en" ? "id" : "en"); }
+        function get(){ return current; }
+        function tr(k){ return t(k); }
+        return { t: t, tr: tr, set: set, toggle: toggle, get: get, apply: apply };
+    })();
+
+    (function(){
+        var initial = "en";
+        var saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "id") initial = saved;
+        else {
+            var b = (navigator.language || "en").toLowerCase();
+            if (b.indexOf("id") === 0) initial = "id";
+        }
+        window.I18N.set(initial);
+        document.getElementById("langToggle").addEventListener("click", function(){
+            window.I18N.toggle();
+        });
+    })();
     </script>
-<br /><br /><br />
+
+    <br /><br /><br />
+
     <!-- ============ AD TOP ============ -->
     <div class="ad-break">
         <div class="ad-box">{% include /ads/banner/01.html %}</div>
@@ -1027,11 +1271,11 @@ layout: null
   <div id="serverVideo01">
     <div class="svg-loading">
       <div class="spinner"></div>
-      <span>Loading video...</span>
+      <span data-i18n="loadingVideo">Loading video...</span>
     </div>
   </div>
 
-  <!-- ============ PANEL SERVER (responsive & modern) ============ -->
+  <!-- ============ PANEL SERVER ============ -->
   <div id="serverPanel01">
     <div class="server-panel-head">
       <div class="server-panel-icon">
@@ -1043,8 +1287,8 @@ layout: null
         </svg>
       </div>
       <div class="server-panel-text">
-        <span id="serverNotice01" class="server-panel-title">If the video doesn't play, try another server</span>
-        <span class="server-panel-sub">Multiple mirrors available</span>
+        <span id="serverNotice01" class="server-panel-title" data-i18n="serverNotice">If the video doesn't play, try another server</span>
+        <span class="server-panel-sub" data-i18n="serverSub">Multiple mirrors available</span>
       </div>
     </div>
     <div id="serverButtons01"></div>
@@ -1059,16 +1303,16 @@ layout: null
           <path d="M12 16v-4"/>
           <path d="M12 8h.01"/>
         </svg>
-        SPONSORED CONTENT
+        <span data-i18n="sponsored">SPONSORED CONTENT</span>
       </span>
       <span class="ad-divider-line"></span>
     </div>
   </div>
 
-  <!-- ============ IKLAN VAST (di bawah, advertiser-friendly) ============ -->
+  <!-- ============ IKLAN VAST ============ -->
   <div id="vastBox01" style="display:none;">
     <video id="vastVideo01" playsinline muted autoplay preload="auto"></video>
-    <div id="vastAdLabel01">Advertisement • <span id="vastAdTime">0:00</span></div>
+    <div id="vastAdLabel01"><span data-i18n="advertisement">Advertisement</span> • <span id="vastAdTime">0:00</span></div>
     <div id="vastClick01"></div>
   </div>
 
@@ -1083,7 +1327,6 @@ layout: null
   gap:12px;
 }
 
-/* ---------- VIDEO SERVER ---------- */
 #serverVideo01{
   position:relative;
   width:100%;
@@ -1122,13 +1365,8 @@ layout: null
   border-radius:50%;
   animation:spin 0.8s linear infinite;
 }
-@keyframes spin{
-  to{transform:rotate(360deg);}
-}
+@keyframes spin{ to{transform:rotate(360deg);} }
 
-/* ==========================================================
-   PANEL SERVER (konten utama — bukan iklan)
-   ========================================================== */
 #serverPanel01{
   width:100%;
   padding:14px 16px;
@@ -1143,7 +1381,6 @@ layout: null
   gap:12px;
   margin-bottom:14px;
 }
-
 .server-panel-icon{
   flex-shrink:0;
   width:38px;
@@ -1157,31 +1394,10 @@ layout: null
   color:var(--accent);
 }
 .server-panel-icon svg{width:20px;height:20px}
+.server-panel-text{display:flex;flex-direction:column;min-width:0;flex:1}
+.server-panel-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.3;margin:0}
+.server-panel-sub{font-size:11px;color:var(--text-dim);font-weight:500;letter-spacing:.02em;margin-top:2px}
 
-.server-panel-text{
-  display:flex;
-  flex-direction:column;
-  min-width:0;
-  flex:1;
-}
-
-.server-panel-title{
-  font-size:14px;
-  font-weight:700;
-  color:var(--text);
-  line-height:1.3;
-  margin:0;
-}
-
-.server-panel-sub{
-  font-size:11px;
-  color:var(--text-dim);
-  font-weight:500;
-  letter-spacing:.02em;
-  margin-top:2px;
-}
-
-/* ---------- Tombol server (responsive grid) ---------- */
 #serverButtons01{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(120px, 1fr));
@@ -1210,55 +1426,16 @@ layout: null
   white-space:nowrap;
   text-overflow:ellipsis;
 }
-
-.serverButton01 .sb-icon{
-  flex-shrink:0;
-  width:15px;
-  height:15px;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:2.2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  opacity:.75;
-  transition:opacity .2s ease;
-}
-
+.serverButton01 .sb-icon{flex-shrink:0;width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.75;transition:opacity .2s ease}
 .serverButton01 .sb-label{overflow:hidden;text-overflow:ellipsis}
-
-.serverButton01:hover{
-  background:var(--surface);
-  border-color:var(--accent);
-  color:var(--accent);
-  transform:translateY(-1px);
-  box-shadow:0 4px 14px var(--accent-soft);
-}
+.serverButton01:hover{background:var(--surface);border-color:var(--accent);color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 14px var(--accent-soft)}
 .serverButton01:hover .sb-icon{opacity:1}
 .serverButton01:active{transform:translateY(0)}
-
-.serverButton01.active{
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;
-  border-color:transparent;
-  box-shadow:0 6px 18px var(--accent-soft);
-}
+.serverButton01.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 6px 18px var(--accent-soft)}
 .serverButton01.active .sb-icon{opacity:1}
 
-/* ==========================================================
-   DIVIDER IKLAN — pemisah jelas antara konten & iklan
-   ========================================================== */
-.ad-divider{
-  width:100%;
-  padding:6px 0;
-  margin:2px 0;
-}
-
-.ad-divider-head{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
+.ad-divider{width:100%;padding:6px 0;margin:2px 0}
+.ad-divider-head{display:flex;align-items:center;gap:12px}
 .ad-divider-badge{
   display:inline-flex;
   align-items:center;
@@ -1275,22 +1452,9 @@ layout: null
   flex-shrink:0;
   line-height:1;
 }
+.ad-divider-badge svg{width:11px;height:11px;opacity:.75}
+.ad-divider-line{flex:1;height:1px;background:linear-gradient(to right, var(--border-strong), transparent)}
 
-.ad-divider-badge svg{
-  width:11px;
-  height:11px;
-  opacity:.75;
-}
-
-.ad-divider-line{
-  flex:1;
-  height:1px;
-  background:linear-gradient(to right, var(--border-strong), transparent);
-}
-
-/* ==========================================================
-   IKLAN VAST — area yang jelas bukan konten
-   ========================================================== */
 #vastBox01{
   position:relative;
   width:100%;
@@ -1300,15 +1464,7 @@ layout: null
   overflow:hidden;
   border:1px solid var(--border-strong);
 }
-
-#vastVideo01{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  background:#000;
-}
-
+#vastVideo01{display:block;width:100%;height:100%;object-fit:contain;background:#000}
 #vastAdLabel01{
   position:absolute;
   left:10px;
@@ -1327,18 +1483,8 @@ layout: null
   -webkit-backdrop-filter:blur(4px);
   border:1px solid rgba(255,255,255,.1);
 }
+#vastClick01{position:absolute;inset:0;z-index:8;display:none;cursor:pointer}
 
-#vastClick01{
-  position:absolute;
-  inset:0;
-  z-index:8;
-  display:none;
-  cursor:pointer;
-}
-
-/* ==========================================================
-   RESPONSIVE
-   ========================================================== */
 @media(max-width:480px){
   #serverPanel01{padding:12px}
   .server-panel-head{gap:10px;margin-bottom:12px}
@@ -1346,30 +1492,14 @@ layout: null
   .server-panel-icon svg{width:18px;height:18px}
   .server-panel-title{font-size:13px}
   .server-panel-sub{font-size:10.5px}
-
-  #serverButtons01{
-    grid-template-columns:repeat(2, 1fr);
-    gap:6px;
-  }
-  .serverButton01{
-    padding:10px 8px;
-    font-size:12px;
-    min-height:42px;
-    gap:6px;
-  }
+  #serverButtons01{grid-template-columns:repeat(2, 1fr);gap:6px}
+  .serverButton01{padding:10px 8px;font-size:12px;min-height:42px;gap:6px}
   .serverButton01 .sb-icon{width:13px;height:13px}
-
-  .ad-divider-badge{
-    font-size:9px;
-    padding:3px 8px;
-    letter-spacing:.14em;
-  }
+  .ad-divider-badge{font-size:9px;padding:3px 8px;letter-spacing:.14em}
   .ad-divider-badge svg{width:10px;height:10px}
   .ad-divider-head{gap:8px}
-
   #vastAdLabel01{font-size:10px;padding:4px 8px}
 }
-
 @media(max-width:360px){
   #serverButtons01{grid-template-columns:1fr}
 }
@@ -1379,9 +1509,6 @@ layout: null
 (function(){
   "use strict";
 
-  /* ==========================================================
-     KONFIGURASI
-  ========================================================== */
   var VAST_URLS = [
     "https://unsightlystrain.com/d.moFzz/dpGBNWvTZDGoUY/_eZm/9/ubZOUvlNk/P/Trcv0YORDIQp1/OXT_MetKNhzeQE4_NiDCUO5BN/wF",
     "https://unsightlystrain.com/dmmrFAz.dWGmNMvQZqGyUw/Ieimd9IufZvU/l/k/PqT/cM0VORDzQI1/OITXM_tRNnzLQW4KNBD/UJ5lN/ybZ-shaVW/1tp/dCD/0zx_"
@@ -1391,19 +1518,14 @@ layout: null
     {{ content }}
   ];
 
-  /* ==========================================================
-     DOMAIN GUARD — VAST hanya jalan di yulianti.xyz & subdomain
-  ========================================================== */
-  var ALLOWED_DOMAIN = "yulianti.xyz";
+  /* DOMAIN GUARD — VAST hanya jalan di atikah.xyz & subdomain */
+  var ALLOWED_DOMAIN = "atikah.xyz";
 
   function isAllowedDomain(){
     var host = (location.hostname || "").toLowerCase();
     return host === ALLOWED_DOMAIN || host.endsWith("." + ALLOWED_DOMAIN);
   }
 
-  /* ==========================================================
-     ELEMEN
-  ========================================================== */
   var serverVideo01   = document.getElementById("serverVideo01");
   var serverButtons01 = document.getElementById("serverButtons01");
   var vastBox01       = document.getElementById("vastBox01");
@@ -1413,18 +1535,11 @@ layout: null
   var vastClick01     = document.getElementById("vastClick01");
   var adDivider01     = document.getElementById("adDivider01");
 
-  /* ==========================================================
-     STATE
-  ========================================================== */
   var ads = [];
   var adIndex = 0;
   var currentAd = null;
   var adPlaying = false;
   var vastSourceIndex = 0;
-
-  /* ==========================================================
-     BAGIAN 1: SERVER
-  ========================================================== */
 
   function buildButtons(){
     serverButtons01.innerHTML = "";
@@ -1435,14 +1550,12 @@ layout: null
       btn.setAttribute("data-server", i);
       btn.setAttribute("aria-label", "Play Server " + String(i+1).padStart(2, "0"));
 
-      // Ikon play
       var icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       icon.setAttribute("viewBox", "0 0 24 24");
       icon.setAttribute("class", "sb-icon");
       icon.setAttribute("aria-hidden", "true");
       icon.innerHTML = '<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>';
 
-      // Label teks
       var label = document.createElement("span");
       label.className = "sb-label";
       label.textContent = "Server " + String(i+1).padStart(2, "0");
@@ -1494,51 +1607,30 @@ layout: null
   buildButtons();
   loadServer(0);
 
-  /* ==========================================================
-     BAGIAN 2: IKLAN VAST (2 SUMBER, AUTOPLAY MUTED)
-  ========================================================== */
-
   function parseVast(xmlText){
     var xml;
-    try {
-      xml = new DOMParser().parseFromString(xmlText, "text/xml");
-    } catch(e){
-      return [];
-    }
-
+    try { xml = new DOMParser().parseFromString(xmlText, "text/xml"); } catch(e){ return []; }
     if (xml.querySelector("parsererror")) return [];
-
     var adNodes = xml.getElementsByTagNameNS("*", "Ad");
     var result = [];
-
     for (var i = 0; i < adNodes.length; i++){
       var ad = adNodes[i];
       var linear = ad.getElementsByTagNameNS("*", "Linear")[0];
       if (!linear) continue;
-
       var durationNode = linear.getElementsByTagNameNS("*", "Duration")[0];
       var duration = durationNode ? parseTime(durationNode.textContent) : 0;
-
       var mediaFiles = linear.getElementsByTagNameNS("*", "MediaFile");
       var videoUrl = "";
       for (var m = 0; m < mediaFiles.length; m++){
         var type = (mediaFiles[m].getAttribute("type") || "").toLowerCase();
-        if (type === "video/mp4"){
-          videoUrl = mediaFiles[m].textContent.trim();
-          break;
-        }
+        if (type === "video/mp4"){ videoUrl = mediaFiles[m].textContent.trim(); break; }
       }
-      if (!videoUrl && mediaFiles.length){
-        videoUrl = mediaFiles[0].textContent.trim();
-      }
+      if (!videoUrl && mediaFiles.length) videoUrl = mediaFiles[0].textContent.trim();
       if (!videoUrl) continue;
-
       var impNodes = ad.getElementsByTagNameNS("*", "Impression");
       var impression = impNodes.length ? impNodes[0].textContent.trim() : "";
-
       var clickNodes = linear.getElementsByTagNameNS("*", "ClickThrough");
       var clickThrough = clickNodes.length ? clickNodes[0].textContent.trim() : "";
-
       var tracking = {};
       var trackNodes = linear.getElementsByTagNameNS("*", "Tracking");
       for (var t = 0; t < trackNodes.length; t++){
@@ -1546,14 +1638,7 @@ layout: null
         var url = trackNodes[t].textContent.trim();
         if (ev && url) tracking[ev] = url;
       }
-
-      result.push({
-        url: videoUrl,
-        duration: duration,
-        impression: impression,
-        clickThrough: clickThrough,
-        tracking: tracking
-      });
+      result.push({ url: videoUrl, duration: duration, impression: impression, clickThrough: clickThrough, tracking: tracking });
     }
     return result;
   }
@@ -1562,12 +1647,8 @@ layout: null
     if (!val) return 0;
     val = String(val).trim();
     var parts = val.split(":");
-    if (parts.length === 3) {
-      return parseFloat(parts[0])*3600 + parseFloat(parts[1])*60 + parseFloat(parts[2]);
-    }
-    if (parts.length === 2) {
-      return parseFloat(parts[0])*60 + parseFloat(parts[1]);
-    }
+    if (parts.length === 3) return parseFloat(parts[0])*3600 + parseFloat(parts[1])*60 + parseFloat(parts[2]);
+    if (parts.length === 2) return parseFloat(parts[0])*60 + parseFloat(parts[1]);
     return parseFloat(val) || 0;
   }
 
@@ -1585,55 +1666,36 @@ layout: null
       img.src = url + (url.indexOf("?") === -1 ? "?" : "&") + "_=" + Date.now();
     } catch(e){}
   }
-
   function fireAdTracking(event){
     if (!currentAd || !currentAd.tracking) return;
     fireTracking(currentAd.tracking[event]);
   }
 
   function playAd(){
-    if (!ads.length || adIndex >= ads.length){
-      hideAdBox();
-      return;
-    }
-
+    if (!ads.length || adIndex >= ads.length){ hideAdBox(); return; }
     currentAd = ads[adIndex++];
     adPlaying = true;
-
     vastAdLabel01.style.display = "block";
     vastAdTime.textContent = "Loading...";
-
-    if (currentAd.clickThrough) {
-      vastClick01.style.display = "block";
-    } else {
-      vastClick01.style.display = "none";
-    }
-
-    /* AUTOPLAY MUTED */
+    if (currentAd.clickThrough) vastClick01.style.display = "block";
+    else vastClick01.style.display = "none";
     vastVideo01.muted = true;
     vastVideo01.autoplay = true;
     vastVideo01.playsInline = true;
     vastVideo01.setAttribute("playsinline", "");
     vastVideo01.setAttribute("webkit-playsinline", "");
     vastVideo01.src = currentAd.url;
-
-    if (currentAd.impression) {
-      fireTracking(currentAd.impression);
-    }
-
+    if (currentAd.impression) fireTracking(currentAd.impression);
     var p = vastVideo01.play();
     if (p && p.catch) {
       p.catch(function(){
-        // Fallback kalau browser blokir autoplay
         vastAdTime.textContent = "Tap to play";
         vastAdLabel01.style.cursor = "pointer";
         vastAdLabel01.style.pointerEvents = "auto";
         vastAdLabel01.onclick = function(){
           vastVideo01.muted = true;
           var p2 = vastVideo01.play();
-          if (p2 && p2.catch) {
-            p2.catch(function(){ skipAd(); });
-          }
+          if (p2 && p2.catch) p2.catch(function(){ skipAd(); });
           vastAdLabel01.onclick = null;
           vastAdLabel01.style.cursor = "none";
           vastAdLabel01.style.pointerEvents = "none";
@@ -1645,68 +1707,41 @@ layout: null
   function skipAd(){
     adPlaying = false;
     vastClick01.style.display = "none";
-    if (adIndex < ads.length) {
-      setTimeout(playAd, 200);
-    } else {
-      nextVastSource();
-    }
+    if (adIndex < ads.length) setTimeout(playAd, 200);
+    else nextVastSource();
   }
 
   function hideAdBox(){
     adPlaying = false;
-    try {
-      vastVideo01.pause();
-      vastVideo01.removeAttribute("src");
-      vastVideo01.load();
-    } catch(e){}
+    try { vastVideo01.pause(); vastVideo01.removeAttribute("src"); vastVideo01.load(); } catch(e){}
     vastBox01.style.display = "none";
     if (adDivider01) adDivider01.style.display = "none";
   }
 
-  vastVideo01.addEventListener("play", function(){
-    if (!adPlaying) return;
-    fireAdTracking("start");
-  });
+  vastVideo01.addEventListener("play", function(){ if (adPlaying) fireAdTracking("start"); });
 
   vastVideo01.addEventListener("timeupdate", function(){
     if (!adPlaying || !currentAd) return;
-
     var cur = vastVideo01.currentTime || 0;
     var dur = vastVideo01.duration || currentAd.duration || 0;
-
     vastAdTime.textContent = fmtTime(cur) + " / " + fmtTime(dur);
-
     if (!dur) return;
     var pct = cur / dur;
-    if (pct >= 0.25 && !currentAd._q25) {
-      currentAd._q25 = true;
-      fireAdTracking("firstQuartile");
-    }
-    if (pct >= 0.50 && !currentAd._q50) {
-      currentAd._q50 = true;
-      fireAdTracking("midpoint");
-    }
-    if (pct >= 0.75 && !currentAd._q75) {
-      currentAd._q75 = true;
-      fireAdTracking("thirdQuartile");
-    }
+    if (pct >= 0.25 && !currentAd._q25) { currentAd._q25 = true; fireAdTracking("firstQuartile"); }
+    if (pct >= 0.50 && !currentAd._q50) { currentAd._q50 = true; fireAdTracking("midpoint"); }
+    if (pct >= 0.75 && !currentAd._q75) { currentAd._q75 = true; fireAdTracking("thirdQuartile"); }
   });
 
   vastVideo01.addEventListener("ended", function(){
     if (!adPlaying) return;
     fireAdTracking("complete");
     vastClick01.style.display = "none";
-
-    if (adIndex < ads.length) {
-      setTimeout(playAd, 300);
-    } else {
-      setTimeout(nextVastSource, 300);
-    }
+    if (adIndex < ads.length) setTimeout(playAd, 300);
+    else setTimeout(nextVastSource, 300);
   });
 
   vastVideo01.addEventListener("error", function(){
     if (!adPlaying) return;
-    console.warn("[VAST] video error");
     fireAdTracking("error");
     skipAd();
   });
@@ -1717,43 +1752,20 @@ layout: null
   });
 
   function fetchVastSource(index){
-    if (index >= VAST_URLS.length) {
-      console.warn("[VAST] all sources exhausted → hide box");
-      hideAdBox();
-      return;
-    }
-
+    if (index >= VAST_URLS.length){ hideAdBox(); return; }
     vastSourceIndex = index;
     var url = VAST_URLS[index];
-    console.log("[VAST] fetching #" + (index+1) + ":", url);
-
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
     xhr.timeout = 10000;
-
     xhr.onreadystatechange = function(){
       if (xhr.readyState !== 4) return;
-
-      console.log("[VAST] #" + (index+1) + " status:", xhr.status);
-      console.log("[VAST] #" + (index+1) + " preview:", (xhr.responseText || "").slice(0, 200));
-
       var parsed = [];
-
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try {
-          parsed = parseVast(xhr.responseText);
-          console.log("[VAST] #" + (index+1) + " parsed:", parsed.length, "ads");
-        } catch(e){
-          console.error("[VAST] #" + (index+1) + " parse error:", e);
-          parsed = [];
-        }
-      } else {
-        console.warn("[VAST] #" + (index+1) + " HTTP error:", xhr.status);
+      if (xhr.status >= 200 && xhr.status < 300){
+        try { parsed = parseVast(xhr.responseText); } catch(e){ parsed = []; }
       }
-
-      if (parsed.length > 0) {
-        ads = parsed;
-        adIndex = 0;
+      if (parsed.length > 0){
+        ads = parsed; adIndex = 0;
         vastBox01.style.display = "block";
         if (adDivider01) adDivider01.style.display = "block";
         playAd();
@@ -1761,43 +1773,24 @@ layout: null
         fetchVastSource(index + 1);
       }
     };
-
-    xhr.ontimeout = function(){
-      console.warn("[VAST] #" + (index+1) + " timeout");
-      fetchVastSource(index + 1);
-    };
-    xhr.onerror = function(){
-      console.warn("[VAST] #" + (index+1) + " network error");
-      fetchVastSource(index + 1);
-    };
-
+    xhr.ontimeout = function(){ fetchVastSource(index + 1); };
+    xhr.onerror = function(){ fetchVastSource(index + 1); };
     xhr.send();
   }
 
   function nextVastSource(){
     var next = vastSourceIndex + 1;
-    if (next < VAST_URLS.length) {
-      fetchVastSource(next);
-    } else {
-      hideAdBox();
-    }
+    if (next < VAST_URLS.length) fetchVastSource(next);
+    else hideAdBox();
   }
 
-  /* ==========================================================
-     START — hanya jalan kalau domain diizinkan
-  ========================================================== */
-  if (isAllowedDomain()) {
-    console.log("[VAST] domain allowed → start fetching");
-    fetchVastSource(0);
-  } else {
-    console.log("[VAST] domain not allowed (" + location.hostname + ") → skip ads");
-    hideAdBox();
-  }
+  if (isAllowedDomain()) fetchVastSource(0);
+  else hideAdBox();
 
 })();
 </script>
 
-<!-- ============ VIDEO OBJECT SCHEMA (AUTO-SYNC dari player) ============ -->
+<!-- ============ VIDEO OBJECT SCHEMA ============ -->
 <script>
 (function(){
   "use strict";
@@ -1825,14 +1818,10 @@ layout: null
     };
 
     var ogImage = document.querySelector('meta[property="og:image"]');
-    if (ogImage && ogImage.content) {
-      schema.thumbnailUrl = ogImage.content;
-    }
+    if (ogImage && ogImage.content) schema.thumbnailUrl = ogImage.content;
 
     var timeEl = document.querySelector("time[datetime]");
-    if (timeEl) {
-      schema.uploadDate = timeEl.getAttribute("datetime");
-    }
+    if (timeEl) schema.uploadDate = timeEl.getAttribute("datetime");
 
     var ld = document.createElement("script");
     ld.type = "application/ld+json";
@@ -1840,23 +1829,18 @@ layout: null
     ld.textContent = JSON.stringify(schema);
     document.head.appendChild(ld);
 
-    console.log("[Schema] updated →", embedUrl);
     return true;
   }
 
   var tries = 0;
   var iv = setInterval(function(){
     tries++;
-    if (injectSchema() || tries > 20) {
-      clearInterval(iv);
-    }
+    if (injectSchema() || tries > 20) clearInterval(iv);
   }, 500);
 
   var target = document.getElementById("serverVideo01");
-  if (target && window.MutationObserver) {
-    var mo = new MutationObserver(function(){
-      setTimeout(injectSchema, 100);
-    });
+  if (target && window.MutationObserver){
+    var mo = new MutationObserver(function(){ setTimeout(injectSchema, 100); });
     mo.observe(target, { childList: true, subtree: true });
   }
 })();
@@ -1866,9 +1850,16 @@ layout: null
 
         <!-- INFO CARD -->
         <div class="info-card">
+            <span class="info-eyebrow">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/>
+                </svg>
+                <span data-i18n="nowWatching">Now Watching</span>
+            </span>
             <h1 class="info-title">{{ page.title | escape }}</h1>
 
             <!-- SHARE -->
+            <div class="share-label-title" id="shareTitle">Share this video</div>
             <div class="share-row">
                 <a class="share-btn wa" id="shareWA" href="#" target="_blank" rel="noopener" aria-label="Share to WhatsApp">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -1887,15 +1878,7 @@ layout: null
                     <span class="share-label">X</span>
                 </a>
                 <a class="share-btn rd" id="shareRD" href="#" target="_blank" rel="noopener" aria-label="Share to Reddit">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="14" r="6"/>
-                        <circle cx="9.5" cy="14" r="1"/>
-                        <circle cx="14.5" cy="14" r="1"/>
-                        <path d="M9.5 16.5a3 3 0 0 0 5 0"/>
-                        <circle cx="18" cy="10" r="1.5"/>
-                        <path d="M18 10l-3-5-3 1"/>
-                        <path d="M7 12a6 6 0 0 1 10 0"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="6"/><circle cx="9.5" cy="14" r="1"/><circle cx="14.5" cy="14" r="1"/><path d="M9.5 16.5a3 3 0 0 0 5 0"/><circle cx="18" cy="10" r="1.5"/><path d="M18 10l-3-5-3 1"/><path d="M7 12a6 6 0 0 1 10 0"/></svg>
                     <span class="share-label">Reddit</span>
                 </a>
                 <a class="share-btn li" id="shareLI" href="#" target="_blank" rel="noopener" aria-label="Share to LINE">
@@ -1936,7 +1919,7 @@ layout: null
             <a href="{{ page.previous.url }}" class="prev">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
                 <span class="pn-text">
-                    <span class="pn-label">Prev</span>
+                    <span class="pn-label" data-i18n="prev">Prev</span>
                     <span class="pn-title">{{ page.previous.title | escape }}</span>
                 </span>
             </a>
@@ -1944,7 +1927,7 @@ layout: null
             <span class="prev disabled">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
                 <span class="pn-text">
-                    <span class="pn-label">Prev</span>
+                    <span class="pn-label" data-i18n="prev">Prev</span>
                     <span class="pn-title">—</span>
                 </span>
             </span>
@@ -1954,7 +1937,7 @@ layout: null
             <a href="{{ page.next.url }}" class="next">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
                 <span class="pn-text">
-                    <span class="pn-label">Next</span>
+                    <span class="pn-label" data-i18n="next">Next</span>
                     <span class="pn-title">{{ page.next.title | escape }}</span>
                 </span>
             </a>
@@ -1962,7 +1945,7 @@ layout: null
             <span class="next disabled">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
                 <span class="pn-text">
-                    <span class="pn-label">Next</span>
+                    <span class="pn-label" data-i18n="next">Next</span>
                     <span class="pn-title">—</span>
                 </span>
             </span>
@@ -1971,10 +1954,16 @@ layout: null
 
         <!-- RELATED -->
         <section class="related-section" id="relatedSection" style="display:none">
-            <h2 class="sidebar-title">
-                Related Videos
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg>
-            </h2>
+            <div class="related-head">
+                <span class="section-eyebrow" id="relatedEyebrow">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg>
+                    Keep exploring
+                </span>
+                <div class="section-title-row">
+                    <h2 class="sidebar-title" id="relatedTitle">Related Videos</h2>
+                    <span class="section-count" id="relatedCount"></span>
+                </div>
+            </div>
             <div class="grid" id="relatedGrid"></div>
             <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
                 <button class="load-more-btn" id="loadMoreBtn" type="button">
@@ -2001,7 +1990,7 @@ layout: null
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M14.5 9.5a3 3 0 1 0 0 5"/>
             </svg>
-            <span>&copy; <span id="footYear">2025</span> <strong id="footBrand">Yulianti</strong> — All rights reserved</span>
+            <span>&copy; <span id="footYear">2025</span> <strong id="footBrand">Atikah</strong> — All rights reserved</span>
         </p>
         <div class="foot-badge">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2009,8 +1998,9 @@ layout: null
                 <path d="M12 9v4"/>
                 <path d="M12 17h.01"/>
             </svg>
-            18+ Only
+            Adults Only · 18+
         </div>
+        <div class="foot-tagline">Hand-picked with care · Refreshed daily</div>
     </footer>
 
     <!-- ============ TOAST ============ -->
@@ -2030,10 +2020,10 @@ layout: null
                 <path d="M12 2a10 10 0 0 0 0 20"/>
             </svg>
         </span>
-        <p>This site uses cookies to improve your experience.</p>
+        <p>We use cookies to make your browsing smoother.</p>
         <button class="cookie-ok" id="cookieOk" type="button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
-            OK
+            Got it
         </button>
     </div>
 
@@ -2057,7 +2047,6 @@ layout: null
 
     <script>
         var hasRelated = {% if related_posts.size > 0 %}true{% else %}false{% endif %};
-        var currentCategories = [{% for cat in current_categories %}{{ cat | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}];
 
         var relatedPosts = [
             {% for post in related_posts %}
@@ -2126,7 +2115,7 @@ layout: null
 
         if (copyBtn) {
             copyBtn.addEventListener("click", function(){
-                function done(){ showToast("Link copied to clipboard"); }
+                function done(){ showToast(window.I18N ? window.I18N.tr("toastCopied") : "Link copied to clipboard"); }
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url); done(); });
                 } else {
@@ -2153,6 +2142,7 @@ layout: null
         var loadWrap = document.getElementById("loadMoreWrap");
         var loadBtn = document.getElementById("loadMoreBtn");
         var lmCount = document.getElementById("lmCount");
+        var relatedCount = document.getElementById("relatedCount");
 
         if (!grid || !section) return;
         if (!hasRelated || relatedPosts.length === 0) { return; }
@@ -2178,13 +2168,15 @@ layout: null
             return cols.trim().split(/\s+/).length;
         }
 
-        grid.innerHTML = relatedPosts.map(function(p){
+        grid.innerHTML = relatedPosts.map(function(p, i){
             var img = p.image
                 ? '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
                 : '';
             var dur = formatDuration(60 + (hashCode(p.url) % 841));
+            var num = String(i + 1).padStart(2, "0");
             return '<a href="' + escapeHtml(p.url) + '" class="card hidden">' +
                        '<div class="card-media">' + img +
+                           '<span class="card-num">#' + num + '</span>' +
                            '<span class="card-play" aria-hidden="true">' +
                                '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' +
                            '</span>' +
@@ -2192,10 +2184,15 @@ layout: null
                                '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' +
                                dur +
                            '</span>' +
+                       '</div>' +
+                       '<div class="card-info">' +
                            '<h3 class="card-title">' + escapeHtml(p.title) + '</h3>' +
                        '</div>' +
                    '</a>';
         }).join("");
+
+        if (relatedCount) relatedCount.textContent = relatedPosts.length + " " +
+            (window.I18N && window.I18N.get() === "id" ? "klip" : "clips");
 
         var allCards = Array.prototype.slice.call(grid.querySelectorAll(".card"));
         var visibleCount = 0;
@@ -2248,6 +2245,11 @@ layout: null
                 showAll();
             });
         }
+
+        document.addEventListener("langchange", function(){
+            if (relatedCount) relatedCount.textContent = relatedPosts.length + " " +
+                (window.I18N && window.I18N.get() === "id" ? "klip" : "clips");
+        });
     })();
 
     (function(){
