@@ -1,6 +1,1409 @@
 ---
-layout: xxx/01
+layout: null
 ---
 
-{% include /kw/mentah/index/01.html %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+
+    <script>
+    (function() {
+        var hostname = location.hostname;
+        var parts = hostname.split(".");
+        var fullName = parts[0];
+        if (fullName.toLowerCase() === "www") fullName = parts[1] || fullName;
+        var formatText = function(str) {
+            return str.replace(/[-_]/g, " ").replace(/\+/g, " ").replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+        };
+        var displayDomain = formatText(fullName);
+        window.__SITE_NAME__ = displayDomain;
+        document.title = displayDomain + " · Watch Free";
+        var metaDesc = document.querySelector("meta[name=\"description\"]") || document.createElement("meta");
+        metaDesc.name = "description";
+        metaDesc.content = "Watch free amateur clips from Nusantara and across Asia. New videos added daily. Adults only 18+.";
+        if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
+        var canonical = document.querySelector("link[rel=\"canonical\"]") || document.createElement("link");
+        canonical.setAttribute("rel", "canonical");
+        canonical.setAttribute("href", location.href);
+        if (!canonical.parentNode) document.head.appendChild(canonical);
+    })();
+    </script>
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="rating" content="adult">
+    <meta name="rating" content="mature">
+    <meta name="rating" content="RTA-5042-1996-1400-1577-RTA">
+    <meta name="content-rating" content="adult">
+    <meta name="audience" content="adult">
+
+    <style>
+        *,*::before,*::after{box-sizing:border-box}
+
+        :root {
+            --bg: #0f0a0c;
+            --bg-2: #1a1114;
+            --surface: #1f1518;
+            --surface-2: #2a1d21;
+            --surface-3: #352428;
+            --text: #fdf5f2;
+            --text-dim: #a89088;
+            --text-muted: #786860;
+            --border: rgba(255,200,180,.08);
+            --border-strong: rgba(255,200,180,.18);
+            --accent: #f43f5e;
+            --accent-2: #f59e0b;
+            --accent-soft: rgba(244,63,94,.15);
+            --play-bg: rgba(15,10,12,.75);
+            --play-fg: #fdf5f2;
+            --dur-bg: rgba(15,10,12,.95);
+            --dur-fg: #ffffff;
+            --header-bg: rgba(15,10,12,.95);
+            --menu-bg: #140c10;
+        }
+
+        body.light-mode {
+            --bg: #ffffff;
+            --bg-2: #f9f9f9;
+            --surface: #ffffff;
+            --surface-2: #f2f2f2;
+            --surface-3: #e8e8e8;
+            --text: #0f0f0f;
+            --text-dim: #606060;
+            --text-muted: #909090;
+            --border: rgba(0,0,0,.08);
+            --border-strong: rgba(0,0,0,.16);
+            --accent: #e11d48;
+            --accent-2: #d97706;
+            --accent-soft: rgba(225,29,72,.1);
+            --play-bg: rgba(0,0,0,.75);
+            --play-fg: #ffffff;
+            --dur-bg: rgba(0,0,0,.85);
+            --dur-fg: #ffffff;
+            --header-bg: rgba(255,255,255,.98);
+            --menu-bg: #ffffff;
+        }
+
+        html{overflow-x:hidden;background:var(--bg);scroll-behavior:smooth}
+        body{
+            width:100%;min-width:320px;max-width:100%;margin:0;padding:0;
+            background:var(--bg);color:var(--text);
+            font-family:'Inter',system-ui,-apple-system,sans-serif;
+            line-height:1.4;-webkit-font-smoothing:antialiased;
+            transition:background .3s ease,color .3s ease;
+        }
+
+        svg{display:block}
+
+        /* ============ HEADER (YouTube Style) ============ */
+        .site-header{
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+            background:var(--header-bg);
+            backdrop-filter:blur(24px);
+            -webkit-backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border);
+            padding:8px 12px;
+            height:56px;
+        }
+        .header-inner{
+            display:flex;align-items:center;gap:8px;
+            max-width:1920px;margin:0 auto;
+            height:100%;
+        }
+
+        .icon-btn{
+            width:40px;height:40px;flex-shrink:0;
+            background:transparent;border:none;
+            border-radius:50%;cursor:pointer;padding:0;
+            display:flex;align-items:center;justify-content:center;
+            color:var(--text);transition:background .2s ease;
+        }
+        .icon-btn:hover{background:var(--surface-2)}
+        .icon-btn:active{transform:scale(.94)}
+        .icon-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+        /* Brand */
+        .brand{
+            display:flex;align-items:center;gap:8px;
+            flex-shrink:0;
+            text-decoration:none;
+            color:var(--text);
+            padding:0 8px;
+            min-width:0;
+        }
+        .brand-mark{
+            width:32px;height:32px;flex-shrink:0;
+            border-radius:8px;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:14px;
+            font-family:'Fraunces',serif;
+            box-shadow:0 2px 12px var(--accent-soft);
+        }
+        .brand-name{
+            font-family:'Fraunces',serif;
+            font-size:18px;
+            font-weight:900;
+            letter-spacing:-.03em;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            color:var(--text);
+        }
+        .brand-tag{
+            font-size:9px;
+            font-weight:600;
+            letter-spacing:.14em;
+            text-transform:uppercase;
+            color:var(--text-dim);
+            margin-left:2px;
+            align-self:flex-start;
+            margin-top:2px;
+            display:none;
+        }
+        @media(min-width:700px){ .brand-tag{display:inline} }
+
+        /* Search */
+        .search-wrap{
+            flex:1;
+            max-width:600px;
+            margin:0 auto;
+            display:flex;
+            align-items:center;
+            gap:0;
+        }
+        .search-form{
+            display:flex;
+            width:100%;
+            align-items:center;
+        }
+        .search-input{
+            flex:1;
+            height:40px;
+            padding:0 16px;
+            background:var(--surface-2);
+            border:1px solid var(--border-strong);
+            border-right:none;
+            border-radius:20px 0 0 20px;
+            color:var(--text);
+            font-family:inherit;
+            font-size:14px;
+            outline:none;
+            transition:all .2s ease;
+            min-width:0;
+        }
+        .search-input::placeholder{color:var(--text-muted)}
+        .search-input:focus{
+            background:var(--surface);
+            border-color:var(--accent);
+        }
+        .search-btn{
+            width:60px;
+            height:40px;
+            background:var(--surface-3);
+            border:1px solid var(--border-strong);
+            border-left:none;
+            border-radius:0 20px 20px 0;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:var(--text);
+            transition:all .2s ease;
+        }
+        .search-btn:hover{background:var(--surface-2)}
+        .search-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+        @media(max-width:700px){
+            .search-wrap{display:none}
+        }
+        @media(max-width:500px){
+            .brand-name{display:none}
+        }
+
+        /* Right actions */
+        .header-actions{
+            display:flex;align-items:center;gap:4px;
+            flex-shrink:0;
+        }
+        .lang-btn{
+            min-width:44px;height:40px;
+            background:transparent;border:none;
+            border-radius:50px;cursor:pointer;padding:0 10px;
+            display:flex;align-items:center;justify-content:center;gap:5px;
+            color:var(--text);transition:all .2s ease;
+            font-family:inherit;
+            font-size:11px;font-weight:800;letter-spacing:.05em;
+        }
+        .lang-btn:hover{background:var(--surface-2)}
+        .lang-btn svg{
+            width:18px;height:18px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            color:var(--accent);
+        }
+
+        /* ============ MENU DRAWER (KIRI) ============ */
+        .menu-overlay{
+            position:fixed;inset:0;z-index:1050;
+            background:rgba(0,0,0,.5);
+            opacity:0;pointer-events:none;
+            transition:opacity .3s ease;
+        }
+        .menu-overlay.open{opacity:1;pointer-events:auto}
+
+        .menu-panel{
+            position:fixed;top:0;left:0;bottom:0;z-index:1100;
+            width:240px;max-width:85vw;
+            background:var(--menu-bg);
+            transform:translateX(-100%);
+            transition:transform .3s cubic-bezier(.4,0,.2,1);
+            display:flex;flex-direction:column;overflow:hidden;
+            border-right:1px solid var(--border);
+        }
+        .menu-panel.open{transform:translateX(0)}
+
+        .menu-head{
+            flex-shrink:0;
+            padding:16px;
+            border-bottom:1px solid var(--border);
+            display:flex;align-items:center;gap:10px;
+        }
+        .menu-head-mark{
+            width:32px;height:32px;border-radius:8px;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:14px;
+            font-family:'Fraunces',serif;
+            flex-shrink:0;
+        }
+        .menu-head-text{display:flex;flex-direction:column;min-width:0}
+        .menu-head-name{
+            font-family:'Fraunces',serif;
+            font-size:15px;font-weight:900;color:var(--text);
+            letter-spacing:-.02em;line-height:1.2;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .menu-head-sub{
+            font-size:9px;font-weight:700;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--accent);
+            margin-top:2px;line-height:1.2;
+        }
+
+        .menu-body{
+            flex:1;overflow-y:auto;
+            padding:8px 0 20px;
+            -webkit-overflow-scrolling:touch;
+        }
+
+        .menu-link{
+            display:flex;align-items:center;gap:16px;
+            padding:10px 24px;
+            color:var(--text);text-decoration:none;
+            font-size:14px;font-weight:500;
+            transition:background .15s ease;
+        }
+        .menu-link:hover{background:var(--surface-2)}
+        .menu-link svg{
+            width:22px;height:22px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            flex-shrink:0;
+        }
+        .menu-link .ml-arrow{
+            margin-left:auto;
+            width:14px;height:14px;
+            opacity:.5;
+        }
+
+        .menu-divider{height:1px;background:var(--border);margin:8px 0}
+
+        .menu-section-label{
+            font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+            color:var(--text-muted);padding:14px 24px 8px;
+        }
+
+        .menu-legal{
+            display:flex;flex-direction:column;
+        }
+        .menu-legal details{overflow:hidden}
+        .menu-legal summary{
+            padding:10px 24px;cursor:pointer;
+            font-size:13px;font-weight:500;color:var(--text);
+            list-style:none;
+            display:flex;align-items:center;gap:14px;
+            user-select:none;transition:background .15s ease;
+        }
+        .menu-legal summary:hover{background:var(--surface-2)}
+        .menu-legal summary::-webkit-details-marker{display:none}
+        .menu-legal summary .chev{
+            margin-left:auto;width:8px;height:8px;
+            border-right:2px solid var(--text-dim);
+            border-bottom:2px solid var(--text-dim);
+            transform:rotate(45deg);transition:transform .25s ease;
+            flex-shrink:0;
+        }
+        .menu-legal details[open] summary .chev{transform:rotate(-135deg);margin-top:4px}
+        .menu-legal-body{
+            padding:4px 24px 16px;
+            font-size:12px;line-height:1.6;color:var(--text-dim);
+            border-left:2px solid var(--accent-soft);
+            margin-left:24px;
+        }
+        .menu-legal-body p{margin:8px 0}
+        .menu-legal-body p strong{color:var(--text)}
+        .menu-legal-body ul{margin:8px 0;padding-left:16px}
+        .menu-legal-body a{color:var(--accent);text-decoration:none}
+        .menu-legal-body a:hover{text-decoration:underline}
+
+        .menu-contact-list{list-style:none;padding:0;margin:0}
+        .menu-contact-list li{
+            display:flex;align-items:center;gap:14px;
+            font-size:13px;
+            padding:10px 24px;
+        }
+        .menu-contact-list .contact-ico{
+            flex-shrink:0;width:22px;height:22px;
+            color:var(--accent);
+        }
+        .menu-contact-list .contact-ico svg{
+            width:20px;height:20px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+        .menu-contact-list .contact-meta{display:flex;flex-direction:column;min-width:0;flex:1}
+        .menu-contact-list .contact-label{
+            font-size:10px;text-transform:uppercase;
+            letter-spacing:.1em;color:var(--text-muted);
+            line-height:1.2;font-weight:600;
+        }
+        .menu-contact-list a{
+            color:var(--text);text-decoration:none;
+            font-size:12.5px;font-weight:500;
+            margin-top:2px;word-break:break-all;
+        }
+        .menu-contact-list a:hover{color:var(--accent)}
+
+        /* ============ ADS ============ */
+        .ad-box{
+            display:flex;justify-content:center;align-items:center;
+            margin:0 auto;max-width:100%;overflow:hidden;
+            min-height:50px;
+        }
+        .ad-break{
+            padding:8px 0;background:var(--bg);
+            border-bottom:1px solid var(--border);
+        }
+        .ad-break:first-child{margin-top:60px}
+        .ad-break.bottom{margin-top:24px;border-top:1px solid var(--border);border-bottom:none}
+        .ad-inline{
+            margin:24px 0;
+        }
+
+        /* ============ MAIN LAYOUT ============ */
+        .main-wrap{
+            max-width:1920px;
+            margin:0 auto;
+            padding:16px 16px 40px;
+        }
+        @media(min-width:600px){
+            .main-wrap{padding:16px 24px 40px}
+        }
+        @media(min-width:1200px){
+            .main-wrap{padding:16px 40px 40px}
+        }
+
+        /* ============ CHIP FILTERS (YouTube style) ============ */
+        .chip-bar{
+            position:sticky;
+            top:56px;
+            z-index:50;
+            background:var(--bg);
+            display:flex;gap:8px;
+            overflow-x:auto;
+            padding:8px 0 12px;
+            margin-bottom:8px;
+            scrollbar-width:none;
+            border-bottom:1px solid var(--border);
+            -webkit-overflow-scrolling:touch;
+        }
+        .chip-bar::-webkit-scrollbar{display:none}
+        .chip{
+            flex-shrink:0;
+            display:inline-flex;align-items:center;gap:6px;
+            padding:8px 14px;
+            background:var(--surface-2);
+            border:1px solid transparent;
+            border-radius:999px;
+            font-size:13px;
+            font-weight:600;
+            color:var(--text);
+            cursor:pointer;
+            white-space:nowrap;
+            transition:all .15s ease;
+            font-family:inherit;
+        }
+        .chip:hover{background:var(--surface-3)}
+        .chip.active{
+            background:var(--text);
+            color:var(--bg);
+        }
+
+        /* ============ SECTION (YouTube rows) ============ */
+        .section{margin:24px 0}
+        .section:first-child{margin-top:8px}
+
+        .section-head{
+            display:flex;align-items:center;justify-content:space-between;
+            margin-bottom:16px;
+            gap:12px;
+        }
+        .section-title{
+            font-family:'Fraunces',Georgia,serif;
+            font-size:22px;font-weight:900;
+            letter-spacing:-.02em;
+            color:var(--text);margin:0;
+            line-height:1.2;
+            display:flex;align-items:center;gap:8px;
+        }
+        .section-title .section-ico{
+            width:24px;height:24px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            color:var(--accent);
+        }
+        .section-count{
+            font-size:12px;font-weight:600;
+            color:var(--text-muted);
+        }
+
+        /* ============ YOUTUBE-STYLE GRID ============ */
+        .grid{
+            display:grid;
+            gap:16px 12px;
+            grid-template-columns:repeat(1,1fr);
+        }
+        @media(min-width:500px){
+            .grid{grid-template-columns:repeat(2,1fr);gap:20px 16px}
+        }
+        @media(min-width:900px){
+            .grid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media(min-width:1300px){
+            .grid{grid-template-columns:repeat(4,1fr)}
+        }
+        @media(min-width:1600px){
+            .grid{grid-template-columns:repeat(5,1fr)}
+        }
+
+        /* ============ YOUTUBE CARD ============ */
+        .card{
+            display:block;
+            text-decoration:none;
+            color:inherit;
+            transition:transform .15s ease;
+        }
+        .card:hover .card-thumb img{transform:scale(1.03)}
+        .card:hover .card-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+        .card-thumb{
+            position:relative;
+            width:100%;
+            aspect-ratio:16/9;
+            overflow:hidden;
+            background:var(--surface-2);
+            border-radius:12px;
+            margin-bottom:10px;
+        }
+        .card-thumb img{
+            width:100%;height:100%;object-fit:cover;display:block;
+            transition:transform .3s cubic-bezier(.4,0,.2,1);
+        }
+
+        .card-play{
+            position:absolute;
+            top:50%;left:50%;
+            width:56px;height:56px;
+            background:var(--play-bg);
+            backdrop-filter:blur(4px);
+            -webkit-backdrop-filter:blur(4px);
+            border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            color:var(--play-fg);
+            z-index:2;pointer-events:none;
+            opacity:0;
+            transform:translate(-50%,-50%) scale(.85);
+            transition:all .2s ease;
+        }
+        .card-play svg{width:24px;height:24px;fill:currentColor;margin-left:3px}
+
+        .card-dur{
+            position:absolute;bottom:6px;right:6px;
+            background:var(--dur-bg);
+            color:var(--dur-fg);
+            font-size:11.5px;
+            font-weight:700;
+            padding:2px 5px;
+            border-radius:4px;
+            z-index:3;pointer-events:none;
+            font-variant-numeric:tabular-nums;
+            letter-spacing:.02em;
+        }
+
+        /* Info row (avatar + text) */
+        .card-row{
+            display:flex;gap:12px;
+            padding-right:8px;
+        }
+        .card-avatar{
+            flex-shrink:0;
+            width:36px;height:36px;
+            border-radius:50%;
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:900;font-size:15px;
+            font-family:'Fraunces',serif;
+            margin-top:2px;
+        }
+        .card-text{flex:1;min-width:0}
+        .card-title{
+            font-family:'Inter',system-ui,sans-serif;
+            font-size:14px;
+            font-weight:600;
+            line-height:1.35;
+            color:var(--text);
+            margin:0 0 3px;
+            overflow:hidden;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            -webkit-box-orient:vertical;
+            text-overflow:ellipsis;
+            word-break:break-word;
+        }
+        .card-meta{
+            font-size:12px;
+            color:var(--text-dim);
+            line-height:1.4;
+        }
+        .card-meta span{display:inline}
+        .card-meta span + span::before{content:' • ';margin:0 2px}
+
+        @media(max-width:500px){
+            .card-avatar{width:32px;height:32px;font-size:13px}
+            .card-title{font-size:13px}
+            .card-meta{font-size:11.5px}
+            .card-play{width:48px;height:48px;opacity:1;transform:translate(-50%,-50%) scale(1)}
+        }
+
+        /* ============ PAGINATION ============ */
+        .pagination{
+            display:flex;justify-content:center;align-items:center;
+            gap:6px;margin:40px 0 20px;flex-wrap:wrap;
+        }
+        .pagination a,
+        .pagination span{
+            display:inline-flex;align-items:center;justify-content:center;
+            min-width:40px;height:40px;padding:0 14px;
+            background:var(--surface-2);color:var(--text);
+            border:none;border-radius:20px;
+            font-size:14px;font-weight:600;text-decoration:none;
+            transition:all .15s ease;cursor:pointer;
+            font-family:inherit;
+        }
+        .pagination a:hover{background:var(--surface-3)}
+        .pagination .active{
+            background:var(--text);color:var(--bg);
+        }
+        .pagination .disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
+        .pagination .dots{background:transparent;cursor:default;color:var(--text-dim)}
+        .pagination .chev-btn{padding:0;min-width:40px}
+        .pagination .chev-btn svg{
+            width:18px;height:18px;
+            stroke:currentColor;fill:none;stroke-width:2.5;
+            stroke-linecap:round;stroke-linejoin:round;
+        }
+
+        /* ============ COOKIE BANNER ============ */
+        .cookie-banner{
+            position:fixed;
+            bottom:16px;left:50%;
+            transform:translateX(-50%) translateY(20px);
+            max-width:420px;width:calc(100% - 32px);
+            background:var(--surface);color:var(--text);
+            border:1px solid var(--border-strong);
+            border-radius:12px;
+            padding:16px 18px;
+            box-shadow:0 12px 40px rgba(0,0,0,.4);
+            font-size:13px;line-height:1.5;
+            z-index:1200;
+            display:flex;align-items:center;gap:12px;
+            opacity:0;
+            transition:opacity .3s ease,transform .3s ease;
+        }
+        .cookie-banner.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        .cookie-banner .cookie-ico{
+            flex-shrink:0;width:36px;height:36px;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            background:var(--accent-soft);color:var(--accent);
+        }
+        .cookie-banner .cookie-ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .cookie-banner p{margin:0;flex:1;color:var(--text);font-size:13px}
+        .cookie-ok{
+            background:var(--accent);color:#fff;
+            border:none;border-radius:999px;
+            padding:8px 18px;cursor:pointer;
+            font-size:13px;font-weight:700;
+            font-family:inherit;
+            flex-shrink:0;transition:all .15s ease;
+        }
+        .cookie-ok:hover{filter:brightness(1.1)}
+        .cookie-ok:active{transform:scale(.96)}
+
+        /* ============ FOOTER ============ */
+        footer.site-footer{
+            max-width:1920px;margin:40px auto 0;
+            padding:24px 16px 32px;
+            border-top:1px solid var(--border);
+            text-align:center;
+        }
+        .foot-copy{
+            font-size:12px;color:var(--text-dim);
+            margin:0;line-height:1.6;
+            display:flex;align-items:center;justify-content:center;
+            gap:8px;flex-wrap:wrap;
+        }
+        .foot-copy .copy-ico{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+        .foot-copy strong{color:var(--text);font-weight:600}
+        .foot-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            margin-top:12px;font-size:10px;font-weight:700;
+            letter-spacing:.15em;text-transform:uppercase;
+            color:var(--text-dim);
+            padding:5px 12px;
+            border:1px solid var(--border-strong);
+            border-radius:999px;
+        }
+        .foot-badge svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
+        .foot-tagline{
+            margin-top:10px;font-size:11px;
+            color:var(--text-muted);letter-spacing:.06em;
+        }
+    </style>
+
+{% include head.html %}
+
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <button class="icon-btn" id="menuOpen" aria-label="Menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>
+                </svg>
+            </button>
+
+            <a href="/" class="brand">
+                <div class="brand-mark" id="brandMark">A</div>
+                <span class="brand-name" id="brandName">Atikah</span>
+                <span class="brand-tag" data-i18n="brandTag">Vault</span>
+            </a>
+
+            <div class="search-wrap">
+                <form class="search-form" onsubmit="return false;">
+                    <input type="search" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search videos...">
+                    <button class="search-btn" type="submit" aria-label="Search">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div class="header-actions">
+                <button class="lang-btn" id="langToggle" aria-label="Switch language">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <span id="langCode">EN</span>
+                </button>
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+                    <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2"/><path d="M12 20v2"/>
+                        <path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/>
+                        <path d="M2 12h2"/><path d="M20 12h2"/>
+                        <path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/>
+                    </svg>
+                    <svg id="moonIcon" viewBox="0 0 24 24" style="display:none" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu overlay + drawer -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <aside class="menu-panel" id="menuPanel" role="dialog" aria-label="Navigation">
+        <div class="menu-head">
+            <div class="menu-head-mark" id="menuHeadMark">A</div>
+            <div class="menu-head-text">
+                <span class="menu-head-name" id="menuHeadName">Atikah</span>
+                <span class="menu-head-sub" data-i18n="menuSub">Menu</span>
+            </div>
+        </div>
+        <div class="menu-body">
+
+            <a href="/" class="menu-link">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+                <span data-i18n="home">Home</span>
+            </a>
+
+            <div class="menu-divider"></div>
+
+            <div class="menu-section-label" data-i18n="aboutLabel">About</div>
+            <div class="menu-legal">
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        <span data-i18n="aboutTitle">About</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="aboutBody"></div>
+                </details>
+            </div>
+
+            <div class="menu-divider"></div>
+
+            <div class="menu-section-label" data-i18n="legalLabel">Legal</div>
+            <div class="menu-legal">
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/></svg>
+                        <span data-i18n="privacyTitle">Privacy</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="privacyBody"></div>
+                </details>
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+                        <span data-i18n="termsTitle">Terms</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="termsBody"></div>
+                </details>
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        <span data-i18n="disclaimerTitle">18+</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="disclaimerBody"></div>
+                </details>
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="10"/><circle cx="8.5" cy="10.5" r="1"/><circle cx="15.5" cy="10.5" r="1"/><circle cx="12" cy="16" r="1"/></svg>
+                        <span data-i18n="cookieTitle">Cookies</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="cookieBody"></div>
+                </details>
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="9"/><path d="M9 9h.01"/><path d="M15 15h.01"/><path d="M9.5 14.5a4 4 0 0 0 5 0"/></svg>
+                        <span data-i18n="dmcaTitle">DMCA</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="dmcaBody"></div>
+                </details>
+                <details>
+                    <summary>
+                        <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+                        <span data-i18n="section2257Title">2257</span>
+                        <span class="chev"></span>
+                    </summary>
+                    <div class="menu-legal-body" id="section2257Body"></div>
+                </details>
+            </div>
+
+            <div class="menu-divider"></div>
+
+            <div class="menu-section-label" data-i18n="contactLabel">Contact</div>
+            <ul class="menu-contact-list">
+                <li>
+                    <span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+                    <span class="contact-meta">
+                        <span class="contact-label">WhatsApp</span>
+                        <a href="https://wa.me/6285770366055" target="_blank" rel="noopener">+62 857-7036-6055</a>
+                    </span>
+                </li>
+                <li>
+                    <span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></span>
+                    <span class="contact-meta">
+                        <span class="contact-label">Telegram</span>
+                        <a href="https://t.me/yl4t1" target="_blank" rel="noopener">@yl4t1</a>
+                    </span>
+                </li>
+                <li>
+                    <span class="contact-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                    <span class="contact-meta">
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:admin@atikah.xyz">admin@atikah.xyz</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- i18n Dictionary -->
+    <script id="i18n-data" type="application/json">
+    {
+      "en": {
+        "brandTag": "Vault",
+        "menuSub": "Menu",
+        "home": "Home",
+        "aboutLabel": "About",
+        "aboutTitle": "About",
+        "legalLabel": "Legal",
+        "privacyTitle": "Privacy",
+        "termsTitle": "Terms",
+        "disclaimerTitle": "18+",
+        "cookieTitle": "Cookies",
+        "dmcaTitle": "DMCA",
+        "section2257Title": "2257",
+        "contactLabel": "Contact",
+        "searchPlaceholder": "Search videos...",
+        "chips": ["All", "Trending", "New", "Popular", "Top Rated"],
+        "sections": [
+          { "key": "Recommended", "eyebrow": "Just for you" },
+          { "key": "Trending Now", "eyebrow": "Trending" },
+          { "key": "Recently Added", "eyebrow": "New" },
+          { "key": "Most Watched", "eyebrow": "Popular" },
+          { "key": "The Vault", "eyebrow": "Archive" }
+        ],
+        "clips": "videos",
+        "views": "views",
+        "footerRights": "All rights reserved",
+        "footerBadge": "Adults Only · 18+",
+        "footerTagline": "Free curated amateur videos · Updated daily",
+        "cookieText": "We use cookies to make your browsing smoother.",
+        "cookieOk": "Got it",
+        "viewsFormat": "{n} views",
+        "timeAgo": "{n} {unit} ago",
+        "units": { "d": "day", "w": "week", "mo": "month", "y": "year" },
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> is a hand-curated vault of authentic amateur clips, sourced from Indonesia and neighboring Asian regions.</p><p>Every clip is reviewed for quality and authenticity before it enters the vault. The collection refreshes daily.</p><p>This site is strictly for adult visitors (18 years and older).</p>",
+        "privacyBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>Your privacy matters to us. This policy explains what happens to information when you browse the vault.</p><p>We do <strong>not</strong> collect personal details such as names, email addresses, or payment data.</p><ul><li><strong>Local storage</strong> — theme, cookie consent, age verification live in your browser only.</li><li><strong>Server logs</strong> — standard access logs may be recorded by our hosting provider for security.</li></ul><p>Every video is embedded from a third-party platform.</p><p>No third-party tracking cookies are used by us directly.</p>",
+        "termsBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>By browsing or using this website, you agree to the terms below.</p><p><strong>1. Who May Use This Site</strong></p><p>You must be at least 18 years old to access this vault.</p><p><strong>2. The Content</strong></p><p>Clips are embedded from third-party platforms — we do not host or own the videos shown.</p><p><strong>3. Acceptable Use</strong></p><ul><li>No unlawful purpose</li><li>No unauthorized access attempts</li><li>No content scraping</li><li>No access if under 18</li></ul><p><strong>4. No Warranties</strong></p><p>The site is provided \"as is\" with no warranties of any kind.</p><p><strong>5. Limitation of Liability</strong></p><p>We are not liable for any damages arising from use of the site.</p>",
+        "disclaimerBody": "<p><strong>ADULTS ONLY.</strong> This website contains adult material meant solely for adults. By entering, you confirm that you are at least 18 years old and that viewing adult content is legal where you are.</p><p>All content is fictional and for entertainment only. Every character depicted is 18 years of age or older.</p>",
+        "cookieBody": "<p>This site relies on the following cookies:</p><ul><li><strong>age-verified</strong> — age verification (essential)</li><li><strong>cookie-consent</strong> — cookie choice (essential)</li><li><strong>theme</strong> — dark/light preference (functional)</li><li><strong>lang</strong> — language choice (functional)</li></ul><p>No third-party tracking cookies.</p>",
+        "dmcaBody": "<p>We respect the intellectual property rights of others. If you believe your copyrighted work appears on this site without authorization, you may file a DMCA takedown notice.</p><p>Include: identification of the work, URL, your contact details, a good-faith statement, a statement under penalty of perjury, and your signature.</p><p>We respond to valid DMCA notices within 72 hours.</p>",
+        "section2257Body": "<p>This website is <strong>not a primary or secondary producer</strong> of any sexually explicit content. All visual depictions are <strong>embedded from third-party platforms</strong> solely responsible for compliance with 18 U.S.C. § 2257.</p><p>We do not host, upload, store, or transmit any sexually explicit media on our servers.</p><p>We require all third-party sources to confirm performers were 18+ at time of production.</p>"
+      },
+      "id": {
+        "brandTag": "Vault",
+        "menuSub": "Menu",
+        "home": "Beranda",
+        "aboutLabel": "Tentang",
+        "aboutTitle": "Tentang",
+        "legalLabel": "Legal",
+        "privacyTitle": "Privasi",
+        "termsTitle": "Syarat",
+        "disclaimerTitle": "18+",
+        "cookieTitle": "Cookie",
+        "dmcaTitle": "DMCA",
+        "section2257Title": "2257",
+        "contactLabel": "Kontak",
+        "searchPlaceholder": "Cari video...",
+        "chips": ["Semua", "Tren", "Baru", "Populer", "Terbaik"],
+        "sections": [
+          { "key": "Direkomendasikan", "eyebrow": "Untuk Anda" },
+          { "key": "Sedang Tren", "eyebrow": "Tren" },
+          { "key": "Baru Ditambahkan", "eyebrow": "Baru" },
+          { "key": "Paling Banyak Ditonton", "eyebrow": "Populer" },
+          { "key": "Arsip", "eyebrow": "Koleksi" }
+        ],
+        "clips": "video",
+        "views": "tayangan",
+        "footerRights": "Seluruh hak dilindungi",
+        "footerBadge": "Khusus Dewasa · 18+",
+        "footerTagline": "Video amatir gratis · Diperbarui setiap hari",
+        "cookieText": "Kami memakai cookie agar jelajah Anda lebih nyaman.",
+        "cookieOk": "Mengerti",
+        "viewsFormat": "{n} tayangan",
+        "timeAgo": "{n} {unit} lalu",
+        "units": { "d": "hari", "w": "minggu", "mo": "bulan", "y": "tahun" },
+        "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> adalah galeri klip amatir pilihan dari Nusantara dan sekitarnya.</p><p>Setiap klip ditinjau dari sisi kualitas dan keaslian sebelum masuk galeri. Koleksi diperbarui tiap hari.</p><p>Situs ini khusus untuk pengunjung dewasa (18 tahun ke atas).</p>",
+        "privacyBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Privasi Anda penting bagi kami.</p><p>Kami <strong>tidak</strong> mengumpulkan data pribadi seperti nama, email, atau data pembayaran.</p><ul><li><strong>Penyimpanan lokal</strong> — tema, persetujuan cookie, verifikasi usia hanya ada di browser Anda.</li><li><strong>Log server</strong> — log akses standar dapat dicatat oleh penyedia hosting untuk keamanan.</li></ul><p>Setiap video disematkan dari platform pihak ketiga.</p><p>Tidak ada cookie pelacak pihak ketiga yang dipasang langsung oleh kami.</p>",
+        "termsBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Dengan menjelajahi situs ini, Anda setuju dengan syarat di bawah.</p><p><strong>1. Siapa yang Boleh Menggunakan</strong></p><p>Anda harus berusia minimal 18 tahun untuk mengakses galeri ini.</p><p><strong>2. Konten</strong></p><p>Klip disematkan dari platform pihak ketiga — kami tidak menghosting atau memiliki video yang ditampilkan.</p><p><strong>3. Penggunaan yang Wajar</strong></p><ul><li>Tidak untuk tujuan melanggar hukum</li><li>Tidak mencoba akses tidak sah</li><li>Tidak mengikis konten</li><li>Tidak mengakses jika di bawah 18 tahun</li></ul><p><strong>4. Tanpa Jaminan</strong></p><p>Situs disediakan \"sebagaimana adanya\" tanpa jaminan apa pun.</p><p><strong>5. Batasan Tanggung Jawab</strong></p><p>Kami tidak bertanggung jawab atas kerusakan apa pun dari penggunaan situs.</p>",
+        "disclaimerBody": "<p><strong>KHUSUS DEWASA.</strong> Situs ini memuat materi dewasa khusus untuk orang dewasa. Dengan masuk, Anda mengonfirmasi berusia minimal 18 tahun dan menonton konten dewasa legal di lokasi Anda.</p><p>Semua konten fiktif dan hanya untuk hiburan. Setiap karakter berusia 18 tahun atau lebih.</p>",
+        "cookieBody": "<p>Situs ini memakai cookie berikut:</p><ul><li><strong>age-verified</strong> — verifikasi usia (penting)</li><li><strong>cookie-consent</strong> — pilihan cookie (penting)</li><li><strong>theme</strong> — preferensi gelap/terang (fungsional)</li><li><strong>lang</strong> — pilihan bahasa (fungsional)</li></ul><p>Tidak ada cookie pelacak pihak ketiga.</p>",
+        "dmcaBody": "<p>Kami menghormati hak kekayaan intelektual orang lain. Jika Anda yakin karya berhak cipta Anda muncul di sini tanpa izin, Anda dapat mengirim pemberitahuan takedown DMCA.</p><p>Sertakan: identifikasi karya, URL, detail kontak Anda, pernyataan itikad baik, pernyataan di bawah sumpah, dan tanda tangan Anda.</p><p>Kami menanggapi pemberitahuan DMCA yang sah dalam 72 jam.</p>",
+        "section2257Body": "<p>Situs ini <strong>bukan produser primer atau sekunder</strong> dari konten seksual eksplisit apa pun. Semua penggambaran visual <strong>disematkan dari platform pihak ketiga</strong> yang bertanggung jawab penuh atas kepatuhan terhadap 18 U.S.C. § 2257.</p><p>Kami tidak menghosting, mengunggah, menyimpan, atau mengirimkan media seksual eksplisit apa pun di server kami.</p><p>Kami mewajibkan semua sumber pihak ketiga untuk mengonfirmasi performer berusia 18+ saat produksi.</p>"
+      }
+    }
+    </script>
+
+    <!-- Top Ad -->
+    <div class="ad-break">
+        <div class="ad-box">{% include /ads/banner/01.html %}</div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="main-wrap">
+
+        <!-- Chip filters (YouTube style) -->
+        <div class="chip-bar" id="chipBar"></div>
+
+        {% assign category_posts = site.categories['x01'] %}
+        {% if category_posts == nil or category_posts.size == 0 %}
+          {% assign category_posts = site.posts %}
+        {% endif %}
+
+        <div id="ad-slots" style="display:none">
+            <div data-ad="1">{% include /ads/banner/02.html %}</div>
+            <div data-ad="2">{% include /ads/banner/03.html %}</div>
+            <div data-ad="3">{% include /ads/banner/04.html %}</div>
+            <div data-ad="4">{% include /ads/banner/05.html %}</div>
+        </div>
+
+        <div id="sections-container"></div>
+
+        <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
+
+    </main>
+
+    <!-- Bottom ad -->
+    <div class="ad-break bottom">
+        <div class="ad-box">{% include /ads/banner/06.html %}</div>
+    </div>
+
+{% include paginasi.html %}
+    {% include /ads/gobloggugel/umum.html %}
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p class="foot-copy">
+            <svg class="copy-ico" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M14.5 9.5a3 3 0 1 0 0 5"/>
+            </svg>
+            <span>&copy; <span id="footYear">2025</span> <strong id="footBrand">Atikah</strong> — <span data-i18n="footerRights">All rights reserved</span></span>
+        </p>
+        <div class="foot-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <path d="M12 9v4"/><path d="M12 17h.01"/>
+            </svg>
+            <span data-i18n="footerBadge">Adults Only · 18+</span>
+        </div>
+        <div class="foot-tagline" data-i18n="footerTagline">Free curated amateur videos · Updated daily</div>
+    </footer>
+
+    <!-- Cookie -->
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie notice">
+        <span class="cookie-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="8.5" cy="10.5" r="1"/>
+                <circle cx="15.5" cy="10.5" r="1"/>
+                <circle cx="12" cy="16" r="1"/>
+            </svg>
+        </span>
+        <p data-i18n="cookieText">We use cookies to make your browsing smoother.</p>
+        <button class="cookie-ok" id="cookieOk" type="button" data-i18n="cookieOk">Got it</button>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+    (function() {
+        var host = window.location.hostname.split(".");
+        var sub = host[0];
+        if (sub.toLowerCase() === "www") sub = host[1] || "";
+        var clean = sub.replace(/-/g, " ");
+        var display = clean.replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+
+        document.getElementById("brandMark").textContent = display.charAt(0).toUpperCase();
+        document.getElementById("brandName").textContent = display;
+        document.getElementById("menuHeadName").textContent = display;
+        document.getElementById("menuHeadMark").textContent = display.charAt(0).toUpperCase();
+
+        var overlay = document.getElementById("menuOverlay");
+        var panel = document.getElementById("menuPanel");
+        function openMenu(){
+            panel.classList.add("open");
+            overlay.classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+        function closeMenu(){
+            panel.classList.remove("open");
+            overlay.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+        document.getElementById("menuOpen").addEventListener("click", openMenu);
+        overlay.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
+        panel.querySelectorAll('a[href^="#"]').forEach(function(link){
+            link.addEventListener("click", function(){ setTimeout(closeMenu, 100); });
+        });
+        panel.querySelectorAll('a[href]:not([href^="#"])').forEach(function(link){
+            link.addEventListener("click", closeMenu);
+        });
+    })();
+
+    (function() {
+        var body = document.body;
+        var btn = document.getElementById("themeToggle");
+        var sun = document.getElementById("sunIcon");
+        var moon = document.getElementById("moonIcon");
+        if (localStorage.getItem("theme") === "light") {
+            body.classList.add("light-mode");
+            sun.style.display = "none";
+            moon.style.display = "block";
+        }
+        btn.addEventListener("click", function() {
+            body.classList.toggle("light-mode");
+            var isLight = body.classList.contains("light-mode");
+            sun.style.display = isLight ? "none" : "block";
+            moon.style.display = isLight ? "block" : "none";
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+        });
+    })();
+
+    /* i18n */
+    window.I18N = (function(){
+        var data = JSON.parse(document.getElementById("i18n-data").textContent);
+        var current = "en";
+
+        function t(key) {
+            var dict = data[current] || data.en;
+            return dict[key] != null ? dict[key] : (data.en[key] != null ? data.en[key] : key);
+        }
+        function setText(selector, value) {
+            document.querySelectorAll("[data-i18n='" + selector + "']").forEach(function(el){ el.textContent = value; });
+        }
+        function setPlaceholder(selector, value) {
+            document.querySelectorAll("[data-i18n-placeholder='" + selector + "']").forEach(function(el){ el.setAttribute("placeholder", value); });
+        }
+        function apply() {
+            document.documentElement.setAttribute("lang", current);
+            ["brandTag","menuSub","home","aboutLabel","aboutTitle","legalLabel","privacyTitle","termsTitle",
+             "disclaimerTitle","cookieTitle","dmcaTitle","section2257Title","contactLabel",
+             "footerRights","footerBadge","footerTagline","cookieText","cookieOk"].forEach(function(k){
+                setText(k, t(k));
+            });
+            setPlaceholder("searchPlaceholder", t("searchPlaceholder"));
+            ["aboutBody","privacyBody","termsBody","disclaimerBody","cookieBody","dmcaBody","section2257Body"].forEach(function(id){
+                var el = document.getElementById(id);
+                if (!el) return;
+                var html = t(id);
+                html = html.replace(/class="brand-about">[^<]*<\/strong>/,
+                    'class="brand-about">' + (window.__SITE_NAME__ || "Atikah") + '</strong>');
+                el.innerHTML = html;
+            });
+            var lc = document.getElementById("langCode");
+            if (lc) lc.textContent = current === "en" ? "EN" : "ID";
+            document.dispatchEvent(new CustomEvent("langchange", { detail: { lang: current } }));
+        }
+        function set(lang) {
+            if (lang !== "en" && lang !== "id") return;
+            current = lang;
+            localStorage.setItem("lang", lang);
+            apply();
+        }
+        function toggle(){ set(current === "en" ? "id" : "en"); }
+        function get(){ return current; }
+        function tr(k){ return t(k); }
+        return { t: t, tr: tr, set: set, toggle: toggle, get: get, apply: apply };
+    })();
+
+    (function(){
+        var initial = "en";
+        var saved = localStorage.getItem("lang");
+        if (saved === "en" || saved === "id") initial = saved;
+        else {
+            var b = (navigator.language || "en").toLowerCase();
+            if (b.indexOf("id") === 0) initial = "id";
+        }
+        window.I18N.set(initial);
+        document.getElementById("langToggle").addEventListener("click", function(){ window.I18N.toggle(); });
+    })();
+    </script>
+
+    <!-- Content Renderer -->
+    <script>
+    (function(){
+        var allPosts = [
+            {% for post in category_posts %}
+            {
+                url: "{{ post.url }}",
+                image: "{{ post.image | relative_url }}",
+                title: {{ post.title | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+
+        var perSection = 10;
+        var totalPerPage = 50;
+        var totalPages = Math.ceil(allPosts.length / totalPerPage);
+        var currentPage = 1;
+
+        var container = document.getElementById("sections-container");
+        var nav = document.getElementById("pagination");
+        var chipBar = document.getElementById("chipBar");
+
+        if (!nav) return;
+        if (totalPages <= 1) nav.remove();
+
+        var adSlots = {};
+        document.querySelectorAll("#ad-slots > div").forEach(function(el){
+            adSlots[el.getAttribute("data-ad")] = el.innerHTML;
+        });
+
+        function pageURL(n) {
+            var base = window.location.origin + window.location.pathname;
+            return n === 1 ? base : base + "?pag=" + n;
+        }
+        function getPageFromURL() {
+            var params = new URLSearchParams(window.location.search);
+            var p = parseInt(params.get("pag"), 10);
+            if (isNaN(p) || p < 1) return 1;
+            if (p > totalPages) return totalPages;
+            return p;
+        }
+        function hashCode(str) {
+            var h = 0;
+            for (var i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+            return Math.abs(h);
+        }
+        function formatDuration(seconds) {
+            var m = Math.floor(seconds / 60);
+            var s = seconds % 60;
+            return m + ":" + (s < 10 ? "0" : "") + s;
+        }
+        function formatViews(url) {
+            var base = 1200 + (hashCode(url) % 980000);
+            if (base >= 1000000) return (base/1000000).toFixed(1).replace(/\.0$/,"") + "M";
+            if (base >= 1000) return Math.floor(base/1000) + "K";
+            return base + "";
+        }
+        function timeAgo(url) {
+            var days = 1 + (hashCode(url) % 500);
+            if (days < 7) return { n: days, unit: "d" };
+            if (days < 30) return { n: Math.floor(days/7), unit: "w" };
+            if (days < 365) return { n: Math.floor(days/30), unit: "mo" };
+            return { n: Math.floor(days/365), unit: "y" };
+        }
+        function escapeHtml(str) {
+            return String(str || "").replace(/[&<>"']/g, function(c){
+                return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+            });
+        }
+
+        function buildCard(post) {
+            var img = post.image
+                ? '<img src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title) + '" loading="lazy">'
+                : '';
+            var dur = formatDuration(60 + (hashCode(post.url) % 841));
+            var views = formatViews(post.url);
+            var ta = timeAgo(post.url);
+            var taText = window.I18N.tr("timeAgo")
+                .replace("{n}", ta.n)
+                .replace("{unit}", window.I18N.t("units")[ta.unit]);
+            var viewsText = window.I18N.tr("viewsFormat").replace("{n}", views);
+            var brandLetter = (window.__SITE_NAME__ || "A").charAt(0).toUpperCase();
+            return '<a href="' + escapeHtml(post.url) + '" class="card">' +
+                       '<div class="card-thumb">' + img +
+                           '<span class="card-play" aria-hidden="true">' +
+                               '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' +
+                           '</span>' +
+                           '<span class="card-dur">' + dur + '</span>' +
+                       '</div>' +
+                       '<div class="card-row">' +
+                           '<div class="card-avatar">' + brandLetter + '</div>' +
+                           '<div class="card-text">' +
+                               '<h3 class="card-title">' + escapeHtml(post.title) + '</h3>' +
+                               '<div class="card-meta">' +
+                                   '<span>' + viewsText + '</span>' +
+                                   '<span>' + taText + '</span>' +
+                               '</div>' +
+                           '</div>' +
+                       '</div>' +
+                   '</a>';
+        }
+
+        function renderSection(meta, posts) {
+            if (!posts.length) return "";
+            return '<section class="section">' +
+                       '<div class="section-head">' +
+                           '<h2 class="section-title">' +
+                               '<svg class="section-ico" viewBox="0 0 24 24" aria-hidden="true">' +
+                                   '<path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/>' +
+                               '</svg>' +
+                               meta.key +
+                           '</h2>' +
+                           '<span class="section-count">' + posts.length + ' ' + window.I18N.tr("clips") + '</span>' +
+                       '</div>' +
+                       '<div class="grid">' + posts.map(buildCard).join("") + '</div>' +
+                   '</section>';
+        }
+
+        function renderAd(key) {
+            if (!adSlots[key]) return "";
+            return '<div class="ad-inline"><div class="ad-box">' + adSlots[key] + '</div></div>';
+        }
+
+        function renderChips() {
+            if (!chipBar) return;
+            var chips = window.I18N.t("chips") || [];
+            chipBar.innerHTML = chips.map(function(c, i){
+                return '<button type="button" class="chip' + (i === 0 ? ' active' : '') + '">' + c + '</button>';
+            }).join("");
+        }
+
+        function renderPage(page) {
+            currentPage = page;
+            var start = (page - 1) * totalPerPage;
+            var pagePosts = allPosts.slice(start, start + totalPerPage);
+
+            var html = "";
+            var adKeys = ["1","2","3","4"];
+            var adIdx = 0;
+            var sections = window.I18N.t("sections") || [];
+
+            for (var i = 0; i < sections.length; i++) {
+                var sStart = i * perSection;
+                var sPosts = pagePosts.slice(sStart, sStart + perSection);
+                html += renderSection(sections[i], sPosts);
+                if (i < sections.length - 1 && sPosts.length > 0) {
+                    html += renderAd(adKeys[adIdx % adKeys.length]);
+                    adIdx++;
+                }
+            }
+            container.innerHTML = html;
+
+            container.querySelectorAll("script").forEach(function(oldScript){
+                var newScript = document.createElement("script");
+                if (oldScript.src) newScript.src = oldScript.src;
+                else newScript.textContent = oldScript.textContent;
+                Array.from(oldScript.attributes).forEach(function(attr){
+                    if (attr.name !== "src") newScript.setAttribute(attr.name, attr.value);
+                });
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+
+            var baseName = window.__SITE_NAME__ || document.title.split(" · ")[0];
+            document.title = page === 1
+                ? baseName + " · Watch Free"
+                : baseName + " · Watch Free — Page " + page + " of " + totalPages;
+
+            var canonical = document.querySelector('link[rel="canonical"]');
+            if (canonical) canonical.setAttribute("href", pageURL(page));
+
+            drawPagination(page);
+        }
+
+        function makeLink(text, page, opts) {
+            opts = opts || {};
+            var el;
+            if (opts.disabled) { el = document.createElement("span"); el.className = "disabled"; }
+            else { el = document.createElement("a"); el.href = page === 1 ? "./" : "?pag=" + page; }
+            if (opts.active) el.classList.add("active");
+            if (opts.svg) { el.classList.add("chev-btn"); el.innerHTML = opts.svg; }
+            else { el.textContent = text; }
+            return el;
+        }
+        var chevLeftSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
+        var chevRightSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
+
+        function drawPagination(current) {
+            if (totalPages <= 1) return;
+            nav.innerHTML = "";
+            nav.appendChild(makeLink("", current - 1, { disabled: current === 1, svg: chevLeftSVG }));
+            var pages = [];
+            if (totalPages <= 7) {
+                for (var i = 1; i <= totalPages; i++) pages.push(i);
+            } else {
+                pages.push(1);
+                if (current > 3) pages.push("...");
+                var from = Math.max(2, current - 1);
+                var to = Math.min(totalPages - 1, current + 1);
+                for (var j = from; j <= to; j++) pages.push(j);
+                if (current < totalPages - 2) pages.push("...");
+                pages.push(totalPages);
+            }
+            pages.forEach(function(p){
+                if (p === "...") {
+                    var span = document.createElement("span");
+                    span.className = "dots";
+                    span.textContent = "…";
+                    nav.appendChild(span);
+                } else {
+                    nav.appendChild(makeLink(p, p, { active: p === current }));
+                }
+            });
+            nav.appendChild(makeLink("", current + 1, { disabled: current === totalPages, svg: chevRightSVG }));
+        }
+
+        nav.addEventListener("click", function(e){
+            var link = e.target.closest("a[href]");
+            if (!link) return;
+            var href = link.getAttribute("href");
+            if (href.indexOf("?pag=") !== 0 && href !== "./") return;
+            e.preventDefault();
+            var url = href === "./" ? window.location.pathname : "?pag=" + href.split("=")[1];
+            history.pushState({}, "", url);
+            renderPage(getPageFromURL());
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("popstate", function(){
+            renderPage(getPageFromURL());
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        document.addEventListener("langchange", function(){
+            renderChips();
+            renderPage(currentPage);
+        });
+
+        renderChips();
+        renderPage(getPageFromURL());
+    })();
+
+    (function(){
+        var y = document.getElementById("footYear");
+        if (y) y.textContent = new Date().getFullYear();
+        var fb = document.getElementById("footBrand");
+        if (fb && window.__SITE_NAME__) fb.textContent = window.__SITE_NAME__;
+        document.querySelectorAll(".js-year").forEach(function(el){
+            el.textContent = new Date().getFullYear();
+        });
+    })();
+
+    (function(){
+        var KEY = "cookie-accepted-v1";
+        var banner = document.getElementById("cookieBanner");
+        var okBtn = document.getElementById("cookieOk");
+        if (!banner) return;
+        if (localStorage.getItem(KEY) === "1") { banner.remove(); return; }
+        setTimeout(function(){ banner.classList.add("show"); }, 300);
+        okBtn.addEventListener("click", function(){
+            localStorage.setItem(KEY, "1");
+            banner.classList.remove("show");
+            setTimeout(function(){ banner.remove(); }, 300);
+        });
+    })();
+    </script>
+
+</body>
+</html>
