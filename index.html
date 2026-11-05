@@ -100,7 +100,7 @@ layout: null
 
         svg{display:block}
 
-        /* ============ HEADER (YouTube Style) ============ */
+        /* ============ HEADER ============ */
         .site-header{
             position:fixed;top:0;left:0;right:0;z-index:1000;
             background:var(--header-bg);
@@ -127,10 +127,9 @@ layout: null
         .icon-btn:active{transform:scale(.94)}
         .icon-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-        /* Brand */
         .brand{
             display:flex;align-items:center;gap:8px;
-            flex-shrink:0;
+            flex:1;
             text-decoration:none;
             color:var(--text);
             padding:0 8px;
@@ -168,65 +167,6 @@ layout: null
         }
         @media(min-width:700px){ .brand-tag{display:inline} }
 
-        /* Search */
-        .search-wrap{
-            flex:1;
-            max-width:600px;
-            margin:0 auto;
-            display:flex;
-            align-items:center;
-            gap:0;
-        }
-        .search-form{
-            display:flex;
-            width:100%;
-            align-items:center;
-        }
-        .search-input{
-            flex:1;
-            height:40px;
-            padding:0 16px;
-            background:var(--surface-2);
-            border:1px solid var(--border-strong);
-            border-right:none;
-            border-radius:20px 0 0 20px;
-            color:var(--text);
-            font-family:inherit;
-            font-size:14px;
-            outline:none;
-            transition:all .2s ease;
-            min-width:0;
-        }
-        .search-input::placeholder{color:var(--text-muted)}
-        .search-input:focus{
-            background:var(--surface);
-            border-color:var(--accent);
-        }
-        .search-btn{
-            width:60px;
-            height:40px;
-            background:var(--surface-3);
-            border:1px solid var(--border-strong);
-            border-left:none;
-            border-radius:0 20px 20px 0;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            color:var(--text);
-            transition:all .2s ease;
-        }
-        .search-btn:hover{background:var(--surface-2)}
-        .search-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-        @media(max-width:700px){
-            .search-wrap{display:none}
-        }
-        @media(max-width:500px){
-            .brand-name{display:none}
-        }
-
-        /* Right actions */
         .header-actions{
             display:flex;align-items:center;gap:4px;
             flex-shrink:0;
@@ -248,7 +188,11 @@ layout: null
             color:var(--accent);
         }
 
-        /* ============ MENU DRAWER (KIRI) ============ */
+        @media(max-width:500px){
+            .brand-name{font-size:16px}
+        }
+
+        /* ============ MENU DRAWER ============ */
         .menu-overlay{
             position:fixed;inset:0;z-index:1050;
             background:rgba(0,0,0,.5);
@@ -315,11 +259,6 @@ layout: null
             stroke-linecap:round;stroke-linejoin:round;
             flex-shrink:0;
         }
-        .menu-link .ml-arrow{
-            margin-left:auto;
-            width:14px;height:14px;
-            opacity:.5;
-        }
 
         .menu-divider{height:1px;background:var(--border);margin:8px 0}
 
@@ -328,9 +267,7 @@ layout: null
             color:var(--text-muted);padding:14px 24px 8px;
         }
 
-        .menu-legal{
-            display:flex;flex-direction:column;
-        }
+        .menu-legal{display:flex;flex-direction:column}
         .menu-legal details{overflow:hidden}
         .menu-legal summary{
             padding:10px 24px;cursor:pointer;
@@ -401,9 +338,7 @@ layout: null
         }
         .ad-break:first-child{margin-top:60px}
         .ad-break.bottom{margin-top:24px;border-top:1px solid var(--border);border-bottom:none}
-        .ad-inline{
-            margin:24px 0;
-        }
+        .ad-inline{margin:24px 0}
 
         /* ============ MAIN LAYOUT ============ */
         .main-wrap{
@@ -418,43 +353,7 @@ layout: null
             .main-wrap{padding:16px 40px 40px}
         }
 
-        /* ============ CHIP FILTERS (YouTube style) ============ */
-        .chip-bar{
-            position:sticky;
-            top:56px;
-            z-index:50;
-            background:var(--bg);
-            display:flex;gap:8px;
-            overflow-x:auto;
-            padding:8px 0 12px;
-            margin-bottom:8px;
-            scrollbar-width:none;
-            border-bottom:1px solid var(--border);
-            -webkit-overflow-scrolling:touch;
-        }
-        .chip-bar::-webkit-scrollbar{display:none}
-        .chip{
-            flex-shrink:0;
-            display:inline-flex;align-items:center;gap:6px;
-            padding:8px 14px;
-            background:var(--surface-2);
-            border:1px solid transparent;
-            border-radius:999px;
-            font-size:13px;
-            font-weight:600;
-            color:var(--text);
-            cursor:pointer;
-            white-space:nowrap;
-            transition:all .15s ease;
-            font-family:inherit;
-        }
-        .chip:hover{background:var(--surface-3)}
-        .chip.active{
-            background:var(--text);
-            color:var(--bg);
-        }
-
-        /* ============ SECTION (YouTube rows) ============ */
+        /* ============ SECTION ============ */
         .section{margin:24px 0}
         .section:first-child{margin-top:8px}
 
@@ -482,7 +381,7 @@ layout: null
             color:var(--text-muted);
         }
 
-        /* ============ YOUTUBE-STYLE GRID ============ */
+        /* ============ YOUTUBE GRID ============ */
         .grid{
             display:grid;
             gap:16px 12px;
@@ -555,7 +454,6 @@ layout: null
             letter-spacing:.02em;
         }
 
-        /* Info row (avatar + text) */
         .card-row{
             display:flex;gap:12px;
             padding-right:8px;
@@ -714,18 +612,6 @@ layout: null
                 <span class="brand-tag" data-i18n="brandTag">Vault</span>
             </a>
 
-            <div class="search-wrap">
-                <form class="search-form" onsubmit="return false;">
-                    <input type="search" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search videos...">
-                    <button class="search-btn" type="submit" aria-label="Search">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="m21 21-4.35-4.35"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-
             <div class="header-actions">
                 <button class="lang-btn" id="langToggle" aria-label="Switch language">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -882,8 +768,6 @@ layout: null
         "dmcaTitle": "DMCA",
         "section2257Title": "2257",
         "contactLabel": "Contact",
-        "searchPlaceholder": "Search videos...",
-        "chips": ["All", "Trending", "New", "Popular", "Top Rated"],
         "sections": [
           { "key": "Recommended", "eyebrow": "Just for you" },
           { "key": "Trending Now", "eyebrow": "Trending" },
@@ -892,7 +776,6 @@ layout: null
           { "key": "The Vault", "eyebrow": "Archive" }
         ],
         "clips": "videos",
-        "views": "views",
         "footerRights": "All rights reserved",
         "footerBadge": "Adults Only · 18+",
         "footerTagline": "Free curated amateur videos · Updated daily",
@@ -923,8 +806,6 @@ layout: null
         "dmcaTitle": "DMCA",
         "section2257Title": "2257",
         "contactLabel": "Kontak",
-        "searchPlaceholder": "Cari video...",
-        "chips": ["Semua", "Tren", "Baru", "Populer", "Terbaik"],
         "sections": [
           { "key": "Direkomendasikan", "eyebrow": "Untuk Anda" },
           { "key": "Sedang Tren", "eyebrow": "Tren" },
@@ -933,7 +814,6 @@ layout: null
           { "key": "Arsip", "eyebrow": "Koleksi" }
         ],
         "clips": "video",
-        "views": "tayangan",
         "footerRights": "Seluruh hak dilindungi",
         "footerBadge": "Khusus Dewasa · 18+",
         "footerTagline": "Video amatir gratis · Diperbarui setiap hari",
@@ -960,9 +840,6 @@ layout: null
 
     <!-- MAIN -->
     <main class="main-wrap">
-
-        <!-- Chip filters (YouTube style) -->
-        <div class="chip-bar" id="chipBar"></div>
 
         {% assign category_posts = site.categories['x01'] %}
         {% if category_posts == nil or category_posts.size == 0 %}
@@ -1091,9 +968,6 @@ layout: null
         function setText(selector, value) {
             document.querySelectorAll("[data-i18n='" + selector + "']").forEach(function(el){ el.textContent = value; });
         }
-        function setPlaceholder(selector, value) {
-            document.querySelectorAll("[data-i18n-placeholder='" + selector + "']").forEach(function(el){ el.setAttribute("placeholder", value); });
-        }
         function apply() {
             document.documentElement.setAttribute("lang", current);
             ["brandTag","menuSub","home","aboutLabel","aboutTitle","legalLabel","privacyTitle","termsTitle",
@@ -1101,7 +975,6 @@ layout: null
              "footerRights","footerBadge","footerTagline","cookieText","cookieOk"].forEach(function(k){
                 setText(k, t(k));
             });
-            setPlaceholder("searchPlaceholder", t("searchPlaceholder"));
             ["aboutBody","privacyBody","termsBody","disclaimerBody","cookieBody","dmcaBody","section2257Body"].forEach(function(id){
                 var el = document.getElementById(id);
                 if (!el) return;
@@ -1159,7 +1032,6 @@ layout: null
 
         var container = document.getElementById("sections-container");
         var nav = document.getElementById("pagination");
-        var chipBar = document.getElementById("chipBar");
 
         if (!nav) return;
         if (totalPages <= 1) nav.remove();
@@ -1260,14 +1132,6 @@ layout: null
         function renderAd(key) {
             if (!adSlots[key]) return "";
             return '<div class="ad-inline"><div class="ad-box">' + adSlots[key] + '</div></div>';
-        }
-
-        function renderChips() {
-            if (!chipBar) return;
-            var chips = window.I18N.t("chips") || [];
-            chipBar.innerHTML = chips.map(function(c, i){
-                return '<button type="button" class="chip' + (i === 0 ? ' active' : '') + '">' + c + '</button>';
-            }).join("");
         }
 
         function renderPage(page) {
@@ -1372,11 +1236,9 @@ layout: null
         });
 
         document.addEventListener("langchange", function(){
-            renderChips();
             renderPage(currentPage);
         });
 
-        renderChips();
         renderPage(getPageFromURL());
     })();
 
