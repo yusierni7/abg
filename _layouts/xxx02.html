@@ -23,10 +23,10 @@ layout: null
         };
         var displayDomain = formatText(fullName);
         window.__SITE_NAME__ = displayDomain;
-        document.title = displayDomain + " · Watch Free";
+        document.title = {{ page.title | jsonify }} + " · " + displayDomain;
         var metaDesc = document.querySelector("meta[name=\"description\"]") || document.createElement("meta");
         metaDesc.name = "description";
-        metaDesc.content = "Watch free amateur clips from Nusantara and across Asia. New videos added daily. Adults only 18+.";
+        metaDesc.content = {{ page.title | jsonify }} + " — Watch free on " + displayDomain + ". Curated amateur videos from Nusantara and Asia. Adults only 18+.";
         if (!metaDesc.parentNode) document.head.appendChild(metaDesc);
         var canonical = document.querySelector("link[rel=\"canonical\"]") || document.createElement("link");
         canonical.setAttribute("rel", "canonical");
@@ -41,6 +41,15 @@ layout: null
     <meta name="rating" content="RTA-5042-1996-1400-1577-RTA">
     <meta name="content-rating" content="adult">
     <meta name="audience" content="adult">
+
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="{{ page.title | escape }}">
+    <meta property="og:description" content="Watch {{ page.title | escape }} — curated amateur videos from Nusantara and Asia. Adults only 18+.">
+    {% if page.image %}<meta property="og:image" content="{{ page.image | relative_url | absolute_url }}">{% endif %}
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title | escape }}">
+    {% if page.image %}<meta name="twitter:image" content="{{ page.image | relative_url | absolute_url }}">{% endif %}
 
     <style>
         *,*::before,*::after{box-sizing:border-box}
@@ -94,7 +103,7 @@ layout: null
             width:100%;min-width:320px;max-width:100%;margin:0;padding:0;
             background:var(--bg);color:var(--text);
             font-family:'Inter',system-ui,-apple-system,sans-serif;
-            line-height:1.4;-webkit-font-smoothing:antialiased;
+            line-height:1.5;-webkit-font-smoothing:antialiased;
             transition:background .3s ease,color .3s ease;
         }
 
@@ -115,7 +124,6 @@ layout: null
             max-width:1920px;margin:0 auto;
             height:100%;
         }
-
         .icon-btn{
             width:40px;height:40px;flex-shrink:0;
             background:transparent;border:none;
@@ -187,7 +195,6 @@ layout: null
             stroke-linecap:round;stroke-linejoin:round;
             color:var(--accent);
         }
-
         @media(max-width:500px){
             .brand-name{font-size:16px}
         }
@@ -238,13 +245,11 @@ layout: null
             text-transform:uppercase;color:var(--accent);
             margin-top:2px;line-height:1.2;
         }
-
         .menu-body{
             flex:1;overflow-y:auto;
             padding:8px 0 20px;
             -webkit-overflow-scrolling:touch;
         }
-
         .menu-link{
             display:flex;align-items:center;gap:16px;
             padding:10px 24px;
@@ -259,14 +264,11 @@ layout: null
             stroke-linecap:round;stroke-linejoin:round;
             flex-shrink:0;
         }
-
         .menu-divider{height:1px;background:var(--border);margin:8px 0}
-
         .menu-section-label{
             font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
             color:var(--text-muted);padding:14px 24px 8px;
         }
-
         .menu-legal{display:flex;flex-direction:column}
         .menu-legal details{overflow:hidden}
         .menu-legal summary{
@@ -297,7 +299,6 @@ layout: null
         .menu-legal-body ul{margin:8px 0;padding-left:16px}
         .menu-legal-body a{color:var(--accent);text-decoration:none}
         .menu-legal-body a:hover{text-decoration:underline}
-
         .menu-contact-list{list-style:none;padding:0;margin:0}
         .menu-contact-list li{
             display:flex;align-items:center;gap:14px;
@@ -340,142 +341,353 @@ layout: null
         .ad-break.bottom{margin-top:24px;border-top:1px solid var(--border);border-bottom:none}
         .ad-inline{margin:24px 0}
 
-        /* ============ MAIN LAYOUT ============ */
-        .main-wrap{
+        /* ============ WATCH PAGE LAYOUT ============ */
+        .watch-wrap{
             max-width:1920px;
             margin:0 auto;
-            padding:16px 16px 40px;
+            padding:16px;
         }
         @media(min-width:600px){
-            .main-wrap{padding:16px 24px 40px}
+            .watch-wrap{padding:16px 24px}
         }
         @media(min-width:1200px){
-            .main-wrap{padding:16px 40px 40px}
+            .watch-wrap{padding:24px 40px}
         }
 
-        /* ============ SECTION ============ */
-        .section{margin:24px 0}
-        .section:first-child{margin-top:8px}
-
-        .section-head{
-            display:flex;align-items:center;justify-content:space-between;
-            margin-bottom:16px;
-            gap:12px;
-        }
-        .section-title{
-            font-family:'Fraunces',Georgia,serif;
-            font-size:22px;font-weight:900;
-            letter-spacing:-.02em;
-            color:var(--text);margin:0;
-            line-height:1.2;
-            display:flex;align-items:center;gap:8px;
-        }
-        .section-title .section-ico{
-            width:24px;height:24px;
-            stroke:currentColor;fill:none;stroke-width:2;
-            stroke-linecap:round;stroke-linejoin:round;
-            color:var(--accent);
-        }
-        .section-count{
-            font-size:12px;font-weight:600;
-            color:var(--text-muted);
-        }
-
-        /* ============ YOUTUBE GRID ============ */
-        .grid{
+        .watch-grid{
             display:grid;
-            gap:16px 12px;
-            grid-template-columns:repeat(1,1fr);
+            grid-template-columns:1fr;
+            gap:24px;
         }
-        @media(min-width:500px){
-            .grid{grid-template-columns:repeat(2,1fr);gap:20px 16px}
+        @media(min-width:1000px){
+            .watch-grid{
+                grid-template-columns:minmax(0,1fr) 380px;
+                gap:24px;
+            }
         }
-        @media(min-width:900px){
-            .grid{grid-template-columns:repeat(3,1fr)}
-        }
-        @media(min-width:1300px){
-            .grid{grid-template-columns:repeat(4,1fr)}
-        }
-        @media(min-width:1600px){
-            .grid{grid-template-columns:repeat(5,1fr)}
+        @media(min-width:1400px){
+            .watch-grid{
+                grid-template-columns:minmax(0,1fr) 420px;
+            }
         }
 
-        /* ============ YOUTUBE CARD ============ */
-        .card{
-            display:block;
-            text-decoration:none;
-            color:inherit;
-            transition:transform .15s ease;
-        }
-        .card:hover .card-thumb img{transform:scale(1.03)}
-        .card:hover .card-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+        /* ============ PLAYER COLUMN ============ */
+        .watch-main{min-width:0}
 
-        .card-thumb{
+        .player-shell{
+            position:relative;
+            width:100%;
+            background:#000;
+            border-radius:12px;
+            overflow:hidden;
+            border:1px solid var(--border);
+            box-shadow:0 8px 32px rgba(0,0,0,.4);
+        }
+        body.light-mode .player-shell{box-shadow:0 8px 32px rgba(0,0,0,.1)}
+
+        .player-content{
             position:relative;
             width:100%;
             aspect-ratio:16/9;
-            overflow:hidden;
-            background:var(--surface-2);
-            border-radius:12px;
-            margin-bottom:10px;
+            background:#000;
         }
-        .card-thumb img{
-            width:100%;height:100%;object-fit:cover;display:block;
-            transition:transform .3s cubic-bezier(.4,0,.2,1);
+        .player-content iframe,
+        .player-content video,
+        .player-content embed,
+        .player-content object{
+            position:absolute;inset:0;
+            width:100% !important;height:100% !important;
+            border:0;display:block;
+        }
+        .player-content.vertical{
+            aspect-ratio:9/16;
+            max-width:520px;
+            margin:0 auto;
         }
 
-        .card-play{
+        /* SVG Loading */
+        .svg-loading{
             position:absolute;
-            top:50%;left:50%;
-            width:56px;height:56px;
-            background:var(--play-bg);
-            backdrop-filter:blur(4px);
-            -webkit-backdrop-filter:blur(4px);
+            inset:0;
+            display:flex;flex-direction:column;
+            align-items:center;justify-content:center;
+            gap:12px;
+            color:var(--text-dim);
+            font-size:13px;
+            background:#000;
+        }
+        .spinner{
+            width:32px;height:32px;
+            border:3px solid rgba(255,255,255,.15);
+            border-top-color:var(--accent);
             border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            color:var(--play-fg);
-            z-index:2;pointer-events:none;
-            opacity:0;
-            transform:translate(-50%,-50%) scale(.85);
+            animation:spin .8s linear infinite;
+        }
+        @keyframes spin{ to{transform:rotate(360deg);} }
+
+        /* Player info bar */
+        .player-info{
+            margin-top:12px;
+            display:flex;align-items:center;justify-content:space-between;
+            gap:12px;
+            padding:10px 14px;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:10px;
+            font-size:12px;
+            color:var(--text-dim);
+        }
+        .player-info-left{
+            display:flex;align-items:center;gap:8px;
+            min-width:0;overflow:hidden;
+        }
+        .player-info-dot{
+            flex-shrink:0;
+            width:8px;height:8px;
+            border-radius:50%;
+            background:#22c55e;
+            box-shadow:0 0 0 3px rgba(34,197,94,.15);
+            animation:pulseDot 2s ease-in-out infinite;
+        }
+        .player-info-dot.loading{
+            background:var(--accent);
+            box-shadow:0 0 0 3px var(--accent-soft);
+        }
+        .player-info-dot.error{
+            background:#ef4444;
+            box-shadow:0 0 0 3px rgba(239,68,68,.15);
+            animation:none;
+        }
+        @keyframes pulseDot{
+            0%,100%{opacity:1;transform:scale(1);}
+            50%{opacity:.6;transform:scale(.85);}
+        }
+        .player-retry{
+            flex-shrink:0;
+            display:inline-flex;align-items:center;gap:5px;
+            padding:6px 12px;
+            background:var(--surface-2);
+            border:1px solid var(--border-strong);
+            border-radius:8px;
+            color:var(--text);
+            font-size:11.5px;font-weight:700;
+            font-family:inherit;cursor:pointer;
             transition:all .2s ease;
         }
-        .card-play svg{width:24px;height:24px;fill:currentColor;margin-left:3px}
+        .player-retry:hover{
+            background:var(--surface-3);
+            border-color:var(--accent);
+            color:var(--accent);
+        }
+        .player-retry:disabled{opacity:.5;cursor:not-allowed;pointer-events:none}
 
-        .card-dur{
-            position:absolute;bottom:6px;right:6px;
-            background:var(--dur-bg);
-            color:var(--dur-fg);
-            font-size:11.5px;
-            font-weight:700;
-            padding:2px 5px;
-            border-radius:4px;
-            z-index:3;pointer-events:none;
-            font-variant-numeric:tabular-nums;
-            letter-spacing:.02em;
+        /* Video info */
+        .video-title{
+            font-family:'Fraunces',Georgia,serif;
+            font-size:22px;
+            font-weight:900;
+            letter-spacing:-.02em;
+            color:var(--text);
+            margin:16px 0 8px;
+            line-height:1.3;
+        }
+        @media(min-width:900px){
+            .video-title{font-size:26px}
         }
 
-        .card-row{
-            display:flex;gap:12px;
-            padding-right:8px;
+        .video-meta{
+            display:flex;align-items:center;gap:14px;
+            font-size:13px;
+            color:var(--text-dim);
+            margin-bottom:14px;
+            flex-wrap:wrap;
         }
-        .card-avatar{
+        .video-meta span{display:inline}
+        .video-meta .meta-dot{
+            width:3px;height:3px;border-radius:50%;
+            background:var(--text-muted);
+        }
+
+        /* Action row (share) */
+        .action-row{
+            display:flex;align-items:center;gap:8px;
+            flex-wrap:wrap;
+            padding:14px 0;
+            border-top:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+            margin-bottom:16px;
+        }
+        .action-btn{
+            display:inline-flex;align-items:center;gap:7px;
+            padding:9px 14px;
+            background:var(--surface-2);
+            border:none;border-radius:999px;
+            color:var(--text);
+            font-size:13px;font-weight:600;
+            font-family:inherit;cursor:pointer;
+            text-decoration:none;
+            transition:background .15s ease;
+            white-space:nowrap;
             flex-shrink:0;
-            width:36px;height:36px;
+        }
+        .action-btn:hover{background:var(--surface-3)}
+        .action-btn:active{transform:scale(.96)}
+        .action-btn svg{
+            width:18px;height:18px;
+            stroke:currentColor;fill:none;stroke-width:2;
+            stroke-linecap:round;stroke-linejoin:round;
+            flex-shrink:0;
+        }
+        .action-btn .share-label{display:none}
+        @media(min-width:640px){
+            .action-btn .share-label{display:inline}
+        }
+
+        /* Channel card */
+        .channel-card{
+            display:flex;align-items:center;gap:14px;
+            padding:14px;
+            background:var(--surface-2);
+            border-radius:12px;
+            margin-bottom:16px;
+        }
+        .channel-avatar{
+            flex-shrink:0;
+            width:48px;height:48px;
             border-radius:50%;
             background:linear-gradient(135deg,var(--accent),var(--accent-2));
             display:flex;align-items:center;justify-content:center;
-            color:#fff;font-weight:900;font-size:15px;
+            color:#fff;font-weight:900;font-size:20px;
             font-family:'Fraunces',serif;
+            box-shadow:0 4px 16px var(--accent-soft);
+        }
+        .channel-info{flex:1;min-width:0}
+        .channel-name{
+            font-family:'Fraunces',serif;
+            font-size:16px;
+            font-weight:900;
+            color:var(--text);
+            letter-spacing:-.02em;
+            line-height:1.2;
+            margin:0 0 3px;
+        }
+        .channel-sub{
+            font-size:12px;
+            color:var(--text-dim);
+            line-height:1.3;
+        }
+
+        /* Prev/Next */
+        .prevnext-row{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-bottom:16px;
+        }
+        .pn-card{
+            display:flex;align-items:center;gap:10px;
+            padding:12px 14px;
+            background:var(--surface-2);
+            border-radius:12px;
+            text-decoration:none;
+            color:var(--text);
+            transition:background .15s ease;
+            min-width:0;
+        }
+        .pn-card:hover{background:var(--surface-3)}
+        .pn-card.next{flex-direction:row-reverse;text-align:right}
+        .pn-card svg{
+            width:16px;height:16px;flex-shrink:0;
+            stroke:currentColor;fill:none;stroke-width:2.2;
+            stroke-linecap:round;stroke-linejoin:round;
+            opacity:.7;
+        }
+        .pn-text{display:flex;flex-direction:column;min-width:0;flex:1}
+        .pn-card.next .pn-text{align-items:flex-end}
+        .pn-label{
+            font-size:10px;font-weight:800;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--text-muted);
+            line-height:1.2;
+        }
+        .pn-title{
+            font-size:12.5px;font-weight:500;color:var(--text);
+            overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
             margin-top:2px;
         }
-        .card-text{flex:1;min-width:0}
-        .card-title{
-            font-family:'Inter',system-ui,sans-serif;
-            font-size:14px;
-            font-weight:600;
-            line-height:1.35;
+        .pn-card.disabled{opacity:.35;pointer-events:none}
+        @media(max-width:500px){
+            .prevnext-row{grid-template-columns:1fr}
+        }
+
+        /* ============ SIDEBAR (Recommended) ============ */
+        .watch-side{
+            min-width:0;
+        }
+        .side-head{
+            display:flex;align-items:center;justify-content:space-between;
+            margin-bottom:12px;
+            gap:8px;
+        }
+        .side-title{
+            font-family:'Fraunces',Georgia,serif;
+            font-size:16px;
+            font-weight:900;
             color:var(--text);
-            margin:0 0 3px;
+            letter-spacing:-.02em;
+            margin:0;
+        }
+        .side-count{
+            font-size:11px;
+            color:var(--text-muted);
+            font-weight:600;
+        }
+
+        .rec-list{
+            display:flex;flex-direction:column;gap:8px;
+        }
+        .rec-card{
+            display:flex;gap:10px;
+            text-decoration:none;
+            color:inherit;
+            padding:6px;
+            border-radius:10px;
+            transition:background .15s ease;
+            min-width:0;
+        }
+        .rec-card:hover{background:var(--surface-2)}
+        .rec-card:hover .rec-thumb img{transform:scale(1.05)}
+
+        .rec-thumb{
+            position:relative;
+            flex-shrink:0;
+            width:160px;
+            aspect-ratio:16/9;
+            border-radius:8px;
+            overflow:hidden;
+            background:var(--surface-2);
+        }
+        .rec-thumb img{
+            width:100%;height:100%;object-fit:cover;display:block;
+            transition:transform .3s ease;
+        }
+        .rec-dur{
+            position:absolute;bottom:4px;right:4px;
+            background:var(--dur-bg);
+            color:var(--dur-fg);
+            font-size:11px;font-weight:700;
+            padding:2px 5px;
+            border-radius:4px;
+            font-variant-numeric:tabular-nums;
+            letter-spacing:.02em;
+        }
+        .rec-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+        .rec-title{
+            font-family:'Inter',system-ui,sans-serif;
+            font-size:13.5px;
+            font-weight:600;
+            line-height:1.3;
+            color:var(--text);
+            margin:0;
             overflow:hidden;
             display:-webkit-box;
             -webkit-line-clamp:2;
@@ -483,50 +695,99 @@ layout: null
             text-overflow:ellipsis;
             word-break:break-word;
         }
-        .card-meta{
-            font-size:12px;
+        .rec-meta{
+            font-size:11.5px;
             color:var(--text-dim);
-            line-height:1.4;
+            line-height:1.3;
+            margin-top:auto;
         }
-        .card-meta span{display:inline}
-        .card-meta span + span::before{content:' • ';margin:0 2px}
+        .rec-meta span{display:inline}
+        .rec-meta span + span::before{content:' • ';margin:0 1px}
 
+        @media(max-width:999px){
+            .watch-side{
+                border-top:1px solid var(--border);
+                padding-top:20px;
+            }
+            .rec-list{
+                display:grid;
+                grid-template-columns:1fr;
+                gap:12px;
+            }
+            .rec-thumb{width:140px}
+        }
         @media(max-width:500px){
-            .card-avatar{width:32px;height:32px;font-size:13px}
-            .card-title{font-size:13px}
-            .card-meta{font-size:11.5px}
-            .card-play{width:48px;height:48px;opacity:1;transform:translate(-50%,-50%) scale(1)}
+            .rec-thumb{width:120px}
+            .rec-title{font-size:12.5px}
+            .rec-meta{font-size:11px}
         }
 
-        /* ============ PAGINATION ============ */
-        .pagination{
-            display:flex;justify-content:center;align-items:center;
-            gap:6px;margin:40px 0 20px;flex-wrap:wrap;
+        /* Mobile: sidebar shown as grid cards (like home) */
+        @media(max-width:999px) and (min-width:600px){
+            .rec-list{
+                grid-template-columns:repeat(2,1fr);
+                gap:16px;
+            }
+            .rec-card{
+                flex-direction:column;
+                padding:0;
+                gap:8px;
+            }
+            .rec-thumb{
+                width:100%;
+                border-radius:10px;
+            }
+            .rec-info{padding:0 2px}
         }
-        .pagination a,
-        .pagination span{
-            display:inline-flex;align-items:center;justify-content:center;
-            min-width:40px;height:40px;padding:0 14px;
-            background:var(--surface-2);color:var(--text);
-            border:none;border-radius:20px;
-            font-size:14px;font-weight:600;text-decoration:none;
-            transition:all .15s ease;cursor:pointer;
-            font-family:inherit;
+
+        /* Load more */
+        .load-more-wrap{
+            display:flex;justify-content:center;
+            margin-top:16px;
         }
-        .pagination a:hover{background:var(--surface-3)}
-        .pagination .active{
-            background:var(--text);color:var(--bg);
+        .load-more-btn{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:10px 20px;
+            background:var(--surface-2);
+            border:none;border-radius:999px;
+            color:var(--text);
+            font-size:12.5px;font-weight:700;
+            font-family:inherit;cursor:pointer;
+            transition:all .15s ease;
         }
-        .pagination .disabled{opacity:.3;cursor:not-allowed;pointer-events:none}
-        .pagination .dots{background:transparent;cursor:default;color:var(--text-dim)}
-        .pagination .chev-btn{padding:0;min-width:40px}
-        .pagination .chev-btn svg{
-            width:18px;height:18px;
+        .load-more-btn:hover{background:var(--surface-3)}
+        .load-more-btn:active{transform:scale(.97)}
+        .load-more-btn svg{
+            width:14px;height:14px;
             stroke:currentColor;fill:none;stroke-width:2.5;
             stroke-linecap:round;stroke-linejoin:round;
+            transition:transform .3s ease;
+        }
+        .load-more-btn.expanded svg{transform:rotate(180deg)}
+        .load-more-btn .lm-count{
+            color:var(--text-muted);font-weight:500;
         }
 
-        /* ============ COOKIE BANNER ============ */
+        /* ============ TOAST ============ */
+        .toast{
+            position:fixed;
+            bottom:24px;left:50%;
+            transform:translateX(-50%) translateY(20px);
+            background:var(--text);color:var(--bg);
+            padding:10px 18px;
+            border-radius:999px;
+            font-size:13px;font-weight:600;
+            box-shadow:0 8px 24px rgba(0,0,0,.4);
+            z-index:1500;
+            opacity:0;pointer-events:none;
+            transition:opacity .25s ease,transform .25s ease;
+            display:flex;align-items:center;gap:8px;
+            max-width:calc(100vw - 32px);
+        }
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+        .toast svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+        /* ============ COOKIE ============ */
         .cookie-banner{
             position:fixed;
             bottom:16px;left:50%;
@@ -648,14 +909,12 @@ layout: null
             </div>
         </div>
         <div class="menu-body">
-
             <a href="/" class="menu-link">
                 <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
                 <span data-i18n="home">Home</span>
             </a>
 
             <div class="menu-divider"></div>
-
             <div class="menu-section-label" data-i18n="aboutLabel">About</div>
             <div class="menu-legal">
                 <details>
@@ -669,7 +928,6 @@ layout: null
             </div>
 
             <div class="menu-divider"></div>
-
             <div class="menu-section-label" data-i18n="legalLabel">Legal</div>
             <div class="menu-legal">
                 <details>
@@ -723,7 +981,6 @@ layout: null
             </div>
 
             <div class="menu-divider"></div>
-
             <div class="menu-section-label" data-i18n="contactLabel">Contact</div>
             <ul class="menu-contact-list">
                 <li>
@@ -768,22 +1025,32 @@ layout: null
         "dmcaTitle": "DMCA",
         "section2257Title": "2257",
         "contactLabel": "Contact",
-        "sections": [
-          { "key": "Recommended", "eyebrow": "Just for you" },
-          { "key": "Trending Now", "eyebrow": "Trending" },
-          { "key": "Recently Added", "eyebrow": "New" },
-          { "key": "Most Watched", "eyebrow": "Popular" },
-          { "key": "The Vault", "eyebrow": "Archive" }
-        ],
-        "clips": "videos",
+        "nowWatching": "Now Watching",
+        "recommended": "Up Next",
+        "recommendedCount": "{n} videos",
+        "channelName": "Atikah Vault",
+        "channelSub": "Curated amateur clips · Updated daily",
+        "share": "Share",
+        "copy": "Copy",
+        "prev": "Previous",
+        "next": "Next",
+        "viewsFormat": "{n} views",
+        "timeAgo": "{n} {unit} ago",
+        "units": { "d": "day", "w": "week", "mo": "month", "y": "year" },
+        "loadingVideo": "Loading video...",
+        "autoServer": "Auto-selected server",
+        "retry": "Retry",
+        "retrying": "Trying next server...",
+        "allFailed": "All servers unavailable",
+        "sponsored": "SPONSORED CONTENT",
+        "advertisement": "Advertisement",
         "footerRights": "All rights reserved",
         "footerBadge": "Adults Only · 18+",
         "footerTagline": "Free curated amateur videos · Updated daily",
         "cookieText": "We use cookies to make your browsing smoother.",
         "cookieOk": "Got it",
-        "viewsFormat": "{n} views",
-        "timeAgo": "{n} {unit} ago",
-        "units": { "d": "day", "w": "week", "mo": "month", "y": "year" },
+        "toastCopied": "Link copied to clipboard",
+        "loadMore": "Load More",
         "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> is a hand-curated vault of authentic amateur clips, sourced from Indonesia and neighboring Asian regions.</p><p>Every clip is reviewed for quality and authenticity before it enters the vault. The collection refreshes daily.</p><p>This site is strictly for adult visitors (18 years and older).</p>",
         "privacyBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>Your privacy matters to us. This policy explains what happens to information when you browse the vault.</p><p>We do <strong>not</strong> collect personal details such as names, email addresses, or payment data.</p><ul><li><strong>Local storage</strong> — theme, cookie consent, age verification live in your browser only.</li><li><strong>Server logs</strong> — standard access logs may be recorded by our hosting provider for security.</li></ul><p>Every video is embedded from a third-party platform.</p><p>No third-party tracking cookies are used by us directly.</p>",
         "termsBody": "<p><strong>Effective date:</strong> <span class=\"js-year\">2025</span></p><p>By browsing or using this website, you agree to the terms below.</p><p><strong>1. Who May Use This Site</strong></p><p>You must be at least 18 years old to access this vault.</p><p><strong>2. The Content</strong></p><p>Clips are embedded from third-party platforms — we do not host or own the videos shown.</p><p><strong>3. Acceptable Use</strong></p><ul><li>No unlawful purpose</li><li>No unauthorized access attempts</li><li>No content scraping</li><li>No access if under 18</li></ul><p><strong>4. No Warranties</strong></p><p>The site is provided \"as is\" with no warranties of any kind.</p><p><strong>5. Limitation of Liability</strong></p><p>We are not liable for any damages arising from use of the site.</p>",
@@ -806,22 +1073,32 @@ layout: null
         "dmcaTitle": "DMCA",
         "section2257Title": "2257",
         "contactLabel": "Kontak",
-        "sections": [
-          { "key": "Direkomendasikan", "eyebrow": "Untuk Anda" },
-          { "key": "Sedang Tren", "eyebrow": "Tren" },
-          { "key": "Baru Ditambahkan", "eyebrow": "Baru" },
-          { "key": "Paling Banyak Ditonton", "eyebrow": "Populer" },
-          { "key": "Arsip", "eyebrow": "Koleksi" }
-        ],
-        "clips": "video",
+        "nowWatching": "Sedang Ditonton",
+        "recommended": "Berikutnya",
+        "recommendedCount": "{n} video",
+        "channelName": "Atikah Vault",
+        "channelSub": "Klip amatir terkurasi · Diperbarui tiap hari",
+        "share": "Bagikan",
+        "copy": "Salin",
+        "prev": "Sebelumnya",
+        "next": "Berikutnya",
+        "viewsFormat": "{n} tayangan",
+        "timeAgo": "{n} {unit} lalu",
+        "units": { "d": "hari", "w": "minggu", "mo": "bulan", "y": "tahun" },
+        "loadingVideo": "Memuat video...",
+        "autoServer": "Server dipilih otomatis",
+        "retry": "Coba lagi",
+        "retrying": "Mencoba server lain...",
+        "allFailed": "Semua server tidak tersedia",
+        "sponsored": "KONTEN SPONSOR",
+        "advertisement": "Iklan",
         "footerRights": "Seluruh hak dilindungi",
         "footerBadge": "Khusus Dewasa · 18+",
         "footerTagline": "Video amatir gratis · Diperbarui setiap hari",
         "cookieText": "Kami memakai cookie agar jelajah Anda lebih nyaman.",
         "cookieOk": "Mengerti",
-        "viewsFormat": "{n} tayangan",
-        "timeAgo": "{n} {unit} lalu",
-        "units": { "d": "hari", "w": "minggu", "mo": "bulan", "y": "tahun" },
+        "toastCopied": "Tautan disalin ke clipboard",
+        "loadMore": "Muat Lebih Banyak",
         "aboutBody": "<p><strong class=\"brand-about\">Atikah</strong> adalah galeri klip amatir pilihan dari Nusantara dan sekitarnya.</p><p>Setiap klip ditinjau dari sisi kualitas dan keaslian sebelum masuk galeri. Koleksi diperbarui tiap hari.</p><p>Situs ini khusus untuk pengunjung dewasa (18 tahun ke atas).</p>",
         "privacyBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Privasi Anda penting bagi kami.</p><p>Kami <strong>tidak</strong> mengumpulkan data pribadi seperti nama, email, atau data pembayaran.</p><ul><li><strong>Penyimpanan lokal</strong> — tema, persetujuan cookie, verifikasi usia hanya ada di browser Anda.</li><li><strong>Log server</strong> — log akses standar dapat dicatat oleh penyedia hosting untuk keamanan.</li></ul><p>Setiap video disematkan dari platform pihak ketiga.</p><p>Tidak ada cookie pelacak pihak ketiga yang dipasang langsung oleh kami.</p>",
         "termsBody": "<p><strong>Berlaku sejak:</strong> <span class=\"js-year\">2025</span></p><p>Dengan menjelajahi situs ini, Anda setuju dengan syarat di bawah.</p><p><strong>1. Siapa yang Boleh Menggunakan</strong></p><p>Anda harus berusia minimal 18 tahun untuk mengakses galeri ini.</p><p><strong>2. Konten</strong></p><p>Klip disematkan dari platform pihak ketiga — kami tidak menghosting atau memiliki video yang ditampilkan.</p><p><strong>3. Penggunaan yang Wajar</strong></p><ul><li>Tidak untuk tujuan melanggar hukum</li><li>Tidak mencoba akses tidak sah</li><li>Tidak mengikis konten</li><li>Tidak mengakses jika di bawah 18 tahun</li></ul><p><strong>4. Tanpa Jaminan</strong></p><p>Situs disediakan \"sebagaimana adanya\" tanpa jaminan apa pun.</p><p><strong>5. Batasan Tanggung Jawab</strong></p><p>Kami tidak bertanggung jawab atas kerusakan apa pun dari penggunaan situs.</p>",
@@ -838,25 +1115,146 @@ layout: null
         <div class="ad-box">{% include /ads/banner/01.html %}</div>
     </div>
 
-    <!-- MAIN -->
-    <main class="main-wrap">
+    <!-- ============ WATCH PAGE ============ -->
+    <main class="watch-wrap">
+        <div class="watch-grid">
 
-        {% assign category_posts = site.categories['x01'] %}
-        {% if category_posts == nil or category_posts.size == 0 %}
-          {% assign category_posts = site.posts %}
-        {% endif %}
+            <!-- LEFT: Player + Info -->
+            <div class="watch-main">
 
-        <div id="ad-slots" style="display:none">
-            <div data-ad="1">{% include /ads/banner/02.html %}</div>
-            <div data-ad="2">{% include /ads/banner/03.html %}</div>
-            <div data-ad="3">{% include /ads/banner/04.html %}</div>
-            <div data-ad="4">{% include /ads/banner/05.html %}</div>
+                <!-- Player shell -->
+                <div class="player-shell">
+                    <div class="player-content" id="playerContent">
+                        <div id="serverVideo01">
+                            <div class="svg-loading">
+                                <div class="spinner"></div>
+                                <span data-i18n="loadingVideo">Loading video...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player info bar -->
+                <div class="player-info">
+                    <span class="player-info-left">
+                        <span class="player-info-dot"></span>
+                        <span data-i18n="autoServer">Auto-selected server</span>
+                    </span>
+                    <button id="retryBtn01" type="button" class="player-retry" data-i18n="retry">Retry</button>
+                </div>
+
+                <!-- Title -->
+                <h1 class="video-title">{{ page.title | escape }}</h1>
+
+                <!-- Meta -->
+                <div class="video-meta" id="videoMeta">
+                    <span id="metaViews"></span>
+                    <span class="meta-dot"></span>
+                    <span id="metaTime"></span>
+                    <span class="meta-dot"></span>
+                    <span id="metaBrand"></span>
+                </div>
+
+                <!-- Actions (share) -->
+                <div class="action-row">
+                    <a class="action-btn" id="shareWA" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        <span class="share-label">WhatsApp</span>
+                    </a>
+                    <a class="action-btn" id="shareTG" href="#" target="_blank" rel="noopener" aria-label="Telegram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+                        <span class="share-label">Telegram</span>
+                    </a>
+                    <a class="action-btn" id="shareFB" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <span class="share-label">Facebook</span>
+                    </a>
+                    <a class="action-btn" id="shareTW" href="#" target="_blank" rel="noopener" aria-label="X">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7.5 9.5L4 20h2.2l6-6.7L17.6 20H20l-7.7-9.7L19.6 4h-2.2l-5.5 6.2L6.4 4z"/></svg>
+                        <span class="share-label">X</span>
+                    </a>
+                    <a class="action-btn" id="shareRD" href="#" target="_blank" rel="noopener" aria-label="Reddit">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="6"/><circle cx="9.5" cy="14" r="1"/><circle cx="14.5" cy="14" r="1"/><path d="M9.5 16.5a3 3 0 0 0 5 0"/><circle cx="18" cy="10" r="1.5"/><path d="M18 10l-3-5-3 1"/></svg>
+                        <span class="share-label">Reddit</span>
+                    </a>
+                    <button class="action-btn" id="copyLink" type="button" aria-label="Copy">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span class="share-label" data-i18n="copy">Copy</span>
+                    </button>
+                </div>
+
+                <!-- Channel card -->
+                <div class="channel-card">
+                    <div class="channel-avatar" id="channelAvatar">A</div>
+                    <div class="channel-info">
+                        <h3 class="channel-name" id="channelName">Atikah Vault</h3>
+                        <p class="channel-sub" data-i18n="channelSub">Curated amateur clips · Updated daily</p>
+                    </div>
+                </div>
+
+                <!-- Prev/Next -->
+                <nav class="prevnext-row" aria-label="Post navigation">
+                    {% if page.previous %}
+                    <a href="{{ page.previous.url }}" class="pn-card prev">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                        <span class="pn-text">
+                            <span class="pn-label" data-i18n="prev">Previous</span>
+                            <span class="pn-title">{{ page.previous.title | escape }}</span>
+                        </span>
+                    </a>
+                    {% else %}
+                    <span class="pn-card prev disabled">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                        <span class="pn-text">
+                            <span class="pn-label" data-i18n="prev">Previous</span>
+                            <span class="pn-title">—</span>
+                        </span>
+                    </span>
+                    {% endif %}
+
+                    {% if page.next %}
+                    <a href="{{ page.next.url }}" class="pn-card next">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                        <span class="pn-text">
+                            <span class="pn-label" data-i18n="next">Next</span>
+                            <span class="pn-title">{{ page.next.title | escape }}</span>
+                        </span>
+                    </a>
+                    {% else %}
+                    <span class="pn-card next disabled">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                        <span class="pn-text">
+                            <span class="pn-label" data-i18n="next">Next</span>
+                            <span class="pn-title">—</span>
+                        </span>
+                    </span>
+                    {% endif %}
+                </nav>
+
+                <!-- Inline ad -->
+                <div class="ad-inline">
+                    <div class="ad-box">{% include /ads/banner/02.html %}</div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: Recommended sidebar -->
+            <aside class="watch-side">
+                <div class="side-head">
+                    <h2 class="side-title" data-i18n="recommended">Up Next</h2>
+                    <span class="side-count" id="sideCount"></span>
+                </div>
+                <div class="rec-list" id="recList"></div>
+                <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+                    <button class="load-more-btn" id="loadMoreBtn" type="button">
+                        <span data-i18n="loadMore">Load More</span>
+                        <span class="lm-count" id="lmCount"></span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                </div>
+            </aside>
+
         </div>
-
-        <div id="sections-container"></div>
-
-        <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
-
     </main>
 
     <!-- Bottom ad -->
@@ -886,6 +1284,12 @@ layout: null
         <div class="foot-tagline" data-i18n="footerTagline">Free curated amateur videos · Updated daily</div>
     </footer>
 
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+        <span id="toastText">Link copied</span>
+    </div>
+
     <!-- Cookie -->
     <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Cookie notice">
         <span class="cookie-ico" aria-hidden="true">
@@ -900,7 +1304,37 @@ layout: null
         <button class="cookie-ok" id="cookieOk" type="button" data-i18n="cookieOk">Got it</button>
     </div>
 
-    <!-- Scripts -->
+    <!-- Data: Related -->
+    {% assign current_categories = page.categories | default: empty %}
+    {% assign related_posts = "" | split: "" %}
+    {% if current_categories.size > 0 %}
+        {% for cat in current_categories %}
+            {% for post in site.categories[cat] %}
+                {% if post.url != page.url %}
+                    {% unless related_posts contains post %}
+                        {% assign related_posts = related_posts | push: post %}
+                    {% endunless %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    {% assign related_posts = related_posts | slice: 0, 30 %}
+
+    <script>
+        var relatedPosts = [
+            {% for post in related_posts %}
+            {
+                url: "{{ post.url }}",
+                image: "{{ post.image | relative_url }}",
+                title: {{ post.title | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+        var pageUrl = {{ page.url | jsonify }};
+        var pageTitle = {{ page.title | jsonify }};
+    </script>
+
+    <!-- Header + theme + i18n -->
     <script>
     (function() {
         var host = window.location.hostname.split(".");
@@ -913,6 +1347,8 @@ layout: null
         document.getElementById("brandName").textContent = display;
         document.getElementById("menuHeadName").textContent = display;
         document.getElementById("menuHeadMark").textContent = display.charAt(0).toUpperCase();
+        var ca = document.getElementById("channelAvatar");
+        if (ca) ca.textContent = display.charAt(0).toUpperCase();
 
         var overlay = document.getElementById("menuOverlay");
         var panel = document.getElementById("menuPanel");
@@ -960,7 +1396,6 @@ layout: null
     window.I18N = (function(){
         var data = JSON.parse(document.getElementById("i18n-data").textContent);
         var current = "en";
-
         function t(key) {
             var dict = data[current] || data.en;
             return dict[key] != null ? dict[key] : (data.en[key] != null ? data.en[key] : key);
@@ -972,6 +1407,7 @@ layout: null
             document.documentElement.setAttribute("lang", current);
             ["brandTag","menuSub","home","aboutLabel","aboutTitle","legalLabel","privacyTitle","termsTitle",
              "disclaimerTitle","cookieTitle","dmcaTitle","section2257Title","contactLabel",
+             "nowWatching","recommended","share","copy","prev","next","loadMore",
              "footerRights","footerBadge","footerTagline","cookieText","cookieOk"].forEach(function(k){
                 setText(k, t(k));
             });
@@ -983,6 +1419,8 @@ layout: null
                     'class="brand-about">' + (window.__SITE_NAME__ || "Atikah") + '</strong>');
                 el.innerHTML = html;
             });
+            var chn = document.getElementById("channelName");
+            if (chn) chn.textContent = t("channelName");
             var lc = document.getElementById("langCode");
             if (lc) lc.textContent = current === "en" ? "EN" : "ID";
             document.dispatchEvent(new CustomEvent("langchange", { detail: { lang: current } }));
@@ -1012,46 +1450,264 @@ layout: null
     })();
     </script>
 
-    <!-- Content Renderer -->
+    <!-- Video player (random server) + VAST -->
     <script>
     (function(){
-        var allPosts = [
-            {% for post in category_posts %}
-            {
-                url: "{{ post.url }}",
-                image: "{{ post.image | relative_url }}",
-                title: {{ post.title | jsonify }}
-            }{% unless forloop.last %},{% endunless %}
-            {% endfor %}
-        ];
+      "use strict";
 
-        var perSection = 10;
-        var totalPerPage = 50;
-        var totalPages = Math.ceil(allPosts.length / totalPerPage);
-        var currentPage = 1;
+      var VAST_URLS = [
+        "https://unsightlystrain.com/d.moFzz/dpGBNWvTZDGoUY/_eZm/9/ubZOUvlNk/P/Trcv0YORDIQp1/OXT_MetKNhzeQE4_NiDCUO5BN/wF",
+        "https://unsightlystrain.com/dmmrFAz.dWGmNMvQZqGyUw/Ieimd9IufZvU/l/k/PqT/cM0VORDzQI1/OITXM_tRNnzLQW4KNBD/UJ5lN/ybZ-shaVW/1tp/dCD/0zx_"
+      ];
 
-        var container = document.getElementById("sections-container");
-        var nav = document.getElementById("pagination");
+      var SERVERS = [
+        {{ content }}
+      ];
 
-        if (!nav) return;
-        if (totalPages <= 1) nav.remove();
+      var ALLOWED_DOMAIN = "atikah.xyz";
+      function isAllowedDomain(){
+        var host = (location.hostname || "").toLowerCase();
+        return host === ALLOWED_DOMAIN || host.endsWith("." + ALLOWED_DOMAIN);
+      }
 
-        var adSlots = {};
-        document.querySelectorAll("#ad-slots > div").forEach(function(el){
-            adSlots[el.getAttribute("data-ad")] = el.innerHTML;
+      var serverVideo01 = document.getElementById("serverVideo01");
+      var retryBtn01    = document.getElementById("retryBtn01");
+      var infoDot       = document.querySelector(".player-info-dot");
+      var infoText      = document.querySelector(".player-info-left span[data-i18n]");
+
+      var usedIndices = [];
+      var loadTimeoutId = null;
+      var currentLoadId = 0;
+
+      function shuffleArray(arr){
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--){
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      var shuffledServers = shuffleArray(SERVERS);
+
+      function setInfoState(state){
+        if (!infoDot) return;
+        infoDot.classList.remove("loading", "error");
+        if (state === "loading") infoDot.classList.add("loading");
+        else if (state === "error") infoDot.classList.add("error");
+      }
+
+      function setInfoText(key){
+        if (!infoText) return;
+        var dict = { auto: "autoServer", retry: "retrying", failed: "allFailed" };
+        infoText.setAttribute("data-i18n", dict[key] || key);
+        infoText.textContent = (window.I18N && window.I18N.tr(dict[key])) || {
+          auto: "Auto-selected server",
+          retry: "Trying next server...",
+          failed: "All servers unavailable"
+        }[key] || key;
+      }
+
+      function showLoading(){
+        serverVideo01.innerHTML =
+          '<div class="svg-loading">' +
+            '<div class="spinner"></div>' +
+            '<span>' + ((window.I18N && window.I18N.tr("loadingVideo")) || "Loading video...") + '</span>' +
+          '</div>';
+      }
+
+      function pickNextServer(){
+        for (var i = 0; i < shuffledServers.length; i++){
+          var idx = SERVERS.indexOf(shuffledServers[i]);
+          if (usedIndices.indexOf(idx) === -1){
+            usedIndices.push(idx);
+            return idx;
+          }
+        }
+        return -1;
+      }
+
+      function loadRandomServer(){
+        if (!SERVERS || SERVERS.length === 0){
+          showLoading();
+          setInfoState("error");
+          setInfoText("failed");
+          return;
+        }
+        var idx = pickNextServer();
+        if (idx === -1){
+          serverVideo01.innerHTML =
+            '<div class="svg-loading">' +
+              '<div class="spinner" style="border-top-color:#ef4444;animation:none"></div>' +
+              '<span style="color:#ef4444">' + ((window.I18N && window.I18N.tr("allFailed")) || "All servers unavailable") + '</span>' +
+            '</div>';
+          setInfoState("error");
+          setInfoText("failed");
+          if (retryBtn01) retryBtn01.disabled = true;
+          return;
+        }
+
+        var myLoadId = ++currentLoadId;
+        showLoading();
+        setInfoState("loading");
+        setInfoText("auto");
+        if (retryBtn01) retryBtn01.disabled = true;
+
+        var iframe = document.createElement("iframe");
+        iframe.src = SERVERS[idx];
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+        iframe.setAttribute("loading", "eager");
+        iframe.setAttribute("referrerpolicy", "no-referrer");
+
+        var loaded = false;
+        iframe.addEventListener("load", function(){
+          if (myLoadId !== currentLoadId) return;
+          loaded = true;
+          clearTimeout(loadTimeoutId);
+          var loading = serverVideo01.querySelector(".svg-loading");
+          if (loading) loading.remove();
+          setInfoState("ok");
+          if (retryBtn01) retryBtn01.disabled = false;
         });
 
-        function pageURL(n) {
-            var base = window.location.origin + window.location.pathname;
-            return n === 1 ? base : base + "?pag=" + n;
+        clearTimeout(loadTimeoutId);
+        loadTimeoutId = setTimeout(function(){
+          if (myLoadId !== currentLoadId) return;
+          if (!loaded){
+            loadRandomServer();
+          }
+        }, 8000);
+
+        serverVideo01.innerHTML = "";
+        serverVideo01.appendChild(iframe);
+      }
+
+      if (retryBtn01){
+        retryBtn01.addEventListener("click", function(){
+          usedIndices = [];
+          shuffledServers = shuffleArray(SERVERS);
+          clearTimeout(loadTimeoutId);
+          loadRandomServer();
+        });
+      }
+
+      loadRandomServer();
+
+      /* VAST ads (no visual box — keeps player clean) */
+      // Not included in this version — placeholder for optional VAST injection
+
+    })();
+    </script>
+
+    <!-- Meta info (views, time, brand) -->
+    <script>
+    (function(){
+        function hashCode(str) {
+            var h = 0;
+            for (var i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+            return Math.abs(h);
         }
-        function getPageFromURL() {
-            var params = new URLSearchParams(window.location.search);
-            var p = parseInt(params.get("pag"), 10);
-            if (isNaN(p) || p < 1) return 1;
-            if (p > totalPages) return totalPages;
-            return p;
+        function formatViews(url) {
+            var base = 1200 + (hashCode(url) % 980000);
+            if (base >= 1000000) return (base/1000000).toFixed(1).replace(/\.0$/,"") + "M";
+            if (base >= 1000) return Math.floor(base/1000) + "K";
+            return base + "";
         }
+        function timeAgo(url) {
+            var days = 1 + (hashCode(url) % 500);
+            if (days < 7) return { n: days, unit: "d" };
+            if (days < 30) return { n: Math.floor(days/7), unit: "w" };
+            if (days < 365) return { n: Math.floor(days/30), unit: "mo" };
+            return { n: Math.floor(days/365), unit: "y" };
+        }
+        function updateMeta(){
+            var views = formatViews(pageUrl);
+            var ta = timeAgo(pageUrl);
+            var taText = window.I18N.tr("timeAgo")
+                .replace("{n}", ta.n)
+                .replace("{unit}", window.I18N.t("units")[ta.unit]);
+            var viewsText = window.I18N.tr("viewsFormat").replace("{n}", views);
+            var mv = document.getElementById("metaViews");
+            var mt = document.getElementById("metaTime");
+            var mb = document.getElementById("metaBrand");
+            if (mv) mv.textContent = viewsText;
+            if (mt) mt.textContent = taText;
+            if (mb) mb.textContent = window.__SITE_NAME__ || "Atikah";
+        }
+        updateMeta();
+        document.addEventListener("langchange", updateMeta);
+    })();
+    </script>
+
+    <!-- Share + copy -->
+    <script>
+    (function(){
+        var url = window.location.href;
+        var enc = encodeURIComponent;
+        var elWA = document.getElementById("shareWA");
+        var elTG = document.getElementById("shareTG");
+        var elFB = document.getElementById("shareFB");
+        var elTW = document.getElementById("shareTW");
+        var elRD = document.getElementById("shareRD");
+        var copyBtn = document.getElementById("copyLink");
+        var toast = document.getElementById("toast");
+        var toastText = document.getElementById("toastText");
+
+        if (elWA) elWA.href = "https://wa.me/?text=" + enc(pageTitle + "\n" + url);
+        if (elTG) elTG.href = "https://t.me/share/url?url=" + enc(url) + "&text=" + enc(pageTitle);
+        if (elFB) elFB.href = "https://www.facebook.com/sharer/sharer.php?u=" + enc(url);
+        if (elTW) elTW.href = "https://twitter.com/intent/tweet?url=" + enc(url) + "&text=" + enc(pageTitle);
+        if (elRD) elRD.href = "https://www.reddit.com/submit?url=" + enc(url) + "&title=" + enc(pageTitle);
+
+        function showToast(msg) {
+            toastText.textContent = msg;
+            toast.classList.add("show");
+            clearTimeout(window.__toastTimer);
+            window.__toastTimer = setTimeout(function(){
+                toast.classList.remove("show");
+            }, 2000);
+        }
+        function fallbackCopy(text) {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch(e){}
+            document.body.removeChild(ta);
+        }
+        if (copyBtn) {
+            copyBtn.addEventListener("click", function(){
+                function done(){ showToast(window.I18N ? window.I18N.tr("toastCopied") : "Link copied to clipboard"); }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url); done(); });
+                } else {
+                    fallbackCopy(url); done();
+                }
+            });
+        }
+    })();
+    </script>
+
+    <!-- Recommended sidebar -->
+    <script>
+    (function(){
+        var list = document.getElementById("recList");
+        var sideCount = document.getElementById("sideCount");
+        var loadWrap = document.getElementById("loadMoreWrap");
+        var loadBtn = document.getElementById("loadMoreBtn");
+        var lmCount = document.getElementById("lmCount");
+
+        if (!list) return;
+        if (!relatedPosts || relatedPosts.length === 0) {
+            list.innerHTML = "";
+            if (sideCount) sideCount.textContent = "";
+            if (loadWrap) loadWrap.style.display = "none";
+            return;
+        }
+
         function hashCode(str) {
             var h = 0;
             for (var i = 0; i < str.length; i++) h = ((h << 5) - h + str.charCodeAt(i)) | 0;
@@ -1081,7 +1737,10 @@ layout: null
             });
         }
 
-        function buildCard(post) {
+        var initialLimit = 8;
+        var expanded = false;
+
+        function buildRecCard(post) {
             var img = post.image
                 ? '<img src="' + escapeHtml(post.image) + '" alt="' + escapeHtml(post.title) + '" loading="lazy">'
                 : '';
@@ -1092,156 +1751,60 @@ layout: null
                 .replace("{n}", ta.n)
                 .replace("{unit}", window.I18N.t("units")[ta.unit]);
             var viewsText = window.I18N.tr("viewsFormat").replace("{n}", views);
-            var brandLetter = (window.__SITE_NAME__ || "A").charAt(0).toUpperCase();
-            return '<a href="' + escapeHtml(post.url) + '" class="card">' +
-                       '<div class="card-thumb">' + img +
-                           '<span class="card-play" aria-hidden="true">' +
-                               '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>' +
-                           '</span>' +
-                           '<span class="card-dur">' + dur + '</span>' +
+            return '<a href="' + escapeHtml(post.url) + '" class="rec-card">' +
+                       '<div class="rec-thumb">' + img +
+                           '<span class="rec-dur">' + dur + '</span>' +
                        '</div>' +
-                       '<div class="card-row">' +
-                           '<div class="card-avatar">' + brandLetter + '</div>' +
-                           '<div class="card-text">' +
-                               '<h3 class="card-title">' + escapeHtml(post.title) + '</h3>' +
-                               '<div class="card-meta">' +
-                                   '<span>' + viewsText + '</span>' +
-                                   '<span>' + taText + '</span>' +
-                               '</div>' +
+                       '<div class="rec-info">' +
+                           '<h3 class="rec-title">' + escapeHtml(post.title) + '</h3>' +
+                           '<div class="rec-meta">' +
+                               '<span>' + viewsText + '</span>' +
+                               '<span>' + taText + '</span>' +
                            '</div>' +
                        '</div>' +
                    '</a>';
         }
 
-        function renderSection(meta, posts) {
-            if (!posts.length) return "";
-            return '<section class="section">' +
-                       '<div class="section-head">' +
-                           '<h2 class="section-title">' +
-                               '<svg class="section-ico" viewBox="0 0 24 24" aria-hidden="true">' +
-                                   '<path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/>' +
-                               '</svg>' +
-                               meta.key +
-                           '</h2>' +
-                           '<span class="section-count">' + posts.length + ' ' + window.I18N.tr("clips") + '</span>' +
-                       '</div>' +
-                       '<div class="grid">' + posts.map(buildCard).join("") + '</div>' +
-                   '</section>';
-        }
+        function render() {
+            var limit = expanded ? relatedPosts.length : Math.min(initialLimit, relatedPosts.length);
+            var items = relatedPosts.slice(0, limit);
+            list.innerHTML = items.map(buildRecCard).join("");
 
-        function renderAd(key) {
-            if (!adSlots[key]) return "";
-            return '<div class="ad-inline"><div class="ad-box">' + adSlots[key] + '</div></div>';
-        }
-
-        function renderPage(page) {
-            currentPage = page;
-            var start = (page - 1) * totalPerPage;
-            var pagePosts = allPosts.slice(start, start + totalPerPage);
-
-            var html = "";
-            var adKeys = ["1","2","3","4"];
-            var adIdx = 0;
-            var sections = window.I18N.t("sections") || [];
-
-            for (var i = 0; i < sections.length; i++) {
-                var sStart = i * perSection;
-                var sPosts = pagePosts.slice(sStart, sStart + perSection);
-                html += renderSection(sections[i], sPosts);
-                if (i < sections.length - 1 && sPosts.length > 0) {
-                    html += renderAd(adKeys[adIdx % adKeys.length]);
-                    adIdx++;
-                }
+            if (sideCount) {
+                var countTpl = window.I18N.tr("recommendedCount") || "{n} videos";
+                sideCount.textContent = countTpl.replace("{n}", relatedPosts.length);
             }
-            container.innerHTML = html;
 
-            container.querySelectorAll("script").forEach(function(oldScript){
-                var newScript = document.createElement("script");
-                if (oldScript.src) newScript.src = oldScript.src;
-                else newScript.textContent = oldScript.textContent;
-                Array.from(oldScript.attributes).forEach(function(attr){
-                    if (attr.name !== "src") newScript.setAttribute(attr.name, attr.value);
-                });
-                oldScript.parentNode.replaceChild(newScript, oldScript);
-            });
-
-            var baseName = window.__SITE_NAME__ || document.title.split(" · ")[0];
-            document.title = page === 1
-                ? baseName + " · Watch Free"
-                : baseName + " · Watch Free — Page " + page + " of " + totalPages;
-
-            var canonical = document.querySelector('link[rel="canonical"]');
-            if (canonical) canonical.setAttribute("href", pageURL(page));
-
-            drawPagination(page);
-        }
-
-        function makeLink(text, page, opts) {
-            opts = opts || {};
-            var el;
-            if (opts.disabled) { el = document.createElement("span"); el.className = "disabled"; }
-            else { el = document.createElement("a"); el.href = page === 1 ? "./" : "?pag=" + page; }
-            if (opts.active) el.classList.add("active");
-            if (opts.svg) { el.classList.add("chev-btn"); el.innerHTML = opts.svg; }
-            else { el.textContent = text; }
-            return el;
-        }
-        var chevLeftSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
-        var chevRightSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
-
-        function drawPagination(current) {
-            if (totalPages <= 1) return;
-            nav.innerHTML = "";
-            nav.appendChild(makeLink("", current - 1, { disabled: current === 1, svg: chevLeftSVG }));
-            var pages = [];
-            if (totalPages <= 7) {
-                for (var i = 1; i <= totalPages; i++) pages.push(i);
-            } else {
-                pages.push(1);
-                if (current > 3) pages.push("...");
-                var from = Math.max(2, current - 1);
-                var to = Math.min(totalPages - 1, current + 1);
-                for (var j = from; j <= to; j++) pages.push(j);
-                if (current < totalPages - 2) pages.push("...");
-                pages.push(totalPages);
-            }
-            pages.forEach(function(p){
-                if (p === "...") {
-                    var span = document.createElement("span");
-                    span.className = "dots";
-                    span.textContent = "…";
-                    nav.appendChild(span);
+            if (loadWrap && loadBtn) {
+                if (relatedPosts.length > initialLimit && !expanded) {
+                    loadWrap.style.display = "flex";
+                    lmCount.textContent = "(" + (relatedPosts.length - initialLimit) + ")";
+                    loadBtn.classList.remove("expanded");
+                    var lbl = loadBtn.querySelector("span:first-child");
+                    if (lbl) lbl.textContent = window.I18N.tr("loadMore");
+                } else if (expanded) {
+                    loadWrap.style.display = "none";
                 } else {
-                    nav.appendChild(makeLink(p, p, { active: p === current }));
+                    loadWrap.style.display = "none";
                 }
-            });
-            nav.appendChild(makeLink("", current + 1, { disabled: current === totalPages, svg: chevRightSVG }));
+            }
         }
 
-        nav.addEventListener("click", function(e){
-            var link = e.target.closest("a[href]");
-            if (!link) return;
-            var href = link.getAttribute("href");
-            if (href.indexOf("?pag=") !== 0 && href !== "./") return;
-            e.preventDefault();
-            var url = href === "./" ? window.location.pathname : "?pag=" + href.split("=")[1];
-            history.pushState({}, "", url);
-            renderPage(getPageFromURL());
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        if (loadBtn) {
+            loadBtn.addEventListener("click", function(){
+                expanded = true;
+                loadBtn.classList.add("expanded");
+                render();
+            });
+        }
 
-        window.addEventListener("popstate", function(){
-            renderPage(getPageFromURL());
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        document.addEventListener("langchange", function(){
-            renderPage(currentPage);
-        });
-
-        renderPage(getPageFromURL());
+        render();
+        document.addEventListener("langchange", render);
     })();
+    </script>
 
+    <!-- Footer year + brand -->
+    <script>
     (function(){
         var y = document.getElementById("footYear");
         if (y) y.textContent = new Date().getFullYear();
@@ -1264,6 +1827,44 @@ layout: null
             banner.classList.remove("show");
             setTimeout(function(){ banner.remove(); }, 300);
         });
+    })();
+    </script>
+
+    <!-- VideoObject schema -->
+    <script>
+    (function(){
+      "use strict";
+      function injectSchema(){
+        var iframe = document.querySelector("#serverVideo01 iframe");
+        var embedUrl = iframe ? iframe.src : "";
+        if (!embedUrl) return false;
+        var old = document.querySelector('script[data-video-schema]');
+        if (old) old.remove();
+        var title = pageTitle || document.title;
+        var schema = {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": title,
+          "description": title,
+          "url": location.href,
+          "contentUrl": embedUrl,
+          "embedUrl": embedUrl,
+          "uploadDate": new Date().toISOString()
+        };
+        var ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage && ogImage.content) schema.thumbnailUrl = ogImage.content;
+        var ld = document.createElement("script");
+        ld.type = "application/ld+json";
+        ld.setAttribute("data-video-schema", "1");
+        ld.textContent = JSON.stringify(schema);
+        document.head.appendChild(ld);
+        return true;
+      }
+      var tries = 0;
+      var iv = setInterval(function(){
+        tries++;
+        if (injectSchema() || tries > 20) clearInterval(iv);
+      }, 500);
     })();
     </script>
 
